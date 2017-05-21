@@ -29,16 +29,68 @@ public class ReaSyncServer extends javax.swing.JFrame {
 
         menuContainerPanel = new javax.swing.JPanel();
         servicesMenuButton = new javax.swing.JButton();
-        dirMenuButton = new javax.swing.JButton();
         homeLogoMenuButton = new javax.swing.JButton();
         logMenuButton = new javax.swing.JButton();
         clientsMenuButton = new javax.swing.JButton();
         bodyContainerPanel = new javax.swing.JPanel();
         homePrincipalPanel = new javax.swing.JPanel();
+        homeTitlePanel = new javax.swing.JPanel();
+        homeTitleLabel = new javax.swing.JLabel();
+        homeTitleSeparator = new javax.swing.JSeparator();
+        homeContainerPanel = new javax.swing.JPanel();
+        homeContainerBanner = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        homeContainerServicesPanel = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
         logPrincipalPanel = new javax.swing.JPanel();
+        logTitlePanel = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
+        logContainerPanel = new javax.swing.JPanel();
+        logScroll = new javax.swing.JScrollPane();
+        logTextArea = new javax.swing.JTextArea();
         clientsPrincipalPanel = new javax.swing.JPanel();
-        directoriesPrincipalPanel = new javax.swing.JPanel();
+        clientsTitlePanel = new javax.swing.JPanel();
+        titleClientsLabel = new javax.swing.JLabel();
+        jSeparator5 = new javax.swing.JSeparator();
+        clientsContainerPanel = new javax.swing.JPanel();
+        clientsTableScroll = new javax.swing.JScrollPane();
+        clientsTable = new javax.swing.JTable();
         servicesPrincipalPanel = new javax.swing.JPanel();
+        tilteServicesPanel = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jSeparator6 = new javax.swing.JSeparator();
+        servicesContainerPanel = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jSeparator7 = new javax.swing.JSeparator();
+        jLabel10 = new javax.swing.JLabel();
+        urlBDField = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        userBDField = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        passwordBDField = new javax.swing.JTextField();
+        conexionBDButton = new javax.swing.JButton();
+        mysqlServiceLabel = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jSeparator8 = new javax.swing.JSeparator();
+        ftpServiceLabel = new javax.swing.JLabel();
+        ftpServiceButton = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jSeparator9 = new javax.swing.JSeparator();
+        reasyncServerStartButton = new javax.swing.JButton();
+        reasyncServerStopButton = new javax.swing.JButton();
+        reasyncServerLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(650, 450));
@@ -54,18 +106,6 @@ public class ReaSyncServer extends javax.swing.JFrame {
         servicesMenuButton.setContentAreaFilled(false);
         servicesMenuButton.setDefaultCapable(false);
         menuContainerPanel.add(servicesMenuButton);
-
-        dirMenuButton.setBackground(new java.awt.Color(255, 153, 0));
-        dirMenuButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reasyncserver/vistas/imagenes/dir.png"))); // NOI18N
-        dirMenuButton.setBorderPainted(false);
-        dirMenuButton.setContentAreaFilled(false);
-        dirMenuButton.setDefaultCapable(false);
-        dirMenuButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dirMenuButtonActionPerformed(evt);
-            }
-        });
-        menuContainerPanel.add(dirMenuButton);
 
         homeLogoMenuButton.setBackground(new java.awt.Color(255, 153, 0));
         homeLogoMenuButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reasyncserver/vistas/imagenes/statuslogo.png"))); // NOI18N
@@ -94,77 +134,467 @@ public class ReaSyncServer extends javax.swing.JFrame {
         bodyContainerPanel.setLayout(new java.awt.CardLayout());
 
         homePrincipalPanel.setBackground(new java.awt.Color(255, 255, 255));
+        homePrincipalPanel.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout homePrincipalPanelLayout = new javax.swing.GroupLayout(homePrincipalPanel);
-        homePrincipalPanel.setLayout(homePrincipalPanelLayout);
-        homePrincipalPanelLayout.setHorizontalGroup(
-            homePrincipalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 705, Short.MAX_VALUE)
+        homeTitlePanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        homeTitleLabel.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        homeTitleLabel.setText("ReaSync");
+
+        javax.swing.GroupLayout homeTitlePanelLayout = new javax.swing.GroupLayout(homeTitlePanel);
+        homeTitlePanel.setLayout(homeTitlePanelLayout);
+        homeTitlePanelLayout.setHorizontalGroup(
+            homeTitlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homeTitlePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(homeTitlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(homeTitlePanelLayout.createSequentialGroup()
+                        .addComponent(homeTitleLabel)
+                        .addGap(0, 509, Short.MAX_VALUE))
+                    .addComponent(homeTitleSeparator))
+                .addContainerGap())
         );
-        homePrincipalPanelLayout.setVerticalGroup(
-            homePrincipalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 377, Short.MAX_VALUE)
+        homeTitlePanelLayout.setVerticalGroup(
+            homeTitlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homeTitlePanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(homeTitleLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(homeTitleSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        homePrincipalPanel.add(homeTitlePanel, java.awt.BorderLayout.PAGE_START);
+
+        homeContainerPanel.setBackground(new java.awt.Color(255, 255, 255));
+        homeContainerPanel.setLayout(new java.awt.BorderLayout());
+
+        homeContainerBanner.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setText("Todos los servicios estan conectados.");
+
+        javax.swing.GroupLayout homeContainerBannerLayout = new javax.swing.GroupLayout(homeContainerBanner);
+        homeContainerBanner.setLayout(homeContainerBannerLayout);
+        homeContainerBannerLayout.setHorizontalGroup(
+            homeContainerBannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homeContainerBannerLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(493, Short.MAX_VALUE))
+        );
+        homeContainerBannerLayout.setVerticalGroup(
+            homeContainerBannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, homeContainerBannerLayout.createSequentialGroup()
+                .addContainerGap(45, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(41, 41, 41))
+        );
+
+        homeContainerPanel.add(homeContainerBanner, java.awt.BorderLayout.PAGE_END);
+
+        homeContainerServicesPanel.setLayout(new java.awt.GridLayout(1, 3));
+
+        jPanel3.setBackground(new java.awt.Color(245, 245, 245));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setText("FTP");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addComponent(jLabel2)
+                .addContainerGap(105, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jSeparator1)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(157, Short.MAX_VALUE))
+        );
+
+        homeContainerServicesPanel.add(jPanel3);
+
+        jPanel4.setBackground(new java.awt.Color(250, 250, 250));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel3.setText("Base de Datos");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(52, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(49, 49, 49))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jSeparator2)
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(157, Short.MAX_VALUE))
+        );
+
+        homeContainerServicesPanel.add(jPanel4);
+
+        jPanel5.setBackground(new java.awt.Color(245, 245, 245));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel4.setText("Servidor");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(76, 76, 76)
+                .addComponent(jLabel4)
+                .addContainerGap(77, Short.MAX_VALUE))
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jSeparator3)
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(157, Short.MAX_VALUE))
+        );
+
+        homeContainerServicesPanel.add(jPanel5);
+
+        homeContainerPanel.add(homeContainerServicesPanel, java.awt.BorderLayout.CENTER);
+
+        homePrincipalPanel.add(homeContainerPanel, java.awt.BorderLayout.CENTER);
 
         bodyContainerPanel.add(homePrincipalPanel, "homePrincipalPanel");
 
         logPrincipalPanel.setBackground(new java.awt.Color(255, 255, 255));
+        logPrincipalPanel.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout logPrincipalPanelLayout = new javax.swing.GroupLayout(logPrincipalPanel);
-        logPrincipalPanel.setLayout(logPrincipalPanelLayout);
-        logPrincipalPanelLayout.setHorizontalGroup(
-            logPrincipalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 705, Short.MAX_VALUE)
+        logTitlePanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel5.setText("¿Qué ha ocurrido?");
+
+        javax.swing.GroupLayout logTitlePanelLayout = new javax.swing.GroupLayout(logTitlePanel);
+        logTitlePanel.setLayout(logTitlePanelLayout);
+        logTitlePanelLayout.setHorizontalGroup(
+            logTitlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(logTitlePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(logTitlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(logTitlePanelLayout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(0, 498, Short.MAX_VALUE))
+                    .addComponent(jSeparator4))
+                .addContainerGap())
         );
-        logPrincipalPanelLayout.setVerticalGroup(
-            logPrincipalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 377, Short.MAX_VALUE)
+        logTitlePanelLayout.setVerticalGroup(
+            logTitlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(logTitlePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        logPrincipalPanel.add(logTitlePanel, java.awt.BorderLayout.PAGE_START);
+
+        logContainerPanel.setBackground(new java.awt.Color(255, 255, 255));
+        logContainerPanel.setLayout(new java.awt.GridLayout());
+
+        logScroll.setBackground(new java.awt.Color(255, 255, 255));
+
+        logTextArea.setColumns(20);
+        logTextArea.setRows(5);
+        logScroll.setViewportView(logTextArea);
+
+        logContainerPanel.add(logScroll);
+
+        logPrincipalPanel.add(logContainerPanel, java.awt.BorderLayout.CENTER);
 
         bodyContainerPanel.add(logPrincipalPanel, "logPrincipalPanel");
 
         clientsPrincipalPanel.setBackground(new java.awt.Color(255, 255, 255));
+        clientsPrincipalPanel.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout clientsPrincipalPanelLayout = new javax.swing.GroupLayout(clientsPrincipalPanel);
-        clientsPrincipalPanel.setLayout(clientsPrincipalPanelLayout);
-        clientsPrincipalPanelLayout.setHorizontalGroup(
-            clientsPrincipalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 705, Short.MAX_VALUE)
+        clientsTitlePanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        titleClientsLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        titleClientsLabel.setText("Clientes Conectados");
+
+        javax.swing.GroupLayout clientsTitlePanelLayout = new javax.swing.GroupLayout(clientsTitlePanel);
+        clientsTitlePanel.setLayout(clientsTitlePanelLayout);
+        clientsTitlePanelLayout.setHorizontalGroup(
+            clientsTitlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(clientsTitlePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(clientsTitlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(clientsTitlePanelLayout.createSequentialGroup()
+                        .addComponent(titleClientsLabel)
+                        .addGap(0, 482, Short.MAX_VALUE))
+                    .addComponent(jSeparator5))
+                .addContainerGap())
         );
-        clientsPrincipalPanelLayout.setVerticalGroup(
-            clientsPrincipalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 377, Short.MAX_VALUE)
+        clientsTitlePanelLayout.setVerticalGroup(
+            clientsTitlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(clientsTitlePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(titleClientsLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        clientsPrincipalPanel.add(clientsTitlePanel, java.awt.BorderLayout.PAGE_START);
+
+        clientsContainerPanel.setBackground(new java.awt.Color(255, 255, 255));
+        clientsContainerPanel.setLayout(new java.awt.GridLayout());
+
+        clientsTableScroll.setViewportView(clientsTable);
+
+        clientsContainerPanel.add(clientsTableScroll);
+
+        clientsPrincipalPanel.add(clientsContainerPanel, java.awt.BorderLayout.CENTER);
 
         bodyContainerPanel.add(clientsPrincipalPanel, "clientsPrincipalPanel");
 
-        directoriesPrincipalPanel.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout directoriesPrincipalPanelLayout = new javax.swing.GroupLayout(directoriesPrincipalPanel);
-        directoriesPrincipalPanel.setLayout(directoriesPrincipalPanelLayout);
-        directoriesPrincipalPanelLayout.setHorizontalGroup(
-            directoriesPrincipalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 705, Short.MAX_VALUE)
-        );
-        directoriesPrincipalPanelLayout.setVerticalGroup(
-            directoriesPrincipalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 377, Short.MAX_VALUE)
-        );
-
-        bodyContainerPanel.add(directoriesPrincipalPanel, "directoriesPrincipalPanel");
-
         servicesPrincipalPanel.setBackground(new java.awt.Color(255, 255, 255));
+        servicesPrincipalPanel.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout servicesPrincipalPanelLayout = new javax.swing.GroupLayout(servicesPrincipalPanel);
-        servicesPrincipalPanel.setLayout(servicesPrincipalPanelLayout);
-        servicesPrincipalPanelLayout.setHorizontalGroup(
-            servicesPrincipalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 705, Short.MAX_VALUE)
+        tilteServicesPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel6.setText("Servicios");
+
+        javax.swing.GroupLayout tilteServicesPanelLayout = new javax.swing.GroupLayout(tilteServicesPanel);
+        tilteServicesPanel.setLayout(tilteServicesPanelLayout);
+        tilteServicesPanelLayout.setHorizontalGroup(
+            tilteServicesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tilteServicesPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(tilteServicesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tilteServicesPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(0, 584, Short.MAX_VALUE))
+                    .addComponent(jSeparator6))
+                .addContainerGap())
         );
-        servicesPrincipalPanelLayout.setVerticalGroup(
-            servicesPrincipalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 377, Short.MAX_VALUE)
+        tilteServicesPanelLayout.setVerticalGroup(
+            tilteServicesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tilteServicesPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        servicesPrincipalPanel.add(tilteServicesPanel, java.awt.BorderLayout.PAGE_START);
+
+        servicesContainerPanel.setBackground(new java.awt.Color(255, 255, 255));
+        servicesContainerPanel.setLayout(new java.awt.GridLayout(1, 3));
+
+        jPanel1.setBackground(new java.awt.Color(245, 245, 245));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setText("Base de datos");
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel10.setText("URL  BD:");
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel11.setText("Usuario BD:");
+        jLabel11.setToolTipText("");
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel12.setText("Password BD:");
+
+        conexionBDButton.setText("Probar Conexión");
+
+        mysqlServiceLabel.setText("El servicio MYSQL esta iniciado");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(59, 59, 59)
+                                .addComponent(jLabel7))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel10)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(passwordBDField)
+                            .addComponent(jSeparator7, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(urlBDField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(userBDField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel12))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 59, Short.MAX_VALUE)
+                .addComponent(conexionBDButton)
+                .addGap(56, 56, 56))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(mysqlServiceLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(urlBDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(userBDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(passwordBDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(conexionBDButton)
+                .addGap(18, 18, 18)
+                .addComponent(mysqlServiceLabel)
+                .addContainerGap(69, Short.MAX_VALUE))
+        );
+
+        servicesContainerPanel.add(jPanel1);
+
+        jPanel2.setBackground(new java.awt.Color(250, 250, 250));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel8.setText("FTP Server");
+
+        ftpServiceLabel.setText("El servicio FTP esta iniciado");
+
+        ftpServiceButton.setText("Verificar Servicio FTP");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 68, Short.MAX_VALUE)
+                        .addComponent(jLabel8)
+                        .addGap(75, 75, 75))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(ftpServiceButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jSeparator8, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ftpServiceLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ftpServiceButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
+                .addComponent(ftpServiceLabel)
+                .addGap(70, 70, 70))
+        );
+
+        servicesContainerPanel.add(jPanel2);
+
+        jPanel6.setBackground(new java.awt.Color(245, 245, 245));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel9.setText("ReaSync Server");
+
+        reasyncServerStartButton.setText("Iniciar Servidor");
+
+        reasyncServerStopButton.setText("Detener Servidor");
+
+        reasyncServerLabel.setText("El servicio ReaSync esta activo");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(jLabel9)
+                        .addGap(0, 50, Short.MAX_VALUE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(reasyncServerStopButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jSeparator9, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(reasyncServerStartButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(reasyncServerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(reasyncServerStartButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(reasyncServerStopButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                .addComponent(reasyncServerLabel)
+                .addGap(70, 70, 70))
+        );
+
+        servicesContainerPanel.add(jPanel6);
+
+        servicesPrincipalPanel.add(servicesContainerPanel, java.awt.BorderLayout.CENTER);
 
         bodyContainerPanel.add(servicesPrincipalPanel, "servicesPrincipalPanel");
 
@@ -172,10 +602,6 @@ public class ReaSyncServer extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void dirMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dirMenuButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dirMenuButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,16 +640,68 @@ public class ReaSyncServer extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bodyContainerPanel;
+    private javax.swing.JPanel clientsContainerPanel;
     private javax.swing.JButton clientsMenuButton;
     private javax.swing.JPanel clientsPrincipalPanel;
-    private javax.swing.JButton dirMenuButton;
-    private javax.swing.JPanel directoriesPrincipalPanel;
+    private javax.swing.JTable clientsTable;
+    private javax.swing.JScrollPane clientsTableScroll;
+    private javax.swing.JPanel clientsTitlePanel;
+    private javax.swing.JButton conexionBDButton;
+    private javax.swing.JButton ftpServiceButton;
+    private javax.swing.JLabel ftpServiceLabel;
+    private javax.swing.JPanel homeContainerBanner;
+    private javax.swing.JPanel homeContainerPanel;
+    private javax.swing.JPanel homeContainerServicesPanel;
     private javax.swing.JButton homeLogoMenuButton;
     private javax.swing.JPanel homePrincipalPanel;
+    private javax.swing.JLabel homeTitleLabel;
+    private javax.swing.JPanel homeTitlePanel;
+    private javax.swing.JSeparator homeTitleSeparator;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JSeparator jSeparator8;
+    private javax.swing.JSeparator jSeparator9;
+    private javax.swing.JPanel logContainerPanel;
     private javax.swing.JButton logMenuButton;
     private javax.swing.JPanel logPrincipalPanel;
+    private javax.swing.JScrollPane logScroll;
+    private javax.swing.JTextArea logTextArea;
+    private javax.swing.JPanel logTitlePanel;
     private javax.swing.JPanel menuContainerPanel;
+    private javax.swing.JLabel mysqlServiceLabel;
+    private javax.swing.JTextField passwordBDField;
+    private javax.swing.JLabel reasyncServerLabel;
+    private javax.swing.JButton reasyncServerStartButton;
+    private javax.swing.JButton reasyncServerStopButton;
+    private javax.swing.JPanel servicesContainerPanel;
     private javax.swing.JButton servicesMenuButton;
     private javax.swing.JPanel servicesPrincipalPanel;
+    private javax.swing.JPanel tilteServicesPanel;
+    private javax.swing.JLabel titleClientsLabel;
+    private javax.swing.JTextField urlBDField;
+    private javax.swing.JTextField userBDField;
     // End of variables declaration//GEN-END:variables
 }
