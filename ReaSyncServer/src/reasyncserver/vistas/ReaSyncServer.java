@@ -91,6 +91,10 @@ public class ReaSyncServer extends javax.swing.JFrame {
         reasyncServerStartButton = new javax.swing.JButton();
         reasyncServerStopButton = new javax.swing.JButton();
         reasyncServerLabel = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        ipReaSyncServerLabel = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        portReaSyncServerField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(650, 450));
@@ -323,7 +327,7 @@ public class ReaSyncServer extends javax.swing.JFrame {
         logPrincipalPanel.add(logTitlePanel, java.awt.BorderLayout.PAGE_START);
 
         logContainerPanel.setBackground(new java.awt.Color(255, 255, 255));
-        logContainerPanel.setLayout(new java.awt.GridLayout());
+        logContainerPanel.setLayout(new java.awt.GridLayout(1, 0));
 
         logScroll.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -371,7 +375,7 @@ public class ReaSyncServer extends javax.swing.JFrame {
         clientsPrincipalPanel.add(clientsTitlePanel, java.awt.BorderLayout.PAGE_START);
 
         clientsContainerPanel.setBackground(new java.awt.Color(255, 255, 255));
-        clientsContainerPanel.setLayout(new java.awt.GridLayout());
+        clientsContainerPanel.setLayout(new java.awt.GridLayout(1, 0));
 
         clientsTableScroll.setViewportView(clientsTable);
 
@@ -555,25 +559,41 @@ public class ReaSyncServer extends javax.swing.JFrame {
 
         reasyncServerLabel.setText("El servicio ReaSync esta activo");
 
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel13.setText("La dirección IP es:");
+
+        ipReaSyncServerLabel.setText("127.0.0.1");
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel14.setText("Puerto:");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(jLabel9)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGap(60, 60, 60)
+                                .addComponent(jLabel9))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel13)))
                         .addGap(0, 50, Short.MAX_VALUE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(reasyncServerStopButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jSeparator9, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(reasyncServerStartButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(reasyncServerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(portReaSyncServerField)
+                            .addComponent(ipReaSyncServerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(reasyncServerStopButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jSeparator9)
+                            .addComponent(reasyncServerStartButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(reasyncServerLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                                .addComponent(jLabel14)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -584,10 +604,18 @@ public class ReaSyncServer extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ipReaSyncServerLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(portReaSyncServerField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(reasyncServerStartButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(reasyncServerStopButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(reasyncServerLabel)
                 .addGap(70, 70, 70))
         );
@@ -657,10 +685,13 @@ public class ReaSyncServer extends javax.swing.JFrame {
     private javax.swing.JLabel homeTitleLabel;
     private javax.swing.JPanel homeTitlePanel;
     private javax.swing.JSeparator homeTitleSeparator;
+    private javax.swing.JLabel ipReaSyncServerLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -693,6 +724,7 @@ public class ReaSyncServer extends javax.swing.JFrame {
     private javax.swing.JPanel menuContainerPanel;
     private javax.swing.JLabel mysqlServiceLabel;
     private javax.swing.JTextField passwordBDField;
+    private javax.swing.JTextField portReaSyncServerField;
     private javax.swing.JLabel reasyncServerLabel;
     private javax.swing.JButton reasyncServerStartButton;
     private javax.swing.JButton reasyncServerStopButton;
