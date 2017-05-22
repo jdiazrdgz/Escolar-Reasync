@@ -5,6 +5,8 @@
  */
 package reasync.vistas;
 
+import java.awt.CardLayout;
+
 /**
  *
  * @author jdiaz
@@ -28,11 +30,12 @@ public class ReaSync extends javax.swing.JFrame {
     private void initComponents() {
 
         menuPanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        servicesMenuButton = new javax.swing.JButton();
         syncMenuButton = new javax.swing.JButton();
-        s = new javax.swing.JButton();
+        statusMenuButton = new javax.swing.JButton();
         logMenuButton = new javax.swing.JButton();
         principalContainerPanel = new javax.swing.JPanel();
+        statusContainerPanel = new javax.swing.JPanel();
         servicesContainerPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -45,7 +48,6 @@ public class ReaSync extends javax.swing.JFrame {
         connectServerButton = new javax.swing.JButton();
         statusConnectionServerLabel = new javax.swing.JLabel();
         syncContainerPanel = new javax.swing.JPanel();
-        statusContainerPanel = new javax.swing.JPanel();
         logContainerPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -56,38 +58,73 @@ public class ReaSync extends javax.swing.JFrame {
         menuPanel.setBackground(new java.awt.Color(255, 153, 0));
         menuPanel.setLayout(new java.awt.GridLayout(1, 4));
 
-        jButton1.setBackground(new java.awt.Color(255, 153, 0));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reasync/vistas/imagenes/database.png"))); // NOI18N
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setDefaultCapable(false);
-        menuPanel.add(jButton1);
+        servicesMenuButton.setBackground(new java.awt.Color(255, 153, 0));
+        servicesMenuButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reasync/vistas/imagenes/database.png"))); // NOI18N
+        servicesMenuButton.setBorderPainted(false);
+        servicesMenuButton.setContentAreaFilled(false);
+        servicesMenuButton.setDefaultCapable(false);
+        servicesMenuButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                servicesMenuButtonActionPerformed(evt);
+            }
+        });
+        menuPanel.add(servicesMenuButton);
 
         syncMenuButton.setBackground(new java.awt.Color(255, 153, 0));
         syncMenuButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reasync/vistas/imagenes/dir.png"))); // NOI18N
         syncMenuButton.setBorderPainted(false);
         syncMenuButton.setContentAreaFilled(false);
         syncMenuButton.setDefaultCapable(false);
+        syncMenuButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                syncMenuButtonActionPerformed(evt);
+            }
+        });
         menuPanel.add(syncMenuButton);
 
-        s.setBackground(new java.awt.Color(255, 153, 0));
-        s.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reasync/vistas/imagenes/statuslogo.png"))); // NOI18N
-        s.setBorderPainted(false);
-        s.setContentAreaFilled(false);
-        s.setDefaultCapable(false);
-        menuPanel.add(s);
+        statusMenuButton.setBackground(new java.awt.Color(255, 153, 0));
+        statusMenuButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reasync/vistas/imagenes/statuslogo.png"))); // NOI18N
+        statusMenuButton.setBorderPainted(false);
+        statusMenuButton.setContentAreaFilled(false);
+        statusMenuButton.setDefaultCapable(false);
+        statusMenuButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                statusMenuButtonActionPerformed(evt);
+            }
+        });
+        menuPanel.add(statusMenuButton);
 
         logMenuButton.setBackground(new java.awt.Color(255, 153, 0));
         logMenuButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reasync/vistas/imagenes/file.png"))); // NOI18N
         logMenuButton.setBorderPainted(false);
         logMenuButton.setContentAreaFilled(false);
         logMenuButton.setDefaultCapable(false);
+        logMenuButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logMenuButtonActionPerformed(evt);
+            }
+        });
         menuPanel.add(logMenuButton);
 
         getContentPane().add(menuPanel, java.awt.BorderLayout.PAGE_END);
 
         principalContainerPanel.setBackground(new java.awt.Color(255, 255, 255));
         principalContainerPanel.setLayout(new java.awt.CardLayout());
+
+        statusContainerPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout statusContainerPanelLayout = new javax.swing.GroupLayout(statusContainerPanel);
+        statusContainerPanel.setLayout(statusContainerPanelLayout);
+        statusContainerPanelLayout.setHorizontalGroup(
+            statusContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 650, Short.MAX_VALUE)
+        );
+        statusContainerPanelLayout.setVerticalGroup(
+            statusContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 377, Short.MAX_VALUE)
+        );
+
+        principalContainerPanel.add(statusContainerPanel, "statusContainerPanel");
 
         servicesContainerPanel.setBackground(new java.awt.Color(255, 255, 255));
         servicesContainerPanel.setLayout(new java.awt.BorderLayout());
@@ -171,7 +208,7 @@ public class ReaSync extends javax.swing.JFrame {
 
         servicesContainerPanel.add(jPanel2, java.awt.BorderLayout.CENTER);
 
-        principalContainerPanel.add(servicesContainerPanel, "card2");
+        principalContainerPanel.add(servicesContainerPanel, "servicesContainerPanel");
 
         syncContainerPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -186,22 +223,7 @@ public class ReaSync extends javax.swing.JFrame {
             .addGap(0, 377, Short.MAX_VALUE)
         );
 
-        principalContainerPanel.add(syncContainerPanel, "card3");
-
-        statusContainerPanel.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout statusContainerPanelLayout = new javax.swing.GroupLayout(statusContainerPanel);
-        statusContainerPanel.setLayout(statusContainerPanelLayout);
-        statusContainerPanelLayout.setHorizontalGroup(
-            statusContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 650, Short.MAX_VALUE)
-        );
-        statusContainerPanelLayout.setVerticalGroup(
-            statusContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 377, Short.MAX_VALUE)
-        );
-
-        principalContainerPanel.add(statusContainerPanel, "card4");
+        principalContainerPanel.add(syncContainerPanel, "syncContainerPanel");
 
         logContainerPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -216,12 +238,32 @@ public class ReaSync extends javax.swing.JFrame {
             .addGap(0, 377, Short.MAX_VALUE)
         );
 
-        principalContainerPanel.add(logContainerPanel, "card5");
+        principalContainerPanel.add(logContainerPanel, "logContainerPanel");
 
         getContentPane().add(principalContainerPanel, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void servicesMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_servicesMenuButtonActionPerformed
+        CardLayout panel = (CardLayout) principalContainerPanel.getLayout();
+        panel.show(principalContainerPanel, "servicesContainerPanel");
+    }//GEN-LAST:event_servicesMenuButtonActionPerformed
+
+    private void syncMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_syncMenuButtonActionPerformed
+        CardLayout panel = (CardLayout) principalContainerPanel.getLayout();
+        panel.show(principalContainerPanel, "syncContainerPanel");
+    }//GEN-LAST:event_syncMenuButtonActionPerformed
+
+    private void statusMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusMenuButtonActionPerformed
+        CardLayout panel = (CardLayout) principalContainerPanel.getLayout();
+        panel.show(principalContainerPanel, "statusContainerPanel");
+    }//GEN-LAST:event_statusMenuButtonActionPerformed
+
+    private void logMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logMenuButtonActionPerformed
+        CardLayout panel = (CardLayout) principalContainerPanel.getLayout();
+        panel.show(principalContainerPanel, "logContainerPanel");
+    }//GEN-LAST:event_logMenuButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -260,7 +302,6 @@ public class ReaSync extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton connectServerButton;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -272,10 +313,11 @@ public class ReaSync extends javax.swing.JFrame {
     private javax.swing.JPanel menuPanel;
     private javax.swing.JTextField portServerField;
     private javax.swing.JPanel principalContainerPanel;
-    private javax.swing.JButton s;
     private javax.swing.JPanel servicesContainerPanel;
+    private javax.swing.JButton servicesMenuButton;
     private javax.swing.JLabel statusConnectionServerLabel;
     private javax.swing.JPanel statusContainerPanel;
+    private javax.swing.JButton statusMenuButton;
     private javax.swing.JPanel syncContainerPanel;
     private javax.swing.JButton syncMenuButton;
     private javax.swing.JTextField urlServerField;

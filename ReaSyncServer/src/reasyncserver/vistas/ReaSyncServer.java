@@ -5,6 +5,8 @@
  */
 package reasyncserver.vistas;
 
+import java.awt.CardLayout;
+
 /**
  *
  * @author jdiaz
@@ -109,6 +111,11 @@ public class ReaSyncServer extends javax.swing.JFrame {
         servicesMenuButton.setBorderPainted(false);
         servicesMenuButton.setContentAreaFilled(false);
         servicesMenuButton.setDefaultCapable(false);
+        servicesMenuButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                servicesMenuButtonActionPerformed(evt);
+            }
+        });
         menuContainerPanel.add(servicesMenuButton);
 
         homeLogoMenuButton.setBackground(new java.awt.Color(255, 153, 0));
@@ -116,6 +123,11 @@ public class ReaSyncServer extends javax.swing.JFrame {
         homeLogoMenuButton.setBorderPainted(false);
         homeLogoMenuButton.setContentAreaFilled(false);
         homeLogoMenuButton.setDefaultCapable(false);
+        homeLogoMenuButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                homeLogoMenuButtonActionPerformed(evt);
+            }
+        });
         menuContainerPanel.add(homeLogoMenuButton);
 
         logMenuButton.setBackground(new java.awt.Color(255, 153, 0));
@@ -123,6 +135,11 @@ public class ReaSyncServer extends javax.swing.JFrame {
         logMenuButton.setBorderPainted(false);
         logMenuButton.setContentAreaFilled(false);
         logMenuButton.setDefaultCapable(false);
+        logMenuButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logMenuButtonActionPerformed(evt);
+            }
+        });
         menuContainerPanel.add(logMenuButton);
 
         clientsMenuButton.setBackground(new java.awt.Color(255, 153, 0));
@@ -130,6 +147,11 @@ public class ReaSyncServer extends javax.swing.JFrame {
         clientsMenuButton.setBorderPainted(false);
         clientsMenuButton.setContentAreaFilled(false);
         clientsMenuButton.setDefaultCapable(false);
+        clientsMenuButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clientsMenuButtonActionPerformed(evt);
+            }
+        });
         menuContainerPanel.add(clientsMenuButton);
 
         getContentPane().add(menuContainerPanel, java.awt.BorderLayout.PAGE_END);
@@ -630,6 +652,26 @@ public class ReaSyncServer extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void servicesMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_servicesMenuButtonActionPerformed
+        CardLayout panel = (CardLayout) bodyContainerPanel.getLayout();
+        panel.show(bodyContainerPanel, "servicesPrincipalPanel");
+    }//GEN-LAST:event_servicesMenuButtonActionPerformed
+
+    private void homeLogoMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeLogoMenuButtonActionPerformed
+        CardLayout panel = (CardLayout) bodyContainerPanel.getLayout();
+        panel.show(bodyContainerPanel, "homePrincipalPanel");
+    }//GEN-LAST:event_homeLogoMenuButtonActionPerformed
+
+    private void logMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logMenuButtonActionPerformed
+        CardLayout panel = (CardLayout) bodyContainerPanel.getLayout();
+        panel.show(bodyContainerPanel, "logPrincipalPanel");
+    }//GEN-LAST:event_logMenuButtonActionPerformed
+
+    private void clientsMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientsMenuButtonActionPerformed
+        CardLayout panel = (CardLayout) bodyContainerPanel.getLayout();
+        panel.show(bodyContainerPanel, "clientsPrincipalPanel");
+    }//GEN-LAST:event_clientsMenuButtonActionPerformed
 
     /**
      * @param args the command line arguments

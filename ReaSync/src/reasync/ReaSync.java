@@ -15,7 +15,8 @@ public class ReaSync {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        reasync.vistas.ReaSync frame =new  reasync.vistas.ReaSync();
+        frame.setVisible(true);
     }
     
 }

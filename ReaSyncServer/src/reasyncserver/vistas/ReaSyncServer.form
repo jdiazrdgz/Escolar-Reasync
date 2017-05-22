@@ -59,6 +59,9 @@
             <Property name="contentAreaFilled" type="boolean" value="false"/>
             <Property name="defaultCapable" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="servicesMenuButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="homeLogoMenuButton">
           <Properties>
@@ -72,6 +75,9 @@
             <Property name="contentAreaFilled" type="boolean" value="false"/>
             <Property name="defaultCapable" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="homeLogoMenuButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="logMenuButton">
           <Properties>
@@ -85,6 +91,9 @@
             <Property name="contentAreaFilled" type="boolean" value="false"/>
             <Property name="defaultCapable" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="logMenuButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="clientsMenuButton">
           <Properties>
@@ -98,6 +107,9 @@
             <Property name="contentAreaFilled" type="boolean" value="false"/>
             <Property name="defaultCapable" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clientsMenuButtonActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
