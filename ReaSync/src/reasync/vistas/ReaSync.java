@@ -35,25 +35,56 @@ public class ReaSync extends javax.swing.JFrame {
         statusMenuButton = new javax.swing.JButton();
         logMenuButton = new javax.swing.JButton();
         principalContainerPanel = new javax.swing.JPanel();
-        statusContainerPanel = new javax.swing.JPanel();
+        homeContainerPanel = new javax.swing.JPanel();
+        homeBannerPanel = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        homeBodyPanel = new javax.swing.JPanel();
         servicesContainerPanel = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        servicesBannerPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jPanel2 = new javax.swing.JPanel();
+        servicesBodyPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         urlServerField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         portServerField = new javax.swing.JTextField();
         connectServerButton = new javax.swing.JButton();
         statusConnectionServerLabel = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        deviceNameField = new javax.swing.JTextField();
+        disconectServerButton = new javax.swing.JButton();
         syncContainerPanel = new javax.swing.JPanel();
+        syncBannerPanel = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
+        syncBodyPanel = new javax.swing.JPanel();
+        directoryContainerPanel = new javax.swing.JPanel();
+        chooseDirectoryButton = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        urlDirectoryLabel = new javax.swing.JLabel();
+        saveUrlButton = new javax.swing.JButton();
+        syncContainerPannel = new javax.swing.JPanel();
+        syncServiceBannerPanel = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jSeparator5 = new javax.swing.JSeparator();
+        syncServiceBodyPannel = new javax.swing.JPanel();
+        syncNowButton = new javax.swing.JButton();
+        startAutoSyncButton = new javax.swing.JButton();
+        stopAutoSyncButton = new javax.swing.JButton();
         logContainerPanel = new javax.swing.JPanel();
+        logTitlePanel = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
+        logContainerPanel1 = new javax.swing.JPanel();
+        logScroll = new javax.swing.JScrollPane();
+        logTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(650, 450));
         setMinimumSize(new java.awt.Dimension(650, 450));
+        setPreferredSize(new java.awt.Dimension(650, 450));
 
         menuPanel.setBackground(new java.awt.Color(255, 153, 0));
         menuPanel.setLayout(new java.awt.GridLayout(1, 4));
@@ -111,45 +142,80 @@ public class ReaSync extends javax.swing.JFrame {
         principalContainerPanel.setBackground(new java.awt.Color(255, 255, 255));
         principalContainerPanel.setLayout(new java.awt.CardLayout());
 
-        statusContainerPanel.setBackground(new java.awt.Color(255, 255, 255));
+        homeContainerPanel.setBackground(new java.awt.Color(255, 255, 255));
+        homeContainerPanel.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout statusContainerPanelLayout = new javax.swing.GroupLayout(statusContainerPanel);
-        statusContainerPanel.setLayout(statusContainerPanelLayout);
-        statusContainerPanelLayout.setHorizontalGroup(
-            statusContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 650, Short.MAX_VALUE)
+        homeBannerPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel4.setText("ReaSync");
+
+        javax.swing.GroupLayout homeBannerPanelLayout = new javax.swing.GroupLayout(homeBannerPanel);
+        homeBannerPanel.setLayout(homeBannerPanelLayout);
+        homeBannerPanelLayout.setHorizontalGroup(
+            homeBannerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homeBannerPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(homeBannerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(homeBannerPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(0, 515, Short.MAX_VALUE))
+                    .addComponent(jSeparator2))
+                .addContainerGap())
         );
-        statusContainerPanelLayout.setVerticalGroup(
-            statusContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 377, Short.MAX_VALUE)
+        homeBannerPanelLayout.setVerticalGroup(
+            homeBannerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homeBannerPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        principalContainerPanel.add(statusContainerPanel, "statusContainerPanel");
+        homeContainerPanel.add(homeBannerPanel, java.awt.BorderLayout.PAGE_START);
+
+        homeBodyPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout homeBodyPanelLayout = new javax.swing.GroupLayout(homeBodyPanel);
+        homeBodyPanel.setLayout(homeBodyPanelLayout);
+        homeBodyPanelLayout.setHorizontalGroup(
+            homeBodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 690, Short.MAX_VALUE)
+        );
+        homeBodyPanelLayout.setVerticalGroup(
+            homeBodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 295, Short.MAX_VALUE)
+        );
+
+        homeContainerPanel.add(homeBodyPanel, java.awt.BorderLayout.CENTER);
+
+        principalContainerPanel.add(homeContainerPanel, "homeContainerPanel");
 
         servicesContainerPanel.setBackground(new java.awt.Color(255, 255, 255));
         servicesContainerPanel.setLayout(new java.awt.BorderLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        servicesBannerPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Conexión con el servidor");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout servicesBannerPanelLayout = new javax.swing.GroupLayout(servicesBannerPanel);
+        servicesBannerPanel.setLayout(servicesBannerPanelLayout);
+        servicesBannerPanelLayout.setHorizontalGroup(
+            servicesBannerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(servicesBannerPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(servicesBannerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(servicesBannerPanelLayout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(0, 408, Short.MAX_VALUE))
+                        .addGap(0, 448, Short.MAX_VALUE))
                     .addComponent(jSeparator1))
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        servicesBannerPanelLayout.setVerticalGroup(
+            servicesBannerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(servicesBannerPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -157,9 +223,9 @@ public class ReaSync extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        servicesContainerPanel.add(jPanel1, java.awt.BorderLayout.PAGE_START);
+        servicesContainerPanel.add(servicesBannerPanel, java.awt.BorderLayout.PAGE_START);
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        servicesBodyPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Dirección del servidor:");
@@ -172,71 +238,260 @@ public class ReaSync extends javax.swing.JFrame {
         statusConnectionServerLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         statusConnectionServerLabel.setText("Estas conectado con el servidor de ReaSync");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setText("Nombre de este equipo:");
+
+        disconectServerButton.setText("Desconectar");
+
+        javax.swing.GroupLayout servicesBodyPanelLayout = new javax.swing.GroupLayout(servicesBodyPanel);
+        servicesBodyPanel.setLayout(servicesBodyPanelLayout);
+        servicesBodyPanelLayout.setHorizontalGroup(
+            servicesBodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(servicesBodyPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel2)
-                        .addComponent(urlServerField)
-                        .addComponent(jLabel3)
-                        .addComponent(portServerField, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE))
-                    .addComponent(connectServerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(statusConnectionServerLabel))
-                .addContainerGap(350, Short.MAX_VALUE))
+                .addGroup(servicesBodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(servicesBodyPanelLayout.createSequentialGroup()
+                        .addComponent(statusConnectionServerLabel)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(servicesBodyPanelLayout.createSequentialGroup()
+                        .addGroup(servicesBodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(connectServerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(servicesBodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel2)
+                                .addComponent(urlServerField)
+                                .addComponent(jLabel3)
+                                .addComponent(portServerField, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)))
+                        .addGap(22, 22, 22)
+                        .addGroup(servicesBodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(deviceNameField)
+                            .addGroup(servicesBodyPanelLayout.createSequentialGroup()
+                                .addGroup(servicesBodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(disconectServerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        servicesBodyPanelLayout.setVerticalGroup(
+            servicesBodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(servicesBodyPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
+                .addGroup(servicesBodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(urlServerField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(servicesBodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(urlServerField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deviceNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(portServerField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(connectServerButton)
+                .addGroup(servicesBodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(connectServerButton)
+                    .addComponent(disconectServerButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addComponent(statusConnectionServerLabel)
                 .addGap(62, 62, 62))
         );
 
-        servicesContainerPanel.add(jPanel2, java.awt.BorderLayout.CENTER);
+        servicesContainerPanel.add(servicesBodyPanel, java.awt.BorderLayout.CENTER);
 
         principalContainerPanel.add(servicesContainerPanel, "servicesContainerPanel");
 
         syncContainerPanel.setBackground(new java.awt.Color(255, 255, 255));
+        syncContainerPanel.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout syncContainerPanelLayout = new javax.swing.GroupLayout(syncContainerPanel);
-        syncContainerPanel.setLayout(syncContainerPanelLayout);
-        syncContainerPanelLayout.setHorizontalGroup(
-            syncContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 650, Short.MAX_VALUE)
+        syncBannerPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel7.setText("Elija la carpeta de sincronización");
+
+        javax.swing.GroupLayout syncBannerPanelLayout = new javax.swing.GroupLayout(syncBannerPanel);
+        syncBannerPanel.setLayout(syncBannerPanelLayout);
+        syncBannerPanelLayout.setHorizontalGroup(
+            syncBannerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(syncBannerPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(syncBannerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(syncBannerPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(0, 374, Short.MAX_VALUE))
+                    .addComponent(jSeparator3))
+                .addContainerGap())
         );
-        syncContainerPanelLayout.setVerticalGroup(
-            syncContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 377, Short.MAX_VALUE)
+        syncBannerPanelLayout.setVerticalGroup(
+            syncBannerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(syncBannerPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        syncContainerPanel.add(syncBannerPanel, java.awt.BorderLayout.PAGE_START);
+
+        syncBodyPanel.setBackground(new java.awt.Color(255, 255, 255));
+        syncBodyPanel.setLayout(new java.awt.GridLayout());
+
+        directoryContainerPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        chooseDirectoryButton.setText("Elegir Carpeta");
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel8.setText("La ruta especificada es:");
+
+        urlDirectoryLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        urlDirectoryLabel.setText("ruta");
+
+        saveUrlButton.setText("Guardar Ruta");
+
+        javax.swing.GroupLayout directoryContainerPanelLayout = new javax.swing.GroupLayout(directoryContainerPanel);
+        directoryContainerPanel.setLayout(directoryContainerPanelLayout);
+        directoryContainerPanelLayout.setHorizontalGroup(
+            directoryContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(directoryContainerPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(directoryContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(directoryContainerPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(0, 193, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, directoryContainerPanelLayout.createSequentialGroup()
+                        .addGroup(directoryContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(saveUrlButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(urlDirectoryLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(chooseDirectoryButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
+        );
+        directoryContainerPanelLayout.setVerticalGroup(
+            directoryContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(directoryContainerPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(chooseDirectoryButton)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(urlDirectoryLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 195, Short.MAX_VALUE)
+                .addComponent(saveUrlButton)
+                .addContainerGap())
+        );
+
+        syncBodyPanel.add(directoryContainerPanel);
+
+        syncContainerPannel.setBackground(new java.awt.Color(250, 250, 250));
+        syncContainerPannel.setLayout(new java.awt.BorderLayout());
+
+        syncServiceBannerPanel.setBackground(new java.awt.Color(245, 245, 245));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel9.setText("Servicio de sincronización");
+
+        javax.swing.GroupLayout syncServiceBannerPanelLayout = new javax.swing.GroupLayout(syncServiceBannerPanel);
+        syncServiceBannerPanel.setLayout(syncServiceBannerPanelLayout);
+        syncServiceBannerPanelLayout.setHorizontalGroup(
+            syncServiceBannerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(syncServiceBannerPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(syncServiceBannerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(syncServiceBannerPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(0, 151, Short.MAX_VALUE))
+                    .addComponent(jSeparator5))
+                .addContainerGap())
+        );
+        syncServiceBannerPanelLayout.setVerticalGroup(
+            syncServiceBannerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(syncServiceBannerPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        syncContainerPannel.add(syncServiceBannerPanel, java.awt.BorderLayout.PAGE_START);
+
+        syncServiceBodyPannel.setBackground(new java.awt.Color(245, 245, 245));
+        syncServiceBodyPannel.setLayout(new java.awt.GridLayout(1, 1));
+
+        syncNowButton.setBackground(new java.awt.Color(255, 153, 51));
+        syncNowButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reasync/vistas/imagenes/transfer.png"))); // NOI18N
+        syncNowButton.setToolTipText("Iniciar Sincronización ahora");
+        syncNowButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        syncNowButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        syncServiceBodyPannel.add(syncNowButton);
+
+        startAutoSyncButton.setBackground(new java.awt.Color(255, 255, 153));
+        startAutoSyncButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reasync/vistas/imagenes/play-button.png"))); // NOI18N
+        startAutoSyncButton.setToolTipText("Iniciar Sincronización Automatica");
+        startAutoSyncButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startAutoSyncButtonActionPerformed(evt);
+            }
+        });
+        syncServiceBodyPannel.add(startAutoSyncButton);
+
+        stopAutoSyncButton.setBackground(new java.awt.Color(255, 255, 153));
+        stopAutoSyncButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reasync/vistas/imagenes/stop-button.png"))); // NOI18N
+        stopAutoSyncButton.setToolTipText("Detener Sincronización automatica");
+        stopAutoSyncButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        syncServiceBodyPannel.add(stopAutoSyncButton);
+
+        syncContainerPannel.add(syncServiceBodyPannel, java.awt.BorderLayout.CENTER);
+
+        syncBodyPanel.add(syncContainerPannel);
+
+        syncContainerPanel.add(syncBodyPanel, java.awt.BorderLayout.CENTER);
 
         principalContainerPanel.add(syncContainerPanel, "syncContainerPanel");
 
         logContainerPanel.setBackground(new java.awt.Color(255, 255, 255));
+        logContainerPanel.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout logContainerPanelLayout = new javax.swing.GroupLayout(logContainerPanel);
-        logContainerPanel.setLayout(logContainerPanelLayout);
-        logContainerPanelLayout.setHorizontalGroup(
-            logContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 650, Short.MAX_VALUE)
+        logTitlePanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel6.setText("¿Qué ha ocurrido?");
+
+        javax.swing.GroupLayout logTitlePanelLayout = new javax.swing.GroupLayout(logTitlePanel);
+        logTitlePanel.setLayout(logTitlePanelLayout);
+        logTitlePanelLayout.setHorizontalGroup(
+            logTitlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(logTitlePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(logTitlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(logTitlePanelLayout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(0, 504, Short.MAX_VALUE))
+                    .addComponent(jSeparator4))
+                .addContainerGap())
         );
-        logContainerPanelLayout.setVerticalGroup(
-            logContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 377, Short.MAX_VALUE)
+        logTitlePanelLayout.setVerticalGroup(
+            logTitlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(logTitlePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        logContainerPanel.add(logTitlePanel, java.awt.BorderLayout.PAGE_START);
+
+        logContainerPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        logContainerPanel1.setLayout(new java.awt.GridLayout());
+
+        logScroll.setBackground(new java.awt.Color(255, 255, 255));
+
+        logTextArea.setColumns(20);
+        logTextArea.setRows(5);
+        logScroll.setViewportView(logTextArea);
+
+        logContainerPanel1.add(logScroll);
+
+        logContainerPanel.add(logContainerPanel1, java.awt.BorderLayout.CENTER);
 
         principalContainerPanel.add(logContainerPanel, "logContainerPanel");
 
@@ -257,13 +512,17 @@ public class ReaSync extends javax.swing.JFrame {
 
     private void statusMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusMenuButtonActionPerformed
         CardLayout panel = (CardLayout) principalContainerPanel.getLayout();
-        panel.show(principalContainerPanel, "statusContainerPanel");
+        panel.show(principalContainerPanel, "homeContainerPanel");
     }//GEN-LAST:event_statusMenuButtonActionPerformed
 
     private void logMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logMenuButtonActionPerformed
         CardLayout panel = (CardLayout) principalContainerPanel.getLayout();
         panel.show(principalContainerPanel, "logContainerPanel");
     }//GEN-LAST:event_logMenuButtonActionPerformed
+
+    private void startAutoSyncButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startAutoSyncButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_startAutoSyncButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -301,25 +560,55 @@ public class ReaSync extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton chooseDirectoryButton;
     private javax.swing.JButton connectServerButton;
+    private javax.swing.JTextField deviceNameField;
+    private javax.swing.JPanel directoryContainerPanel;
+    private javax.swing.JButton disconectServerButton;
+    private javax.swing.JPanel homeBannerPanel;
+    private javax.swing.JPanel homeBodyPanel;
+    private javax.swing.JPanel homeContainerPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JPanel logContainerPanel;
+    private javax.swing.JPanel logContainerPanel1;
     private javax.swing.JButton logMenuButton;
+    private javax.swing.JScrollPane logScroll;
+    private javax.swing.JTextArea logTextArea;
+    private javax.swing.JPanel logTitlePanel;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JTextField portServerField;
     private javax.swing.JPanel principalContainerPanel;
+    private javax.swing.JButton saveUrlButton;
+    private javax.swing.JPanel servicesBannerPanel;
+    private javax.swing.JPanel servicesBodyPanel;
     private javax.swing.JPanel servicesContainerPanel;
     private javax.swing.JButton servicesMenuButton;
+    private javax.swing.JButton startAutoSyncButton;
     private javax.swing.JLabel statusConnectionServerLabel;
-    private javax.swing.JPanel statusContainerPanel;
     private javax.swing.JButton statusMenuButton;
+    private javax.swing.JButton stopAutoSyncButton;
+    private javax.swing.JPanel syncBannerPanel;
+    private javax.swing.JPanel syncBodyPanel;
     private javax.swing.JPanel syncContainerPanel;
+    private javax.swing.JPanel syncContainerPannel;
     private javax.swing.JButton syncMenuButton;
+    private javax.swing.JButton syncNowButton;
+    private javax.swing.JPanel syncServiceBannerPanel;
+    private javax.swing.JPanel syncServiceBodyPannel;
+    private javax.swing.JLabel urlDirectoryLabel;
     private javax.swing.JTextField urlServerField;
     // End of variables declaration//GEN-END:variables
 }

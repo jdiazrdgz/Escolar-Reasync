@@ -165,7 +165,7 @@ public class ReaSyncServer extends javax.swing.JFrame {
         homeTitlePanel.setBackground(new java.awt.Color(255, 255, 255));
 
         homeTitleLabel.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        homeTitleLabel.setText("ReaSync");
+        homeTitleLabel.setText("ReaSync Server");
 
         javax.swing.GroupLayout homeTitlePanelLayout = new javax.swing.GroupLayout(homeTitlePanel);
         homeTitlePanel.setLayout(homeTitlePanelLayout);
@@ -176,7 +176,7 @@ public class ReaSyncServer extends javax.swing.JFrame {
                 .addGroup(homeTitlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(homeTitlePanelLayout.createSequentialGroup()
                         .addComponent(homeTitleLabel)
-                        .addGap(0, 509, Short.MAX_VALUE))
+                        .addGap(0, 380, Short.MAX_VALUE))
                     .addComponent(homeTitleSeparator))
                 .addContainerGap())
         );
