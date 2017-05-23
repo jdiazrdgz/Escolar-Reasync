@@ -6,6 +6,7 @@
 package reasyncserver.vistas;
 
 import java.awt.CardLayout;
+import reasyncserver.vistas.controles.ReaSyncController;
 
 /**
  *
@@ -18,6 +19,10 @@ public class ReaSyncServer extends javax.swing.JFrame {
      */
     public ReaSyncServer() {
         initComponents();
+        myinitComponents();
+    }
+    public void myinitComponents(){
+        ReaSyncController control=new ReaSyncController(this);
     }
 
     /**
