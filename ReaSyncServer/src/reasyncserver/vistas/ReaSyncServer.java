@@ -23,8 +23,17 @@ public class ReaSyncServer extends javax.swing.JFrame {
     }
     public void myinitComponents(){
         ReaSyncController control=new ReaSyncController(this);
+        initActionListeners(control);
+        initMouseListeners(control);
+    }
+    private void initActionListeners(ReaSyncController control) {
+        reasyncServerStartButton.addActionListener(control.getActionController());
+        reasyncServerStopButton.addActionListener(control.getActionController());
     }
 
+    private void initMouseListeners(ReaSyncController control) {
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -581,8 +590,10 @@ public class ReaSyncServer extends javax.swing.JFrame {
         jLabel9.setText("ReaSync Server");
 
         reasyncServerStartButton.setText("Iniciar Servidor");
+        reasyncServerStartButton.setActionCommand("reasyncServerStartButton");
 
         reasyncServerStopButton.setText("Detener Servidor");
+        reasyncServerStopButton.setActionCommand("reasyncServerStopButton");
 
         reasyncServerLabel.setText("El servicio ReaSync esta activo");
 
@@ -593,6 +604,13 @@ public class ReaSyncServer extends javax.swing.JFrame {
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel14.setText("Puerto:");
+
+        portReaSyncServerField.setText("9000");
+        portReaSyncServerField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                portReaSyncServerFieldActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -678,6 +696,10 @@ public class ReaSyncServer extends javax.swing.JFrame {
         panel.show(bodyContainerPanel, "clientsPrincipalPanel");
     }//GEN-LAST:event_clientsMenuButtonActionPerformed
 
+    private void portReaSyncServerFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_portReaSyncServerFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_portReaSyncServerFieldActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -714,73 +736,73 @@ public class ReaSyncServer extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel bodyContainerPanel;
-    private javax.swing.JPanel clientsContainerPanel;
-    private javax.swing.JButton clientsMenuButton;
-    private javax.swing.JPanel clientsPrincipalPanel;
-    private javax.swing.JTable clientsTable;
-    private javax.swing.JScrollPane clientsTableScroll;
-    private javax.swing.JPanel clientsTitlePanel;
-    private javax.swing.JButton conexionBDButton;
-    private javax.swing.JButton ftpServiceButton;
-    private javax.swing.JLabel ftpServiceLabel;
-    private javax.swing.JPanel homeContainerBanner;
-    private javax.swing.JPanel homeContainerPanel;
-    private javax.swing.JPanel homeContainerServicesPanel;
-    private javax.swing.JButton homeLogoMenuButton;
-    private javax.swing.JPanel homePrincipalPanel;
-    private javax.swing.JLabel homeTitleLabel;
-    private javax.swing.JPanel homeTitlePanel;
-    private javax.swing.JSeparator homeTitleSeparator;
-    private javax.swing.JLabel ipReaSyncServerLabel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JSeparator jSeparator8;
-    private javax.swing.JSeparator jSeparator9;
-    private javax.swing.JPanel logContainerPanel;
-    private javax.swing.JButton logMenuButton;
-    private javax.swing.JPanel logPrincipalPanel;
-    private javax.swing.JScrollPane logScroll;
-    private javax.swing.JTextArea logTextArea;
-    private javax.swing.JPanel logTitlePanel;
-    private javax.swing.JPanel menuContainerPanel;
-    private javax.swing.JLabel mysqlServiceLabel;
-    private javax.swing.JTextField passwordBDField;
-    private javax.swing.JTextField portReaSyncServerField;
-    private javax.swing.JLabel reasyncServerLabel;
-    private javax.swing.JButton reasyncServerStartButton;
-    private javax.swing.JButton reasyncServerStopButton;
-    private javax.swing.JPanel servicesContainerPanel;
-    private javax.swing.JButton servicesMenuButton;
-    private javax.swing.JPanel servicesPrincipalPanel;
-    private javax.swing.JPanel tilteServicesPanel;
-    private javax.swing.JLabel titleClientsLabel;
-    private javax.swing.JTextField urlBDField;
-    private javax.swing.JTextField userBDField;
+    public javax.swing.JPanel bodyContainerPanel;
+    public javax.swing.JPanel clientsContainerPanel;
+    public javax.swing.JButton clientsMenuButton;
+    public javax.swing.JPanel clientsPrincipalPanel;
+    public javax.swing.JTable clientsTable;
+    public javax.swing.JScrollPane clientsTableScroll;
+    public javax.swing.JPanel clientsTitlePanel;
+    public javax.swing.JButton conexionBDButton;
+    public javax.swing.JButton ftpServiceButton;
+    public javax.swing.JLabel ftpServiceLabel;
+    public javax.swing.JPanel homeContainerBanner;
+    public javax.swing.JPanel homeContainerPanel;
+    public javax.swing.JPanel homeContainerServicesPanel;
+    public javax.swing.JButton homeLogoMenuButton;
+    public javax.swing.JPanel homePrincipalPanel;
+    public javax.swing.JLabel homeTitleLabel;
+    public javax.swing.JPanel homeTitlePanel;
+    public javax.swing.JSeparator homeTitleSeparator;
+    public javax.swing.JLabel ipReaSyncServerLabel;
+    public javax.swing.JLabel jLabel1;
+    public javax.swing.JLabel jLabel10;
+    public javax.swing.JLabel jLabel11;
+    public javax.swing.JLabel jLabel12;
+    public javax.swing.JLabel jLabel13;
+    public javax.swing.JLabel jLabel14;
+    public javax.swing.JLabel jLabel2;
+    public javax.swing.JLabel jLabel3;
+    public javax.swing.JLabel jLabel4;
+    public javax.swing.JLabel jLabel5;
+    public javax.swing.JLabel jLabel6;
+    public javax.swing.JLabel jLabel7;
+    public javax.swing.JLabel jLabel8;
+    public javax.swing.JLabel jLabel9;
+    public javax.swing.JPanel jPanel1;
+    public javax.swing.JPanel jPanel2;
+    public javax.swing.JPanel jPanel3;
+    public javax.swing.JPanel jPanel4;
+    public javax.swing.JPanel jPanel5;
+    public javax.swing.JPanel jPanel6;
+    public javax.swing.JSeparator jSeparator1;
+    public javax.swing.JSeparator jSeparator2;
+    public javax.swing.JSeparator jSeparator3;
+    public javax.swing.JSeparator jSeparator4;
+    public javax.swing.JSeparator jSeparator5;
+    public javax.swing.JSeparator jSeparator6;
+    public javax.swing.JSeparator jSeparator7;
+    public javax.swing.JSeparator jSeparator8;
+    public javax.swing.JSeparator jSeparator9;
+    public javax.swing.JPanel logContainerPanel;
+    public javax.swing.JButton logMenuButton;
+    public javax.swing.JPanel logPrincipalPanel;
+    public javax.swing.JScrollPane logScroll;
+    public javax.swing.JTextArea logTextArea;
+    public javax.swing.JPanel logTitlePanel;
+    public javax.swing.JPanel menuContainerPanel;
+    public javax.swing.JLabel mysqlServiceLabel;
+    public javax.swing.JTextField passwordBDField;
+    public javax.swing.JTextField portReaSyncServerField;
+    public javax.swing.JLabel reasyncServerLabel;
+    public javax.swing.JButton reasyncServerStartButton;
+    public javax.swing.JButton reasyncServerStopButton;
+    public javax.swing.JPanel servicesContainerPanel;
+    public javax.swing.JButton servicesMenuButton;
+    public javax.swing.JPanel servicesPrincipalPanel;
+    public javax.swing.JPanel tilteServicesPanel;
+    public javax.swing.JLabel titleClientsLabel;
+    public javax.swing.JTextField urlBDField;
+    public javax.swing.JTextField userBDField;
     // End of variables declaration//GEN-END:variables
 }

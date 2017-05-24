@@ -333,7 +333,7 @@ public class ReaSync extends javax.swing.JFrame {
         syncContainerPanel.add(syncBannerPanel, java.awt.BorderLayout.PAGE_START);
 
         syncBodyPanel.setBackground(new java.awt.Color(255, 255, 255));
-        syncBodyPanel.setLayout(new java.awt.GridLayout());
+        syncBodyPanel.setLayout(new java.awt.GridLayout(1, 0));
 
         directoryContainerPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -481,7 +481,7 @@ public class ReaSync extends javax.swing.JFrame {
         logContainerPanel.add(logTitlePanel, java.awt.BorderLayout.PAGE_START);
 
         logContainerPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        logContainerPanel1.setLayout(new java.awt.GridLayout());
+        logContainerPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
         logScroll.setBackground(new java.awt.Color(255, 255, 255));
 

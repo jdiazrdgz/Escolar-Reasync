@@ -6,6 +6,7 @@
 package reasyncserver.vistas.controles;
 
 import javax.swing.JOptionPane;
+import reasyncserver.server.Server;
 import reasyncserver.vistas.ReaSyncServer;
 
 /**
@@ -14,7 +15,17 @@ import reasyncserver.vistas.ReaSyncServer;
  */
 public class ReaSyncController {
 
-    private ReaSyncServer frame;
+    private final Server server;
+    private final ReaSyncServer frame;
+    private final ActionEventsController actionController;
+    private final MouseEventsController mouseEventsController;
+
+    public ReaSyncController(ReaSyncServer frame) {
+        this.frame = frame;
+        this.server = new Server(this);
+        actionController = new ActionEventsController(this);
+        mouseEventsController = new MouseEventsController(this);
+    }
 
     public void mostrarError(String titulo, String error) {
         JOptionPane.showMessageDialog(frame, error, titulo, JOptionPane.ERROR_MESSAGE);
@@ -23,4 +34,21 @@ public class ReaSyncController {
     public void mostrarAviso(String titulo, String aviso) {
         JOptionPane.showMessageDialog(frame, aviso, titulo, JOptionPane.INFORMATION_MESSAGE);
     }
+
+    public ActionEventsController getActionController() {
+        return actionController;
+    }
+
+    public MouseEventsController getMouseEventsController() {
+        return mouseEventsController;
+    }
+
+    public ReaSyncServer getFrame() {
+        return frame;
+    }
+
+    public Server getServer() {
+        return server;
+    }
+
 }

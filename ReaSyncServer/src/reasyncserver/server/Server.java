@@ -9,6 +9,7 @@ import reasyncserver.server.conexiones.EsperadorConexiones;
 import reasyncserver.vistas.controles.ReaSyncController;
 
 public class Server {
+
     private ServerSocket serverSocket;
     private Socket clientSocket;
     private int puerto;
@@ -31,17 +32,18 @@ public class Server {
             return 1;
         } catch (IOException e) {
             serverSocket = null;
-            control.mostrarError("Puerto", "Hubo un error al intentar montar el servidor en el puerto especificado");
+            return 0;
         }
-        return 0;
     }
-    public void esperarConexiones(){
+    
+    public void esperarConexiones() {
         esperadorConexiones = Executors.newCachedThreadPool();
         esperadorConexiones.execute(new EsperadorConexiones(this));
     }
-    public void terminarEsperaConexion(){
+
+    public void terminarEsperaConexion() {
         esperadorConexiones.shutdown();
-        esperadorConexiones=null;
+        esperadorConexiones = null;
         System.gc();
     }
 }
