@@ -18,20 +18,18 @@ class ActionEventsController implements ActionListener {
 
     public ActionEventsController(ReaSyncController reaSyncController) {
         this.reaSyncController = reaSyncController;
-        System.out.println("Action Listener");
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
-        System.out.println(comando + " comando");
         if (comando.equals("reasyncServerStartButton")) {
             if (!reaSyncController.getFrame().portReaSyncServerField.getText().isEmpty()) {
                 if (isNumeric(reaSyncController.getFrame().portReaSyncServerField.getText())) {
                     int puerto = Integer.parseInt(reaSyncController.getFrame().portReaSyncServerField.getText());
                     int error = reaSyncController.getServer().iniciarServidor(puerto);
                     if (error == 1) {
-                        reaSyncController.mostrarAviso("OK", "El servidor ha sido iniciado en el puerto " + puerto);
+                        reaSyncController.mostrarEstadoReaSyncServer("iniciado");
                     } else {
                         reaSyncController.mostrarError("Puerto", "Hubo un error al intentar montar el servidor en el puerto especificado");
                     }
@@ -39,7 +37,12 @@ class ActionEventsController implements ActionListener {
             }
         }
         if (comando.equals("reasyncServerStopButton")) {
-
+            int error = reaSyncController.getServer().cerrarServidor();
+            if (error == 1) {
+                reaSyncController.mostrarEstadoReaSyncServer("detenido");
+            } else {
+                reaSyncController.mostrarError("Servidor", "Ocurrio un error al cerrar el servidor");
+            }
         }
     }
 

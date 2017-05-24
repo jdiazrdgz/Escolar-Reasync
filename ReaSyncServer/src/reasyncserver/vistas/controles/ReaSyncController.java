@@ -35,6 +35,30 @@ public class ReaSyncController {
         JOptionPane.showMessageDialog(frame, aviso, titulo, JOptionPane.INFORMATION_MESSAGE);
     }
 
+    public void mostrarEstadoReaSyncServer(String estado) {
+        switch (estado) {
+            case "iniciado": {
+                frame.reasyncServicesServerLabel.setText("El servicio ReaSync esta activo");
+                frame.reasyncServicesServerLabel.setText("El servicio ReaSync esta activo");
+                String ip = server.getPublicIP();
+                if (ip != null) {
+                    frame.reaSyncServerPortLabel.setText("La ip del equipo es: " + ip);
+                } else {
+                    frame.reaSyncServerPortLabel.setText("Error al obtener la ip del equipo");
+                }
+                frame.reasyncServerStopButton.setEnabled(true);
+                frame.reasyncServerStartButton.setEnabled(false);
+            }
+            break;
+            case "detenido": {
+                frame.reasyncServerLabel.setText("El servicio ReaSync esta detenido");
+                frame.reasyncServicesServerLabel.setText("El servicio ReaSync esta detenido");
+                frame.reasyncServerStopButton.setEnabled(false);
+                frame.reasyncServerStartButton.setEnabled(true);
+            }
+        }
+    }
+
     public ActionEventsController getActionController() {
         return actionController;
     }
