@@ -1,11 +1,8 @@
 package reasync.cliente;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import reasync.cliente.conexion.GestorConexion;
 import reasync.vistas.controladores.ReaSyncController;
 
 /**
@@ -16,14 +13,17 @@ public class Client {
 
     private final ReaSyncController reaSyncController;
     private Socket conexion;
+    private GestorConexion gestorConexion;
 
     public Client(ReaSyncController reaSyncController) {
         this.reaSyncController = reaSyncController;
+        gestorConexion = null;
     }
 
     public int conectarConServidor(int puerto, String host) {
         try {
             conexion = new Socket(host, puerto);
+            gestorConexion = new GestorConexion(conexion);
             return 1;
         } catch (IOException ex) {
             return 0;
@@ -31,13 +31,12 @@ public class Client {
     }
 
     public void desconectarConServidor() {
-        try {
-            conexion.close();
-            conexion = null;
-            System.gc();
-            System.exit(0);
-        } catch (IOException ex) {
-            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        int error=gestorConexion.cerrarConexion();
+        if(error==1){
+            gestorConexion=null;
+        }else{
+            reaSyncController.mostrarError("Conexión", "Ocurrio un error al cerrar la conexión con el servidor");
         }
+        System.gc();
     }
 }

@@ -33,6 +33,21 @@ public class ReaSyncController {
     public void mostrarAviso(String titulo, String aviso) {
         JOptionPane.showMessageDialog(frame, aviso, titulo, JOptionPane.INFORMATION_MESSAGE);
     }
+    
+    public void cambiarEstadoConexion(String estado){
+        switch(estado){
+            case "conectado":{
+                frame.statusConnectionServerLabel.setText("Estas conectado con el servidor de ReaSync");
+                frame.connectServerButton.setEnabled(false);
+                frame.disconectServerButton.setEnabled(true);
+            }
+            case "desconectado":{
+                frame.statusConnectionServerLabel.setText("No estas conectado con el servidor de ReaSync");
+                frame.connectServerButton.setEnabled(true);
+                frame.disconectServerButton.setEnabled(false);
+            }
+        }
+    }
 
     public ReaSync getFrame() {
         return frame;

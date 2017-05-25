@@ -259,7 +259,7 @@ public class ReaSync extends javax.swing.JFrame {
         connectServerButton.setText("Conectar");
 
         statusConnectionServerLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        statusConnectionServerLabel.setText("Estas conectado con el servidor de ReaSync");
+        statusConnectionServerLabel.setText("No estas conectado con el servidor de ReaSync");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Nombre Identificador:");
