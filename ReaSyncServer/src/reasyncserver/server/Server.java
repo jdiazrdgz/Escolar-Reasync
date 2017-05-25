@@ -15,7 +15,6 @@ import reasyncserver.vistas.controles.ReaSyncController;
 public class Server {
 
     private ServerSocket serverSocket;
-    private Socket clientSocket;
     private int puerto;
     private final ReaSyncController reaSyncController;
     private ExecutorService esperadorConexiones;
@@ -23,7 +22,6 @@ public class Server {
     public Server(ReaSyncController reaSyncController) {
         this.reaSyncController = reaSyncController;
         serverSocket = null;
-        clientSocket = null;
         esperadorConexiones = null;
         puerto = 0;
     }
@@ -39,16 +37,18 @@ public class Server {
             return 0;
         }
     }
-    public int cerrarServidor(){
+
+    public int cerrarServidor() {
         try {
             this.serverSocket.close();
-            serverSocket=null;
+            serverSocket = null;
             System.gc();
             return 1;
         } catch (IOException ex) {
             return 0;
         }
     }
+
     public void esperarConexiones() {
         esperadorConexiones = Executors.newCachedThreadPool();
         esperadorConexiones.execute(new EsperadorConexiones(this));
@@ -60,14 +60,23 @@ public class Server {
         System.gc();
     }
 
-    public String getPublicIP(){
+    public String getPublicIP() {
         try {
             String ip = null;
-            InetAddress IP=InetAddress.getLocalHost();
+            InetAddress IP = InetAddress.getLocalHost();
             return IP.getHostAddress();
         } catch (UnknownHostException ex) {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
-            return  null;
+            return null;
         }
     }
+
+    public ServerSocket getServerSocket() {
+        return serverSocket;
+    }
+
+    public ReaSyncController getReaSyncController() {
+        return reaSyncController;
+    }
+
 }

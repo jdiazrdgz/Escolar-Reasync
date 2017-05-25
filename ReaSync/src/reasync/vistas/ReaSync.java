@@ -223,10 +223,10 @@ public class ReaSync extends javax.swing.JFrame {
             .addGroup(servicesBannerPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(servicesBannerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator1)
                     .addGroup(servicesBannerPanelLayout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(0, 448, Short.MAX_VALUE))
-                    .addComponent(jSeparator1))
+                        .addGap(0, 448, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         servicesBannerPanelLayout.setVerticalGroup(
@@ -287,10 +287,10 @@ public class ReaSync extends javax.swing.JFrame {
                                 .addComponent(jLabel3)
                                 .addComponent(portServerField, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)))
                         .addGap(18, 62, Short.MAX_VALUE)
-                        .addGroup(servicesBodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(servicesBodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
                             .addComponent(disconectServerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(deviceNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(deviceNameField))))
                 .addContainerGap())
         );
         servicesBodyPanelLayout.setVerticalGroup(

@@ -7,6 +7,7 @@ package reasync.vistas.controladores;
 
 import javax.swing.JOptionPane;
 import reasync.cliente.Client;
+import reasync.sistema.configuracion.GestorConfiguracion;
 import reasync.vistas.ReaSync;
 
 /**
@@ -14,16 +15,20 @@ import reasync.vistas.ReaSync;
  * @author jdiaz
  */
 public class ReaSyncController {
+
     private final ReaSync frame;
     private final Client cliente;
     private final ActionEventsController actionController;
     private final MouseEventsController mouseEventsController;
+    private final GestorConfiguracion gestorConfiguracion;
 
     public ReaSyncController(ReaSync frame) {
         this.frame = frame;
         cliente = new Client(this);
         actionController = new ActionEventsController(this);
         mouseEventsController = new MouseEventsController(this);
+        gestorConfiguracion = new GestorConfiguracion();
+        cargarConfiguracion();
     }
 
     public void mostrarError(String titulo, String error) {
@@ -33,28 +38,34 @@ public class ReaSyncController {
     public void mostrarAviso(String titulo, String aviso) {
         JOptionPane.showMessageDialog(frame, aviso, titulo, JOptionPane.INFORMATION_MESSAGE);
     }
-    
-    public void cambiarEstadoConexion(String estado){
-        switch(estado){
-            case "conectado":{
+
+    public void cambiarEstadoConexion(String estado) {
+        switch (estado) {
+            case "conectado": {
                 frame.statusConnectionServerLabel.setText("Estas conectado con el servidor de ReaSync");
                 frame.connectServerButton.setEnabled(false);
                 frame.disconectServerButton.setEnabled(true);
             }
-            case "desconectado":{
+            case "desconectado": {
                 frame.statusConnectionServerLabel.setText("No estas conectado con el servidor de ReaSync");
                 frame.connectServerButton.setEnabled(true);
                 frame.disconectServerButton.setEnabled(false);
             }
         }
     }
-
+    public void cargarConfiguracion(){
+        frame.urlDirectoryLabel.setText(gestorConfiguracion.getConfiguracion().getDirectorioSincronizacion());
+    }
     public ReaSync getFrame() {
         return frame;
     }
 
     public Client getCliente() {
         return cliente;
+    }
+
+    public GestorConfiguracion getGestorConfiguracion() {
+        return gestorConfiguracion;
     }
 
     public ActionEventsController getActionController() {
@@ -64,6 +75,5 @@ public class ReaSyncController {
     public MouseEventsController getMouseEventsController() {
         return mouseEventsController;
     }
-    
-    
+
 }

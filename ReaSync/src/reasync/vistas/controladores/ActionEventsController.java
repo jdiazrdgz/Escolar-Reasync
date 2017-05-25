@@ -40,7 +40,7 @@ class ActionEventsController implements ActionListener {
             case "saveUrlButton": {
                 reaSyncController.getFrame().saveUrlButton.setEnabled(false);
                 String directorio = reaSyncController.getFrame().urlDirectoryLabel.getText();
-                new GestorConfiguracion().actualizarDirectorioConfiguracion(directorio);
+                reaSyncController.getGestorConfiguracion().actualizarDirectorioConfiguracion(directorio);
                 break;
             }
             default: {
