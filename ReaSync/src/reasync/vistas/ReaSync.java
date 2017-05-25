@@ -6,6 +6,7 @@
 package reasync.vistas;
 
 import java.awt.CardLayout;
+import reasync.vistas.controladores.ReaSyncController;
 
 /**
  *
@@ -18,8 +19,23 @@ public class ReaSync extends javax.swing.JFrame {
      */
     public ReaSync() {
         initComponents();
+        myinitComponents();
     }
 
+    public void myinitComponents() {
+        ReaSyncController control = new ReaSyncController(this);
+        initActionListeners(control);
+        initMouseListeners(control);
+    }
+
+    private void initActionListeners(ReaSyncController control) {
+        chooseDirectoryButton.addActionListener(control.getActionController());
+        saveUrlButton.addActionListener(control.getActionController());
+    }
+
+    private void initMouseListeners(ReaSyncController control) {
+
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -233,13 +249,22 @@ public class ReaSync extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Puerto:");
 
+        portServerField.setText("9000");
+        portServerField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                portServerFieldActionPerformed(evt);
+            }
+        });
+
         connectServerButton.setText("Conectar");
 
         statusConnectionServerLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         statusConnectionServerLabel.setText("Estas conectado con el servidor de ReaSync");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel5.setText("Nombre de este equipo:");
+        jLabel5.setText("Nombre Identificador:");
+
+        deviceNameField.setText("July");
 
         disconectServerButton.setText("Desconectar");
 
@@ -261,14 +286,11 @@ public class ReaSync extends javax.swing.JFrame {
                                 .addComponent(urlServerField)
                                 .addComponent(jLabel3)
                                 .addComponent(portServerField, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)))
-                        .addGap(22, 22, 22)
+                        .addGap(18, 62, Short.MAX_VALUE)
                         .addGroup(servicesBodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(deviceNameField)
-                            .addGroup(servicesBodyPanelLayout.createSequentialGroup()
-                                .addGroup(servicesBodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(disconectServerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(disconectServerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(deviceNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         servicesBodyPanelLayout.setVerticalGroup(
@@ -338,6 +360,7 @@ public class ReaSync extends javax.swing.JFrame {
         directoryContainerPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         chooseDirectoryButton.setText("Elegir Carpeta");
+        chooseDirectoryButton.setActionCommand("chooseDirectoryButton");
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("La ruta especificada es:");
@@ -346,6 +369,8 @@ public class ReaSync extends javax.swing.JFrame {
         urlDirectoryLabel.setText("ruta");
 
         saveUrlButton.setText("Guardar Ruta");
+        saveUrlButton.setActionCommand("saveUrlButton");
+        saveUrlButton.setEnabled(false);
 
         javax.swing.GroupLayout directoryContainerPanelLayout = new javax.swing.GroupLayout(directoryContainerPanel);
         directoryContainerPanel.setLayout(directoryContainerPanelLayout);
@@ -524,6 +549,10 @@ public class ReaSync extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_startAutoSyncButtonActionPerformed
 
+    private void portServerFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_portServerFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_portServerFieldActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -560,55 +589,55 @@ public class ReaSync extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton chooseDirectoryButton;
-    private javax.swing.JButton connectServerButton;
-    private javax.swing.JTextField deviceNameField;
-    private javax.swing.JPanel directoryContainerPanel;
-    private javax.swing.JButton disconectServerButton;
-    private javax.swing.JPanel homeBannerPanel;
-    private javax.swing.JPanel homeBodyPanel;
-    private javax.swing.JPanel homeContainerPanel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JPanel logContainerPanel;
-    private javax.swing.JPanel logContainerPanel1;
-    private javax.swing.JButton logMenuButton;
-    private javax.swing.JScrollPane logScroll;
-    private javax.swing.JTextArea logTextArea;
-    private javax.swing.JPanel logTitlePanel;
-    private javax.swing.JPanel menuPanel;
-    private javax.swing.JTextField portServerField;
-    private javax.swing.JPanel principalContainerPanel;
-    private javax.swing.JButton saveUrlButton;
-    private javax.swing.JPanel servicesBannerPanel;
-    private javax.swing.JPanel servicesBodyPanel;
-    private javax.swing.JPanel servicesContainerPanel;
-    private javax.swing.JButton servicesMenuButton;
-    private javax.swing.JButton startAutoSyncButton;
-    private javax.swing.JLabel statusConnectionServerLabel;
-    private javax.swing.JButton statusMenuButton;
-    private javax.swing.JButton stopAutoSyncButton;
-    private javax.swing.JPanel syncBannerPanel;
-    private javax.swing.JPanel syncBodyPanel;
-    private javax.swing.JPanel syncContainerPanel;
-    private javax.swing.JPanel syncContainerPannel;
-    private javax.swing.JButton syncMenuButton;
-    private javax.swing.JButton syncNowButton;
-    private javax.swing.JPanel syncServiceBannerPanel;
-    private javax.swing.JPanel syncServiceBodyPannel;
-    private javax.swing.JLabel urlDirectoryLabel;
-    private javax.swing.JTextField urlServerField;
+    public javax.swing.JButton chooseDirectoryButton;
+    public javax.swing.JButton connectServerButton;
+    public javax.swing.JTextField deviceNameField;
+    public javax.swing.JPanel directoryContainerPanel;
+    public javax.swing.JButton disconectServerButton;
+    public javax.swing.JPanel homeBannerPanel;
+    public javax.swing.JPanel homeBodyPanel;
+    public javax.swing.JPanel homeContainerPanel;
+    public javax.swing.JLabel jLabel1;
+    public javax.swing.JLabel jLabel2;
+    public javax.swing.JLabel jLabel3;
+    public javax.swing.JLabel jLabel4;
+    public javax.swing.JLabel jLabel5;
+    public javax.swing.JLabel jLabel6;
+    public javax.swing.JLabel jLabel7;
+    public javax.swing.JLabel jLabel8;
+    public javax.swing.JLabel jLabel9;
+    public javax.swing.JSeparator jSeparator1;
+    public javax.swing.JSeparator jSeparator2;
+    public javax.swing.JSeparator jSeparator3;
+    public javax.swing.JSeparator jSeparator4;
+    public javax.swing.JSeparator jSeparator5;
+    public javax.swing.JPanel logContainerPanel;
+    public javax.swing.JPanel logContainerPanel1;
+    public javax.swing.JButton logMenuButton;
+    public javax.swing.JScrollPane logScroll;
+    public javax.swing.JTextArea logTextArea;
+    public javax.swing.JPanel logTitlePanel;
+    public javax.swing.JPanel menuPanel;
+    public javax.swing.JTextField portServerField;
+    public javax.swing.JPanel principalContainerPanel;
+    public javax.swing.JButton saveUrlButton;
+    public javax.swing.JPanel servicesBannerPanel;
+    public javax.swing.JPanel servicesBodyPanel;
+    public javax.swing.JPanel servicesContainerPanel;
+    public javax.swing.JButton servicesMenuButton;
+    public javax.swing.JButton startAutoSyncButton;
+    public javax.swing.JLabel statusConnectionServerLabel;
+    public javax.swing.JButton statusMenuButton;
+    public javax.swing.JButton stopAutoSyncButton;
+    public javax.swing.JPanel syncBannerPanel;
+    public javax.swing.JPanel syncBodyPanel;
+    public javax.swing.JPanel syncContainerPanel;
+    public javax.swing.JPanel syncContainerPannel;
+    public javax.swing.JButton syncMenuButton;
+    public javax.swing.JButton syncNowButton;
+    public javax.swing.JPanel syncServiceBannerPanel;
+    public javax.swing.JPanel syncServiceBodyPannel;
+    public javax.swing.JLabel urlDirectoryLabel;
+    public javax.swing.JTextField urlServerField;
     // End of variables declaration//GEN-END:variables
 }
