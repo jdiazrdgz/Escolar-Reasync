@@ -1,5 +1,6 @@
 package reasyncserver.server.conexiones;
 
+import reasyncserver.server.conexiones.clientes.Cliente;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class EsperadorConexiones implements Runnable {
     
 
     public EsperadorConexiones(Server server) {
+        this.server=server;
         manejadorHilosCliente= Executors.newCachedThreadPool();
     }
 

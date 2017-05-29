@@ -764,8 +764,8 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="mysqlServicesServiceLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="mysqlServicesServiceLabel" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -790,9 +790,9 @@
                               <Component id="passwordBDField" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="conexionBDButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace pref="76" max="32767" attributes="0"/>
                               <Component id="mysqlServicesServiceLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="69" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -846,7 +846,8 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="mysqlServicesServiceLabel">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="El servicio MYSQL esta iniciado"/>
+                        <Property name="text" type="java.lang.String" value="El servicio MYSQL esta detenido"/>
+                        <Property name="horizontalTextPosition" type="int" value="0"/>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -890,9 +891,9 @@
                               <Component id="jSeparator8" min="-2" pref="10" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="ftpServiceButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="160" max="32767" attributes="0"/>
+                              <EmptySpace pref="219" max="32767" attributes="0"/>
                               <Component id="ftpServicesServiceLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -910,7 +911,8 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="ftpServicesServiceLabel">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="El servicio FTP esta iniciado"/>
+                        <Property name="text" type="java.lang.String" value="El servicio FTP esta detenido"/>
+                        <Property name="horizontalTextPosition" type="int" value="0"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JButton" name="ftpServiceButton">
@@ -984,9 +986,9 @@
                               <Component id="reasyncServerStartButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="reasyncServerStopButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="28" max="32767" attributes="0"/>
+                              <EmptySpace pref="87" max="32767" attributes="0"/>
                               <Component id="reasyncServicesServerLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1017,6 +1019,7 @@
                     <Component class="javax.swing.JLabel" name="reasyncServicesServerLabel">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="El servicio ReaSync esta detenido"/>
+                        <Property name="horizontalTextPosition" type="int" value="0"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel13">

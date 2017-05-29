@@ -30,13 +30,13 @@ public class Client {
         }
     }
 
-    public void desconectarConServidor() {
-        int error=gestorConexion.cerrarConexion();
-        if(error==1){
-            gestorConexion=null;
-        }else{
-            reaSyncController.mostrarError("Conexión", "Ocurrio un error al cerrar la conexión con el servidor");
+    public int desconectarConServidor() {
+        int error = gestorConexion.cerrarConexion();
+        if (error == 1) {
+            gestorConexion = null;
+            return 1;
+        } else {
+            return 0;
         }
-        System.gc();
     }
 }

@@ -31,11 +31,14 @@ public class ReaSync extends javax.swing.JFrame {
     private void initActionListeners(ReaSyncController control) {
         chooseDirectoryButton.addActionListener(control.getActionController());
         saveUrlButton.addActionListener(control.getActionController());
+        connectServerButton.addActionListener(control.getActionController());
+        disconectServerButton.addActionListener(control.getActionController());
     }
 
     private void initMouseListeners(ReaSyncController control) {
 
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -246,6 +249,8 @@ public class ReaSync extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Dirección del servidor:");
 
+        urlServerField.setText("127.0.0.1");
+
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Puerto:");
 
@@ -257,6 +262,7 @@ public class ReaSync extends javax.swing.JFrame {
         });
 
         connectServerButton.setText("Conectar");
+        connectServerButton.setActionCommand("connectServerButton");
 
         statusConnectionServerLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         statusConnectionServerLabel.setText("No estas conectado con el servidor de ReaSync");
@@ -267,6 +273,7 @@ public class ReaSync extends javax.swing.JFrame {
         deviceNameField.setText("July");
 
         disconectServerButton.setText("Desconectar");
+        disconectServerButton.setActionCommand("disconectServerButton");
 
         javax.swing.GroupLayout servicesBodyPanelLayout = new javax.swing.GroupLayout(servicesBodyPanel);
         servicesBodyPanel.setLayout(servicesBodyPanelLayout);

@@ -489,7 +489,8 @@ public class ReaSyncServer extends javax.swing.JFrame {
 
         conexionBDButton.setText("Probar Conexión");
 
-        mysqlServicesServiceLabel.setText("El servicio MYSQL esta iniciado");
+        mysqlServicesServiceLabel.setText("El servicio MYSQL esta detenido");
+        mysqlServicesServiceLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout servicesBDPanelLayout = new javax.swing.GroupLayout(servicesBDPanel);
         servicesBDPanel.setLayout(servicesBDPanelLayout);
@@ -525,8 +526,8 @@ public class ReaSyncServer extends javax.swing.JFrame {
                 .addGap(56, 56, 56))
             .addGroup(servicesBDPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mysqlServicesServiceLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(mysqlServicesServiceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         servicesBDPanelLayout.setVerticalGroup(
             servicesBDPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -549,9 +550,9 @@ public class ReaSyncServer extends javax.swing.JFrame {
                 .addComponent(passwordBDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(conexionBDButton)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                 .addComponent(mysqlServicesServiceLabel)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         servicesContainerPanel.add(servicesBDPanel);
@@ -561,7 +562,8 @@ public class ReaSyncServer extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setText("FTP Server");
 
-        ftpServicesServiceLabel.setText("El servicio FTP esta iniciado");
+        ftpServicesServiceLabel.setText("El servicio FTP esta detenido");
+        ftpServicesServiceLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         ftpServiceButton.setText("Verificar Servicio FTP");
 
@@ -592,9 +594,9 @@ public class ReaSyncServer extends javax.swing.JFrame {
                 .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ftpServiceButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 219, Short.MAX_VALUE)
                 .addComponent(ftpServicesServiceLabel)
-                .addGap(70, 70, 70))
+                .addContainerGap())
         );
 
         servicesContainerPanel.add(servicesFTPPanel);
@@ -611,6 +613,7 @@ public class ReaSyncServer extends javax.swing.JFrame {
         reasyncServerStopButton.setActionCommand("reasyncServerStopButton");
 
         reasyncServicesServerLabel.setText("El servicio ReaSync esta detenido");
+        reasyncServicesServerLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel13.setText("La dirección IP es:");
@@ -675,9 +678,9 @@ public class ReaSyncServer extends javax.swing.JFrame {
                 .addComponent(reasyncServerStartButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(reasyncServerStopButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
                 .addComponent(reasyncServicesServerLabel)
-                .addGap(70, 70, 70))
+                .addContainerGap())
         );
 
         servicesContainerPanel.add(servicesReaSyncPanel);

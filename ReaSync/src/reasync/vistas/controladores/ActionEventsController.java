@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.nio.file.Path;
 import javax.swing.JFileChooser;
-import reasync.sistema.configuracion.GestorConfiguracion;
 
 /**
  *
@@ -41,6 +40,31 @@ class ActionEventsController implements ActionListener {
                 reaSyncController.getFrame().saveUrlButton.setEnabled(false);
                 String directorio = reaSyncController.getFrame().urlDirectoryLabel.getText();
                 reaSyncController.getGestorConfiguracion().actualizarDirectorioConfiguracion(directorio);
+                break;
+            }
+            case "connectServerButton": {
+                int puerto = Integer.parseInt(reaSyncController.getFrame().portServerField.getText());
+                String ipServer = reaSyncController.getFrame().urlServerField.getText();
+                int error = reaSyncController.getCliente().conectarConServidor(puerto, ipServer);
+                System.err.println("Conectado");
+                if (error == 1) {
+                    reaSyncController.getFrame().statusConnectionServerLabel
+                            .setText("Conectado con el servidor de ReaSync");
+                } else {
+                    reaSyncController.getFrame().statusConnectionServerLabel
+                            .setText("Error al conectarse con el servidor de ReaSync");
+                }
+                break;
+            }
+            case "disconectServerButton": {
+                int error = reaSyncController.getCliente().desconectarConServidor();
+                if (error == 1) {
+                    reaSyncController.getFrame().statusConnectionServerLabel
+                            .setText("No estas conectado con el servidor de ReaSync");
+                } else {
+                    reaSyncController.getFrame().statusConnectionServerLabel
+                            .setText("Ocurrio un error al cerrar la conexión con el servidor");
+                }
                 break;
             }
             default: {
