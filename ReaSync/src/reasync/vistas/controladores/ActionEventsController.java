@@ -50,9 +50,14 @@ class ActionEventsController implements ActionListener {
                 if (error == 1) {
                     reaSyncController.getFrame().statusConnectionServerLabel
                             .setText("Conectado con el servidor de ReaSync");
+                    reaSyncController.getFrame().connectServerButton.setEnabled(false);
+                    reaSyncController.getFrame().disconectServerButton.setEnabled(true);
+                    
                 } else {
                     reaSyncController.getFrame().statusConnectionServerLabel
                             .setText("Error al conectarse con el servidor de ReaSync");
+                    reaSyncController.getFrame().connectServerButton.setEnabled(true);
+                    reaSyncController.getFrame().disconectServerButton.setEnabled(false);
                 }
                 break;
             }

@@ -266,6 +266,7 @@ public class ReaSync extends javax.swing.JFrame {
 
         statusConnectionServerLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         statusConnectionServerLabel.setText("No estas conectado con el servidor de ReaSync");
+        statusConnectionServerLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Nombre Identificador:");
@@ -283,9 +284,6 @@ public class ReaSync extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(servicesBodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(servicesBodyPanelLayout.createSequentialGroup()
-                        .addComponent(statusConnectionServerLabel)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(servicesBodyPanelLayout.createSequentialGroup()
                         .addGroup(servicesBodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(connectServerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(servicesBodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -297,7 +295,8 @@ public class ReaSync extends javax.swing.JFrame {
                         .addGroup(servicesBodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
                             .addComponent(disconectServerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(deviceNameField))))
+                            .addComponent(deviceNameField)))
+                    .addComponent(statusConnectionServerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         servicesBodyPanelLayout.setVerticalGroup(

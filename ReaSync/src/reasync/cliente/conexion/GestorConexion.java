@@ -21,14 +21,19 @@ public class GestorConexion {
 
     public GestorConexion(Socket conexion) {
         this.conexion = conexion;
+        
+    }
+    public int iniciarConexion(){
         try {
             in = conexion.getInputStream();
             out = conexion.getOutputStream();
+            return 1;
         } catch (IOException ex) {
             Logger.getLogger(GestorConexion.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
         }
     }
-
+    
     public int cerrarConexion() {
         try {
             out.close();
