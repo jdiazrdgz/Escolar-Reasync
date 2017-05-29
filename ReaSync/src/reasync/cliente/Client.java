@@ -28,8 +28,8 @@ public class Client {
         try {
             conexion = new Socket(host, puerto);
             gestorConexion = new GestorConexion(conexion);
-            int error= gestorConexion.iniciarConexion();
-            if(error==1){
+            int error = gestorConexion.iniciarConexion();
+            if (error == 1) {
                 esperarRespuestas();
             }
             return 1;
@@ -37,7 +37,7 @@ public class Client {
             return 0;
         }
     }
-    
+
     public int desconectarConServidor() {
         int error = gestorConexion.cerrarConexion();
         if (error == 1) {
@@ -47,7 +47,8 @@ public class Client {
             return 0;
         }
     }
-    public void esperarRespuestas(){
+
+    public void esperarRespuestas() {
         esperadorRespuestas = Executors.newCachedThreadPool();
         esperadorRespuestas.execute(new EsperadorRespuestas(this));
     }
@@ -55,5 +56,8 @@ public class Client {
     public GestorConexion getGestorConexion() {
         return gestorConexion;
     }
-    
+
+    public ReaSyncController getReaSyncController() {
+        return reaSyncController;
+    }
 }

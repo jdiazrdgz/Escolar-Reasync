@@ -450,6 +450,7 @@ public class ReaSync extends javax.swing.JFrame {
         syncNowButton.setBackground(new java.awt.Color(255, 153, 51));
         syncNowButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reasync/vistas/imagenes/transfer.png"))); // NOI18N
         syncNowButton.setToolTipText("Iniciar Sincronización ahora");
+        syncNowButton.setActionCommand("syncNowButton");
         syncNowButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         syncNowButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         syncServiceBodyPannel.add(syncNowButton);

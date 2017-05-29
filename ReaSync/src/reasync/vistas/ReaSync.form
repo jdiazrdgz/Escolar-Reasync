@@ -680,6 +680,7 @@
                               <Image iconType="3" name="/reasync/vistas/imagenes/transfer.png"/>
                             </Property>
                             <Property name="toolTipText" type="java.lang.String" value="Iniciar Sincronizaci&#xf3;n ahora"/>
+                            <Property name="actionCommand" type="java.lang.String" value="syncNowButton"/>
                             <Property name="horizontalTextPosition" type="int" value="0"/>
                             <Property name="verticalTextPosition" type="int" value="3"/>
                           </Properties>

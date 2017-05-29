@@ -5,7 +5,9 @@
         <group>
             <file>file:/Z:/JDIAZRDGZ/Data/Github/Escolar-Reasync/ReaSync/src/reasync/cliente/conexion/GestorConexion.java</file>
             <file>file:/Z:/JDIAZRDGZ/Data/Github/Escolar-Reasync/ReaSync/src/reasync/vistas/controladores/ActionEventsController.java</file>
+            <file>file:/Z:/JDIAZRDGZ/Data/Github/Escolar-Reasync/ReaSync/src/reasync/cliente/Client.java</file>
             <file>file:/Z:/JDIAZRDGZ/Data/Github/Escolar-Reasync/ReaSync/src/reasync/vistas/ReaSync.java</file>
+            <file>file:/Z:/JDIAZRDGZ/Data/Github/Escolar-Reasync/ReaSync/src/reasync/cliente/respuestas/EsperadorRespuestas.java</file>
         </group>
     </open-files>
 </project-private>

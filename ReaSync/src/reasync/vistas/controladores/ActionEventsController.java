@@ -72,6 +72,10 @@ class ActionEventsController implements ActionListener {
                 }
                 break;
             }
+            case "syncNowButton":{
+                
+                break;
+            }
             default: {
             }
             break;
