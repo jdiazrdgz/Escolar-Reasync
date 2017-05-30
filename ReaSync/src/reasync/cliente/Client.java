@@ -6,6 +6,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import reasync.cliente.conexion.GestorConexion;
 import reasync.cliente.respuestas.EsperadorRespuestas;
+import reasync.sistema.configuracion.GestorConfiguracion;
+import reasync.sistema.directorios.GestorDirectorio;
 import reasync.vistas.controladores.ReaSyncController;
 
 /**
@@ -18,10 +20,14 @@ public class Client {
     private Socket conexion;
     private GestorConexion gestorConexion;
     private ExecutorService esperadorRespuestas;
+    private final GestorDirectorio gestorDirectorio;
+    private final GestorConfiguracion gestorConfiguracion;
 
     public Client(ReaSyncController reaSyncController) {
         this.reaSyncController = reaSyncController;
         gestorConexion = null;
+        gestorConfiguracion = new GestorConfiguracion();
+        gestorDirectorio = new GestorDirectorio(this);
     }
 
     public int conectarConServidor(int puerto, String host) {
@@ -60,4 +66,13 @@ public class Client {
     public ReaSyncController getReaSyncController() {
         return reaSyncController;
     }
+
+    public GestorDirectorio getGestorDirectorio() {
+        return gestorDirectorio;
+    }
+
+    public GestorConfiguracion getGestorConfiguracion() {
+        return gestorConfiguracion;
+    }
+
 }

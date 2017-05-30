@@ -20,14 +20,13 @@ public class ReaSyncController {
     private final Client cliente;
     private final ActionEventsController actionController;
     private final MouseEventsController mouseEventsController;
-    private final GestorConfiguracion gestorConfiguracion;
+    
 
     public ReaSyncController(ReaSync frame) {
         this.frame = frame;
         cliente = new Client(this);
         actionController = new ActionEventsController(this);
         mouseEventsController = new MouseEventsController(this);
-        gestorConfiguracion = new GestorConfiguracion();
         cargarConfiguracion();
     }
 
@@ -54,7 +53,7 @@ public class ReaSyncController {
         }
     }
     public void cargarConfiguracion(){
-        frame.urlDirectoryLabel.setText(gestorConfiguracion.getConfiguracion().getDirectorioSincronizacion());
+        frame.urlDirectoryLabel.setText(cliente.getGestorConfiguracion().getConfiguracion().getDirectorioSincronizacion());
     }
     public ReaSync getFrame() {
         return frame;
@@ -62,10 +61,6 @@ public class ReaSyncController {
 
     public Client getCliente() {
         return cliente;
-    }
-
-    public GestorConfiguracion getGestorConfiguracion() {
-        return gestorConfiguracion;
     }
 
     public ActionEventsController getActionController() {

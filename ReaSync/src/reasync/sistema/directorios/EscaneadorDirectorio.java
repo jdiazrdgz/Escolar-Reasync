@@ -23,7 +23,7 @@ public class EscaneadorDirectorio {
         this.directorioSyncPrincipal = directorioSyncPrincipal;
     }
 
-    private int getNoArchivosMusica() {
+    public int getNoArchivosMusica() {
         int noArchivosMusica = 0;
         try (DirectoryStream<Path> stream
                 = Files.newDirectoryStream(directorioSyncPrincipal, Filtros.filtroArchivosMusica)) {

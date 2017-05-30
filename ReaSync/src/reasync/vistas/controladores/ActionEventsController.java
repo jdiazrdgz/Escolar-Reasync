@@ -39,7 +39,7 @@ class ActionEventsController implements ActionListener {
             case "saveUrlButton": {
                 reaSyncController.getFrame().saveUrlButton.setEnabled(false);
                 String directorio = reaSyncController.getFrame().urlDirectoryLabel.getText();
-                reaSyncController.getGestorConfiguracion().actualizarDirectorioConfiguracion(directorio);
+                reaSyncController.getCliente().getGestorConfiguracion().actualizarDirectorioConfiguracion(directorio);
                 break;
             }
             case "connectServerButton": {
@@ -73,7 +73,11 @@ class ActionEventsController implements ActionListener {
                 break;
             }
             case "syncNowButton":{
-                
+                int noArchivos=reaSyncController.getCliente()
+                        .getGestorDirectorio()
+                        .getEscaneadorDirectorio()
+                        .getNoArchivosMusica();
+                System.out.println(noArchivos);
                 break;
             }
             default: {

@@ -13,22 +13,30 @@ import reasync.sistema.archivos.ArchivoMusica;
  *
  * @author jdiaz
  */
-public class GestorCambiosDirectorio {
-    
-    private List <ArchivoMusica> listaCambios;
+public class GestorDirectorio {
+
+    private List<ArchivoMusica> listaCambios;
     private EscaneadorDirectorio escaneadorDirectorio;
-    private Client cliente;
+    private final Client cliente;
     private FileSystem sistemaFicheros;
 
-    public GestorCambiosDirectorio(Client client) {
+    public GestorDirectorio(Client cliente) {
+        this.cliente = cliente;
+        iniciarParametros();
+    }
+
+    private void iniciarParametros(){
         sistemaFicheros=FileSystems.getDefault();
         listaCambios= new ArrayList<>();
-        Path directorioSyncPrincipal = sistemaFicheros.getPath(cliente.getReaSyncController()
+        Path directorioSyncPrincipal = sistemaFicheros.getPath(cliente
                  .getGestorConfiguracion()
                  .getConfiguracion()
                  .getDirectorioSincronizacion());
          escaneadorDirectorio = new EscaneadorDirectorio(directorioSyncPrincipal);
     }
-    
-    
+
+    public EscaneadorDirectorio getEscaneadorDirectorio() {
+        return escaneadorDirectorio;
+    }
+
 }
