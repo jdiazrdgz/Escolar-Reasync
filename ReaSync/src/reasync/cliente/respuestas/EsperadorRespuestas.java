@@ -28,7 +28,7 @@ public class EsperadorRespuestas implements Runnable {
             while (true) {
                 objeto = (Object) cliente.getGestorConexion().getIn();
                 if (objeto instanceof Respuesta) {
-
+                    
                 }
             }
         } catch (IOException ex) {

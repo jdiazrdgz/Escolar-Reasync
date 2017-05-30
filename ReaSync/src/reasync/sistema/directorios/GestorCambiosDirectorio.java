@@ -1,5 +1,7 @@
-package reasync.sistema.sync;
+package reasync.sistema.directorios;
 
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -16,11 +18,12 @@ public class GestorCambiosDirectorio {
     private List <ArchivoMusica> listaCambios;
     private EscaneadorDirectorio escaneadorDirectorio;
     private Client cliente;
+    private FileSystem sistemaFicheros;
 
     public GestorCambiosDirectorio(Client client) {
-        
-         listaCambios= new ArrayList<>();
-         Path directorioSyncPrincipal = Paths.get(cliente.getReaSyncController()
+        sistemaFicheros=FileSystems.getDefault();
+        listaCambios= new ArrayList<>();
+        Path directorioSyncPrincipal = sistemaFicheros.getPath(cliente.getReaSyncController()
                  .getGestorConfiguracion()
                  .getConfiguracion()
                  .getDirectorioSincronizacion());
