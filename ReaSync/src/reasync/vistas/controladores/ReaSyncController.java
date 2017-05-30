@@ -31,7 +31,7 @@ public class ReaSyncController {
     }
 
     public void mostrarError(String titulo, String error) {
-        JOptionPane.showMessageDialog(frame, error, titulo, JOptionPane.ERROR_MESSAGE);
+         JOptionPane.showMessageDialog(frame, error, titulo, JOptionPane.ERROR_MESSAGE);
     }
 
     public void mostrarAviso(String titulo, String aviso) {

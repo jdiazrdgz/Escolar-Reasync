@@ -2,7 +2,11 @@ package reasync.vistas.controladores;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 
 /**
@@ -52,7 +56,7 @@ class ActionEventsController implements ActionListener {
                             .setText("Conectado con el servidor de ReaSync");
                     reaSyncController.getFrame().connectServerButton.setEnabled(false);
                     reaSyncController.getFrame().disconectServerButton.setEnabled(true);
-                    
+
                 } else {
                     reaSyncController.getFrame().statusConnectionServerLabel
                             .setText("Error al conectarse con el servidor de ReaSync");
@@ -72,12 +76,12 @@ class ActionEventsController implements ActionListener {
                 }
                 break;
             }
-            case "syncNowButton":{
-                int noArchivos=reaSyncController.getCliente()
+            case "syncNowButton": {
+                int noArtchivosMusica=reaSyncController.getCliente()
                         .getGestorDirectorio()
                         .getEscaneadorDirectorio()
-                        .getNoArchivosMusica();
-                System.out.println(noArchivos);
+                        .getTotalArchivosMusicaDirectorioPrincipal();
+                System.out.println(noArtchivosMusica);
                 break;
             }
             default: {

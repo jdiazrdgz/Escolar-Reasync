@@ -32,7 +32,7 @@ public class GestorDirectorio {
                  .getGestorConfiguracion()
                  .getConfiguracion()
                  .getDirectorioSincronizacion());
-         escaneadorDirectorio = new EscaneadorDirectorio(directorioSyncPrincipal);
+        escaneadorDirectorio = new EscaneadorDirectorio(directorioSyncPrincipal);
     }
 
     public EscaneadorDirectorio getEscaneadorDirectorio() {

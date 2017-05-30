@@ -33,6 +33,7 @@ public class ReaSync extends javax.swing.JFrame {
         saveUrlButton.addActionListener(control.getActionController());
         connectServerButton.addActionListener(control.getActionController());
         disconectServerButton.addActionListener(control.getActionController());
+        syncNowButton.addActionListener(control.getActionController());
     }
 
     private void initMouseListeners(ReaSyncController control) {
