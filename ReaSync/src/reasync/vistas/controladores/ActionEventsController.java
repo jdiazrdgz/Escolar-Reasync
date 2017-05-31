@@ -2,11 +2,7 @@ package reasync.vistas.controladores;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 
 /**
@@ -77,11 +73,13 @@ class ActionEventsController implements ActionListener {
                 break;
             }
             case "syncNowButton": {
-                int noArtchivosMusica=reaSyncController.getCliente()
-                        .getGestorDirectorio()
-                        .getEscaneadorDirectorio()
-                        .getTotalArchivosMusicaDirectorioPrincipal();
-                System.out.println(noArtchivosMusica);
+                //Generar lista local
+                //generar lista cambios
+                //comparar listas y crear una resultante con las diferencias
+                //enviar al server
+                reaSyncController.getCliente()
+                        .getGestorSincronizacion()
+                        .hacerSincronizacionManual();
                 break;
             }
             default: {

@@ -1,4 +1,4 @@
-package reasync.sistema.archivos;
+package archivos;
 
 import java.nio.file.Path;
 

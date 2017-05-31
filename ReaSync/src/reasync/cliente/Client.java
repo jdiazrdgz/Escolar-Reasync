@@ -8,6 +8,7 @@ import reasync.cliente.conexion.GestorConexion;
 import reasync.cliente.respuestas.EsperadorRespuestas;
 import reasync.sistema.configuracion.GestorConfiguracion;
 import reasync.sistema.directorios.GestorDirectorio;
+import reasync.sistema.sync.GestorSincronizacion;
 import reasync.vistas.controladores.ReaSyncController;
 
 /**
@@ -22,12 +23,14 @@ public class Client {
     private ExecutorService esperadorRespuestas;
     private final GestorDirectorio gestorDirectorio;
     private final GestorConfiguracion gestorConfiguracion;
+    private final GestorSincronizacion gestorSincronizacion;
 
     public Client(ReaSyncController reaSyncController) {
         this.reaSyncController = reaSyncController;
         gestorConexion = null;
         gestorConfiguracion = new GestorConfiguracion();
         gestorDirectorio = new GestorDirectorio(this);
+        gestorSincronizacion = new GestorSincronizacion(this);
     }
 
     public int conectarConServidor(int puerto, String host) {
@@ -73,6 +76,10 @@ public class Client {
 
     public GestorConfiguracion getGestorConfiguracion() {
         return gestorConfiguracion;
+    }
+
+    public GestorSincronizacion getGestorSincronizacion() {
+        return gestorSincronizacion;
     }
 
 }
