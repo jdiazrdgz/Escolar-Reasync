@@ -84,6 +84,7 @@ public class ReaSync extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         urlDirectoryLabel = new javax.swing.JLabel();
         saveUrlButton = new javax.swing.JButton();
+        nombreDirectorioSync = new javax.swing.JLabel();
         syncContainerPannel = new javax.swing.JPanel();
         syncServiceBannerPanel = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -102,9 +103,7 @@ public class ReaSync extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setMaximumSize(new java.awt.Dimension(650, 450));
         setMinimumSize(new java.awt.Dimension(650, 450));
-        setPreferredSize(new java.awt.Dimension(650, 450));
 
         menuPanel.setBackground(new java.awt.Color(255, 153, 0));
         menuPanel.setLayout(new java.awt.GridLayout(1, 4));
@@ -379,6 +378,8 @@ public class ReaSync extends javax.swing.JFrame {
         saveUrlButton.setActionCommand("saveUrlButton");
         saveUrlButton.setEnabled(false);
 
+        nombreDirectorioSync.setEnabled(false);
+
         javax.swing.GroupLayout directoryContainerPanelLayout = new javax.swing.GroupLayout(directoryContainerPanel);
         directoryContainerPanel.setLayout(directoryContainerPanelLayout);
         directoryContainerPanelLayout.setHorizontalGroup(
@@ -386,15 +387,17 @@ public class ReaSync extends javax.swing.JFrame {
             .addGroup(directoryContainerPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(directoryContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(directoryContainerPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(0, 193, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, directoryContainerPanelLayout.createSequentialGroup()
                         .addGroup(directoryContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(saveUrlButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(urlDirectoryLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(chooseDirectoryButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(directoryContainerPanelLayout.createSequentialGroup()
+                        .addGroup(directoryContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(nombreDirectorioSync))
+                        .addGap(0, 193, Short.MAX_VALUE))))
         );
         directoryContainerPanelLayout.setVerticalGroup(
             directoryContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -405,7 +408,9 @@ public class ReaSync extends javax.swing.JFrame {
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(urlDirectoryLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 195, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(nombreDirectorioSync)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
                 .addComponent(saveUrlButton)
                 .addContainerGap())
         );
@@ -626,6 +631,7 @@ public class ReaSync extends javax.swing.JFrame {
     public javax.swing.JTextArea logTextArea;
     public javax.swing.JPanel logTitlePanel;
     public javax.swing.JPanel menuPanel;
+    public javax.swing.JLabel nombreDirectorioSync;
     public javax.swing.JTextField portServerField;
     public javax.swing.JPanel principalContainerPanel;
     public javax.swing.JButton saveUrlButton;

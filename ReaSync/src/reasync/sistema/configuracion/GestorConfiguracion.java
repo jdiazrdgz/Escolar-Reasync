@@ -61,6 +61,10 @@ public class GestorConfiguracion {
         this.configuracion.setDirectorioSincronizacion(directorio);
         return guardarConfiguracion(configuracion);
     }
+    public int actualizarNombreDirectorioConfiguracion(String nombreDirectorio) {
+        this.configuracion.setNombreDirectorioConfiguracion(nombreDirectorio);
+        return guardarConfiguracion(configuracion);
+    }
 
     public Configuracion getConfiguracion() {
         return configuracion;

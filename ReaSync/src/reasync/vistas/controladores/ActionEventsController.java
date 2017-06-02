@@ -30,6 +30,8 @@ class ActionEventsController implements ActionListener {
                     Path ruta = chooser.getSelectedFile().toPath();
                     reaSyncController.getFrame().urlDirectoryLabel.setText(ruta.toString());
                     reaSyncController.getFrame().saveUrlButton.setEnabled(true);
+                    reaSyncController.getFrame().nombreDirectorioSync.setVisible(false);
+                    reaSyncController.getFrame().nombreDirectorioSync.setText(ruta.getFileName().toString());
                 } else {
                     reaSyncController.getFrame().urlDirectoryLabel
                             .setText("Elija una ruta para hacer la sincronizacion");
@@ -39,7 +41,11 @@ class ActionEventsController implements ActionListener {
             case "saveUrlButton": {
                 reaSyncController.getFrame().saveUrlButton.setEnabled(false);
                 String directorio = reaSyncController.getFrame().urlDirectoryLabel.getText();
-                reaSyncController.getCliente().getGestorConfiguracion().actualizarDirectorioConfiguracion(directorio);
+                String nombreDirectorio = reaSyncController.getFrame().urlDirectoryLabel.getText();
+                reaSyncController.getCliente().getGestorConfiguracion()
+                        .actualizarDirectorioConfiguracion(directorio);
+                reaSyncController.getCliente().getGestorConfiguracion()
+                        .actualizarNombreDirectorioConfiguracion(nombreDirectorio);
                 break;
             }
             case "connectServerButton": {
