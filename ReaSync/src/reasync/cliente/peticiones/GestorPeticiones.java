@@ -1,4 +1,4 @@
-package reasync.cliente.respuestas.peticiones;
+package reasync.cliente.peticiones;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;

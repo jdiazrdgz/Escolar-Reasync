@@ -8,6 +8,8 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import peticion.Peticion;
+import reasyncserver.bd.GestorRegistros;
+
 
 /**
  *
@@ -20,6 +22,7 @@ public class Cliente implements Runnable {
     private final int id;
     private InputStream in;
     private OutputStream out;
+    private GestorRegistros gestorRegistros;
 
     public Cliente(Socket conexion, int id) {
         this.conexion = conexion;
@@ -56,7 +59,16 @@ public class Cliente implements Runnable {
             while (true) {
                 objeto = (Object) oin.readObject();
                 if(objeto instanceof Peticion){
+                    Peticion peticion=(Peticion)objeto;
                     System.out.println("Era peticion");
+                    switch(peticion.getPeticion()){
+                        case"registroArchivosMusica":{
+                            
+                        }
+                        default:{
+                            
+                        }
+                    }
                 }
             }
         } catch (IOException | ClassNotFoundException ex) {

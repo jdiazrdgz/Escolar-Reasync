@@ -3,7 +3,7 @@ package reasync.sistema.sync;
 import archivos.ArchivosMusica;
 import peticion.Peticion;
 import reasync.cliente.Client;
-import reasync.cliente.respuestas.peticiones.GestorPeticiones;
+import reasync.cliente.peticiones.GestorPeticiones;
 
 /**
  *
