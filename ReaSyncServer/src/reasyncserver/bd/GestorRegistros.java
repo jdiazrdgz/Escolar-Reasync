@@ -10,13 +10,14 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import reasyncserver.server.Server;
 
 /**
  *
  * @author jdiaz
  */
 public class GestorRegistros {
-
+    private Server server;
     private GestorConexionBD gestorConexionBD;
     private Connection conexion;
     private Statement statement;

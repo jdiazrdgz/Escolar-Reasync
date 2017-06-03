@@ -94,12 +94,6 @@ public class ReaSyncServer extends javax.swing.JFrame {
         servicesBDPanel = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jSeparator7 = new javax.swing.JSeparator();
-        jLabel10 = new javax.swing.JLabel();
-        urlBDField = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        userBDField = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        passwordBDField = new javax.swing.JTextField();
         conexionBDButton = new javax.swing.JButton();
         mysqlServicesServiceLabel = new javax.swing.JLabel();
         servicesFTPPanel = new javax.swing.JPanel();
@@ -478,22 +472,6 @@ public class ReaSyncServer extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setText("Base de datos");
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel10.setText("URL  BD:");
-
-        urlBDField.setText("127.0.0.1:3306/reasync");
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel11.setText("Usuario BD:");
-        jLabel11.setToolTipText("");
-
-        userBDField.setText("root");
-
-        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel12.setText("Password BD:");
-
-        passwordBDField.setText("46143**/");
-
         conexionBDButton.setText("Probar Conexión");
         conexionBDButton.setActionCommand("conexionBDButton");
 
@@ -504,37 +482,21 @@ public class ReaSyncServer extends javax.swing.JFrame {
         servicesBDPanel.setLayout(servicesBDPanelLayout);
         servicesBDPanelLayout.setHorizontalGroup(
             servicesBDPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, servicesBDPanelLayout.createSequentialGroup()
-                .addGroup(servicesBDPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, servicesBDPanelLayout.createSequentialGroup()
-                        .addGroup(servicesBDPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(servicesBDPanelLayout.createSequentialGroup()
-                                .addGap(59, 59, 59)
-                                .addComponent(jLabel7))
-                            .addGroup(servicesBDPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel10)))
+            .addGroup(servicesBDPanelLayout.createSequentialGroup()
+                .addGroup(servicesBDPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(servicesBDPanelLayout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(jLabel7)
                         .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, servicesBDPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jSeparator7))
                     .addGroup(servicesBDPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(servicesBDPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(passwordBDField)
-                            .addComponent(jSeparator7, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(urlBDField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(userBDField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, servicesBDPanelLayout.createSequentialGroup()
-                                .addGroup(servicesBDPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel12))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, servicesBDPanelLayout.createSequentialGroup()
-                .addGap(0, 59, Short.MAX_VALUE)
-                .addComponent(conexionBDButton)
-                .addGap(56, 56, 56))
-            .addGroup(servicesBDPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(mysqlServicesServiceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(mysqlServicesServiceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE))
+                    .addGroup(servicesBDPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(conexionBDButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         servicesBDPanelLayout.setVerticalGroup(
@@ -545,20 +507,8 @@ public class ReaSyncServer extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(urlBDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(userBDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(passwordBDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(conexionBDButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 219, Short.MAX_VALUE)
                 .addComponent(mysqlServicesServiceLabel)
                 .addContainerGap())
         );
@@ -782,9 +732,6 @@ public class ReaSyncServer extends javax.swing.JFrame {
     public javax.swing.JSeparator homeTitleSeparator;
     public javax.swing.JLabel ipReaSyncServerLabel;
     public javax.swing.JLabel jLabel1;
-    public javax.swing.JLabel jLabel10;
-    public javax.swing.JLabel jLabel11;
-    public javax.swing.JLabel jLabel12;
     public javax.swing.JLabel jLabel13;
     public javax.swing.JLabel jLabel14;
     public javax.swing.JLabel jLabel2;
@@ -815,7 +762,6 @@ public class ReaSyncServer extends javax.swing.JFrame {
     public javax.swing.JPanel logTitlePanel;
     public javax.swing.JPanel menuContainerPanel;
     public javax.swing.JLabel mysqlServicesServiceLabel;
-    public javax.swing.JTextField passwordBDField;
     public javax.swing.JTextField portReaSyncServerField;
     public javax.swing.JLabel reaSyncServerPortLabel;
     public javax.swing.JLabel reasyncServerLabel;
@@ -830,7 +776,5 @@ public class ReaSyncServer extends javax.swing.JFrame {
     public javax.swing.JPanel servicesReaSyncPanel;
     public javax.swing.JPanel tilteServicesPanel;
     public javax.swing.JLabel titleClientsLabel;
-    public javax.swing.JTextField urlBDField;
-    public javax.swing.JTextField userBDField;
     // End of variables declaration//GEN-END:variables
 }

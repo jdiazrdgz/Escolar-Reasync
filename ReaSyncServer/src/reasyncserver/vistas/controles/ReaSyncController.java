@@ -36,22 +36,6 @@ public class ReaSyncController {
 
     public void cargarConfiguracion() {
         Configuracion configuracion = gestorConfiguracion.getConfiguracion();
-        String urlBD = configuracion.getBdinfo().getUrlbd();
-        String userBD = configuracion.getBdinfo().getUserName();
-        String passwordBD = configuracion.getBdinfo().getPassword();
-        String puertoServer = configuracion.getServerInfo().getPuerto();
-        if (!urlBD.equals("")){
-            frame.urlBDField.setText(urlBD);
-        }
-        if(!userBD.equals("")){
-            frame.userBDField.setText(userBD);
-        }
-        if(!passwordBD.equals("")){
-            frame.passwordBDField.setText(passwordBD);
-        }
-        if(!puertoServer.equals("")){
-            frame.portReaSyncServerField.setText(puertoServer);
-        }
     }
 
     public void mostrarError(String titulo, String error) {
