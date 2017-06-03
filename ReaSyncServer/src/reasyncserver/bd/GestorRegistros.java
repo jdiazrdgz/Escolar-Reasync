@@ -26,6 +26,11 @@ public class GestorRegistros {
         this.conexion = null;
         this.statement = null;
         this.resultset = null;
+        try {
+            gestorConexionBD= new GestorConexionBD();
+        } catch (SQLException | ClassNotFoundException | IllegalAccessException | InstantiationException ex) {
+            Logger.getLogger(GestorRegistros.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public int guardarRegistroArchivoMusica(ArchivoMusica archivoMusica) {
@@ -74,6 +79,7 @@ public class GestorRegistros {
                         resultset.getString("nombre"), 
                         Integer.parseInt(resultset.getString("peso"))));
             }
+            gestorConexionBD.desconectar();
             return archivosMusica;
         } catch (SQLException ex) {
             Logger.getLogger(GestorRegistros.class.getName()).log(Level.SEVERE, null, ex);

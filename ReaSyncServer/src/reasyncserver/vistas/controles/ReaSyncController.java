@@ -7,6 +7,8 @@ package reasyncserver.vistas.controles;
 
 import javax.swing.JOptionPane;
 import reasyncserver.server.Server;
+import reasyncserver.sistema.configuracion.Configuracion;
+import reasyncserver.sistema.configuracion.GestorConfiguracion;
 import reasyncserver.vistas.ReaSyncServer;
 
 /**
@@ -19,12 +21,37 @@ public class ReaSyncController {
     private final ReaSyncServer frame;
     private final ActionEventsController actionController;
     private final MouseEventsController mouseEventsController;
+    private final GestorConfiguracion gestorConfiguracion;
 
     public ReaSyncController(ReaSyncServer frame) {
         this.frame = frame;
         this.server = new Server(this);
         actionController = new ActionEventsController(this);
         mouseEventsController = new MouseEventsController(this);
+        gestorConfiguracion = new GestorConfiguracion();
+        if (gestorConfiguracion.existeConfiguracion()) {
+            cargarConfiguracion();
+        }
+    }
+
+    public void cargarConfiguracion() {
+        Configuracion configuracion = gestorConfiguracion.getConfiguracion();
+        String urlBD = configuracion.getBdinfo().getUrlbd();
+        String userBD = configuracion.getBdinfo().getUserName();
+        String passwordBD = configuracion.getBdinfo().getPassword();
+        String puertoServer = configuracion.getServerInfo().getPuerto();
+        if (!urlBD.equals("")){
+            frame.urlBDField.setText(urlBD);
+        }
+        if(!userBD.equals("")){
+            frame.userBDField.setText(userBD);
+        }
+        if(!passwordBD.equals("")){
+            frame.passwordBDField.setText(passwordBD);
+        }
+        if(!puertoServer.equals("")){
+            frame.portReaSyncServerField.setText(puertoServer);
+        }
     }
 
     public void mostrarError(String titulo, String error) {

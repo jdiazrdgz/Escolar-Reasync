@@ -44,6 +44,9 @@ class ActionEventsController implements ActionListener {
                 reaSyncController.mostrarError("Servidor", "Ocurrio un error al cerrar el servidor");
             }
         }
+        if(comando.equals("conexionBDButton")){
+            
+        }
     }
 
     public static boolean isNumeric(String str) {

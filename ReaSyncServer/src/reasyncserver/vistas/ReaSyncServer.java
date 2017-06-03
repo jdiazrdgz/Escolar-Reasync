@@ -31,6 +31,7 @@ public class ReaSyncServer extends javax.swing.JFrame {
     private void initActionListeners(ReaSyncController control) {
         reasyncServerStartButton.addActionListener(control.getActionController());
         reasyncServerStopButton.addActionListener(control.getActionController());
+        conexionBDButton.addActionListener(control.getActionController());
     }
 
     private void initMouseListeners(ReaSyncController control) {
@@ -480,14 +481,21 @@ public class ReaSyncServer extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel10.setText("URL  BD:");
 
+        urlBDField.setText("127.0.0.1:3306/reasync");
+
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel11.setText("Usuario BD:");
         jLabel11.setToolTipText("");
 
+        userBDField.setText("root");
+
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel12.setText("Password BD:");
 
+        passwordBDField.setText("46143**/");
+
         conexionBDButton.setText("Probar Conexión");
+        conexionBDButton.setActionCommand("conexionBDButton");
 
         mysqlServicesServiceLabel.setText("El servicio MYSQL esta detenido");
         mysqlServicesServiceLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);

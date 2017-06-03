@@ -1,5 +1,6 @@
 package reasyncserver.server.conexiones.clientes;
 
+import archivos.ArchivosMusica;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -9,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import peticion.Peticion;
 import reasyncserver.bd.GestorRegistros;
+import reasyncserver.server.conexiones.clientes.respuesta.GestorRespuestas;
 
 
 /**
@@ -23,6 +25,7 @@ public class Cliente implements Runnable {
     private InputStream in;
     private OutputStream out;
     private GestorRegistros gestorRegistros;
+    private GestorRespuestas gestorRespuestas;
 
     public Cliente(Socket conexion, int id) {
         this.conexion = conexion;
@@ -32,6 +35,8 @@ public class Cliente implements Runnable {
             System.out.println("El cliente " + id + " no puede obtener "
                     + "canales de entrada salida");
         }
+        gestorRegistros = new GestorRegistros();
+        gestorRespuestas = new GestorRespuestas(this);
     }
 
     @Override
@@ -63,7 +68,8 @@ public class Cliente implements Runnable {
                     System.out.println("Era peticion");
                     switch(peticion.getPeticion()){
                         case"registroArchivosMusica":{
-                            
+                            ArchivosMusica archivosMusica = gestorRegistros.getArchivosMusica();
+                            gestorRespuestas.enviarArchivosMusicaRegistrados(archivosMusica);
                         }
                         default:{
                             

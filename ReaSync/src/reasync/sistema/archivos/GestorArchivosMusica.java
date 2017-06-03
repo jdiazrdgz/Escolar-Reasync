@@ -3,6 +3,7 @@ package reasync.sistema.archivos;
 import archivos.ArchivoMusica;
 import archivos.ArchivosMusica;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.List;
 import reasync.sistema.configuracion.GestorConfiguracion;
@@ -19,7 +20,7 @@ public class GestorArchivosMusica {
         this.gestorConfiguracion = gestorConfiguracion;
     }
 
-    public ArchivosMusica fixPathArchivosMusica(ArchivosMusica archivosMusica) {
+    public ArchivosMusica generalizarPathArchivosMusica(ArchivosMusica archivosMusica) {
         List<ArchivoMusica> listaArchivosMusica = archivosMusica.getArchivosMusica();
         Path originalPath = null;
         Path fixedPath = null;
@@ -42,7 +43,20 @@ public class GestorArchivosMusica {
                 }
             }
             fixedPath = originalPath.subpath(inicio, fin);
+            archivoMusica.setRutaArchivo(fixedPath);
+        }
+        return archivosMusica;
+    }
 
+    public ArchivosMusica especificarPathArchivosMusica(ArchivosMusica archivosMusica) {
+        List<ArchivoMusica> listaArchivosMusica = archivosMusica.getArchivosMusica();
+        Path generalPath = null;
+        Path localPath = null;
+        String localdirSync = gestorConfiguracion.getConfiguracion().getNombreDirectorioConfiguracion();
+        for (ArchivoMusica archivoMusica : listaArchivosMusica) {
+            generalPath = archivoMusica.getRutaArchivo();
+            localPath = Paths.get(localdirSync, generalPath.toString());
+            archivoMusica.setRutaArchivo(localPath);
         }
         return archivosMusica;
     }

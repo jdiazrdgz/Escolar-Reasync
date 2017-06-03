@@ -817,6 +817,9 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="urlBDField">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="127.0.0.1:3306/reasync"/>
+                      </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel11">
                       <Properties>
@@ -828,6 +831,9 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="userBDField">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="root"/>
+                      </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel12">
                       <Properties>
@@ -838,10 +844,14 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="passwordBDField">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="46143**/"/>
+                      </Properties>
                     </Component>
                     <Component class="javax.swing.JButton" name="conexionBDButton">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Probar Conexi&#xf3;n"/>
+                        <Property name="actionCommand" type="java.lang.String" value="conexionBDButton"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="mysqlServicesServiceLabel">
