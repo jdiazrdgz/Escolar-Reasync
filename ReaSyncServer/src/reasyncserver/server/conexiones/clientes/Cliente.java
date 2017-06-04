@@ -70,6 +70,7 @@ public class Cliente implements Runnable {
                         case"registroArchivosMusica":{
                             ArchivosMusica archivosMusica = gestorRegistros.getArchivosMusica();
                             gestorRespuestas.enviarArchivosMusicaRegistrados(archivosMusica);
+                            System.err.println("archivos musica enviados");
                         }
                         default:{
                             

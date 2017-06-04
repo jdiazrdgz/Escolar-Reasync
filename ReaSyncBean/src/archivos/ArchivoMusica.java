@@ -1,12 +1,13 @@
 package archivos;
 
+import java.io.Serializable;
 import java.nio.file.Path;
 
 /**
  *
  * @author jdiaz
  */
-public class ArchivoMusica {
+public class ArchivoMusica implements Serializable{
 
     private Path rutaArchivo;
     private String nombreArchivo;

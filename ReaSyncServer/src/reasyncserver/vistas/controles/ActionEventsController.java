@@ -7,6 +7,10 @@ package reasyncserver.vistas.controles;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import reasyncserver.bd.GestorConexionBD;
 
 /**
  *
@@ -45,7 +49,17 @@ class ActionEventsController implements ActionListener {
             }
         }
         if(comando.equals("conexionBDButton")){
-            
+            try {
+                GestorConexionBD gbd = new GestorConexionBD();
+                gbd.conectar();
+                gbd.desconectar();
+                reaSyncController.getFrame().mysqlServicesServiceLabel.setText("El servicio MYSQL esta activo");
+                reaSyncController.getFrame().conexionBDButton.setEnabled(true);
+            } catch (SQLException | ClassNotFoundException | IllegalAccessException | InstantiationException ex) {
+                Logger.getLogger(ActionEventsController.class.getName()).log(Level.SEVERE, null, ex);
+                reaSyncController.getFrame().mysqlServicesServiceLabel.setText("El servicio MYSQL esta detenido");
+                reaSyncController.mostrarError("Base de datos", "Error al conectarse al servicio");
+            }
         }
     }
 

@@ -73,7 +73,7 @@ public class GestorRegistros {
             conexion = gestorConexionBD.conectar();
             statement = conexion
                     .createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            resultset = statement.executeQuery("select * registroarchivosmusica");
+            resultset = statement.executeQuery("select * from registroarchivosmusica");
             while (resultset.next()) {
                 archivosMusica.getArchivosMusica().add(new ArchivoMusica(
                         Paths.get(resultset.getString("path")), 

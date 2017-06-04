@@ -525,6 +525,7 @@ public class ReaSync extends javax.swing.JFrame {
 
         logTextArea.setColumns(20);
         logTextArea.setRows(5);
+        logTextArea.setText("Bienvenido a ReaSync");
         logScroll.setViewportView(logTextArea);
 
         logContainerPanel1.add(logScroll);

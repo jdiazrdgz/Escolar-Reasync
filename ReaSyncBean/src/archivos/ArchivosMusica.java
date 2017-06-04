@@ -1,12 +1,13 @@
 package archivos;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author jdiaz
  */
-public class ArchivosMusica {
+public class ArchivosMusica implements Serializable{
 
     private List<ArchivoMusica> archivosMusica;
 

@@ -6,7 +6,9 @@
 package reasyncserver.vistas.controles;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import reasyncserver.server.Server;
+import reasyncserver.server.conexiones.clientes.info.ClienteConectado;
 import reasyncserver.sistema.configuracion.Configuracion;
 import reasyncserver.sistema.configuracion.GestorConfiguracion;
 import reasyncserver.vistas.ReaSyncServer;
@@ -29,15 +31,24 @@ public class ReaSyncController {
         actionController = new ActionEventsController(this);
         mouseEventsController = new MouseEventsController(this);
         gestorConfiguracion = new GestorConfiguracion();
-        if (gestorConfiguracion.existeConfiguracion()) {
-            cargarConfiguracion();
-        }
+        cargarConfiguracion();
     }
 
     public void cargarConfiguracion() {
-        Configuracion configuracion = gestorConfiguracion.getConfiguracion();
+        iniciarTablaClientes();
     }
-
+    
+    public void iniciarTablaClientes(){
+        DefaultTableModel datos = new DefaultTableModel();
+        datos.addColumn("ID");
+        datos.addColumn("Dirección IP");
+        datos.addColumn("Nombre");
+        frame.clientsTable.setModel(datos);
+    }
+    public void mostrarClienteTabla(ClienteConectado clienteConectado){
+        DefaultTableModel yourModel = (DefaultTableModel)  frame.clientsTable.getModel();
+        yourModel.addRow(new Object[]{clienteConectado.getId(), clienteConectado.getIp(),clienteConectado.getNombre()});
+    }
     public void mostrarError(String titulo, String error) {
         JOptionPane.showMessageDialog(frame, error, titulo, JOptionPane.ERROR_MESSAGE);
     }

@@ -2,6 +2,7 @@ package reasyncserver.server.conexiones;
 
 import reasyncserver.server.conexiones.clientes.Cliente;
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
@@ -9,6 +10,7 @@ import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import reasyncserver.server.Server;
+import reasyncserver.server.conexiones.clientes.info.ClienteConectado;
 
 /**
  *
@@ -32,6 +34,9 @@ public class EsperadorConexiones implements Runnable {
             try {
                 Socket conexion = server.getServerSocket().accept();
                 int idCliente=clientes.size();
+                String ipCliente=(((InetSocketAddress)conexion.getRemoteSocketAddress()).getAddress()).toString().replace("/","");
+                server.getReaSyncController()
+                        .mostrarClienteTabla(new ClienteConectado(Integer.toString(idCliente),ipCliente, "Identificando"));
                 clientes.add(new Cliente(conexion,idCliente));
                 manejadorHilosCliente.execute(clientes.get(idCliente));
             } catch (IOException ex) {

@@ -377,8 +377,10 @@ public class ReaSyncServer extends javax.swing.JFrame {
 
         logScroll.setBackground(new java.awt.Color(255, 255, 255));
 
+        logTextArea.setEditable(false);
         logTextArea.setColumns(20);
         logTextArea.setRows(5);
+        logTextArea.setText("Bienvenido a ReaSync Server");
         logScroll.setViewportView(logTextArea);
 
         logContainerPanel.add(logScroll);
@@ -423,6 +425,7 @@ public class ReaSyncServer extends javax.swing.JFrame {
         clientsContainerPanel.setBackground(new java.awt.Color(255, 255, 255));
         clientsContainerPanel.setLayout(new java.awt.GridLayout(1, 0));
 
+        clientsTableScroll.setBackground(new java.awt.Color(250, 250, 250));
         clientsTableScroll.setViewportView(clientsTable);
 
         clientsContainerPanel.add(clientsTableScroll);

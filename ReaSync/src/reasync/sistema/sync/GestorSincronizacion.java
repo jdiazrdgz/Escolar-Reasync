@@ -23,12 +23,9 @@ public class GestorSincronizacion {
         //pedir lista de archivos a server
         new GestorPeticiones(cliente)
                 .hacerPeticion(new Peticion("registroArchivosMusica"));
-        while (archivosMusicaRecibidos == null) {
-            if (archivosMusicaRecibidos != null) {
-                break;
-            }
-        }
-
+    }
+    public void encontrarDiferencias(){
+        
     }
 
     public Client getCliente() {
