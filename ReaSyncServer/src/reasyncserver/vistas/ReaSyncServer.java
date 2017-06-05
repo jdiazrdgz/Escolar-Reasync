@@ -380,7 +380,7 @@ public class ReaSyncServer extends javax.swing.JFrame {
         logTextArea.setEditable(false);
         logTextArea.setColumns(20);
         logTextArea.setRows(5);
-        logTextArea.setText("Bienvenido a ReaSync Server");
+        logTextArea.setText("Bienvenido a ReaSyncServer \n");
         logScroll.setViewportView(logTextArea);
 
         logContainerPanel.add(logScroll);

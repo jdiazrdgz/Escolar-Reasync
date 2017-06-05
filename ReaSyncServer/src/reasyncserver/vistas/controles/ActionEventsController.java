@@ -53,10 +53,12 @@ class ActionEventsController implements ActionListener {
                 GestorConexionBD gbd = new GestorConexionBD();
                 gbd.conectar();
                 gbd.desconectar();
+                reaSyncController.mostrarMensajeLog("El servicio MYSQL esta activo");
                 reaSyncController.getFrame().mysqlServicesServiceLabel.setText("El servicio MYSQL esta activo");
                 reaSyncController.getFrame().conexionBDButton.setEnabled(true);
             } catch (SQLException | ClassNotFoundException | IllegalAccessException | InstantiationException ex) {
-                Logger.getLogger(ActionEventsController.class.getName()).log(Level.SEVERE, null, ex);
+                //Logger.getLogger(ActionEventsController.class.getName()).log(Level.SEVERE, null, ex);
+                reaSyncController.mostrarMensajeLog("El servicio MYSQL esta detenido");
                 reaSyncController.getFrame().mysqlServicesServiceLabel.setText("El servicio MYSQL esta detenido");
                 reaSyncController.mostrarError("Base de datos", "Error al conectarse al servicio");
             }

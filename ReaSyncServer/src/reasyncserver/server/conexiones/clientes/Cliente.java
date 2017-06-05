@@ -12,7 +12,6 @@ import peticion.Peticion;
 import reasyncserver.bd.GestorRegistros;
 import reasyncserver.server.conexiones.clientes.respuesta.GestorRespuestas;
 
-
 /**
  *
  * @author jdiaz
@@ -63,24 +62,24 @@ public class Cliente implements Runnable {
             oin = new ObjectInputStream(in);
             while (true) {
                 objeto = (Object) oin.readObject();
-                if(objeto instanceof Peticion){
-                    Peticion peticion=(Peticion)objeto;
-                    System.out.println("Era peticion");
-                    switch(peticion.getPeticion()){
-                        case"registroArchivosMusica":{
+                if (objeto instanceof Peticion) {
+                    Peticion peticion = (Peticion) objeto;
+                    System.out.println("Se ha recibido una petición del cliente " + id);
+                    switch (peticion.getPeticion()) {
+                        case "registroArchivosMusica": {
                             ArchivosMusica archivosMusica = gestorRegistros.getArchivosMusica();
                             gestorRespuestas.enviarArchivosMusicaRegistrados(archivosMusica);
-                            System.err.println("archivos musica enviados");
+                            System.out.println("Se han enviado los registros de musica al cliente" + id);
                         }
-                        default:{
-                            
+                        default: {
+
                         }
                     }
                 }
             }
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
-            
+
         }
     }
 

@@ -3,8 +3,6 @@ package reasync.cliente.respuestas;
 import archivos.ArchivosMusica;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.nio.file.Path;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import reasync.cliente.Client;
@@ -18,6 +16,7 @@ public class EsperadorRespuestas implements Runnable {
 
     private final Client cliente;
     private ObjectInputStream ois;
+    public ArchivosMusica archivosMusica;
 
     public EsperadorRespuestas(Client cliente) {
         this.cliente = cliente;
@@ -36,7 +35,7 @@ public class EsperadorRespuestas implements Runnable {
                 if(objeto instanceof ArchivosMusica ){
                     System.err.println("Era archivosMusica");
                     ArchivosMusica archivosMusicaRecibidos= (ArchivosMusica)objeto;
-                    cliente.getGestorSincronizacion().setArchivosMusicaRecibidos(archivosMusicaRecibidos);
+                    this.archivosMusica=archivosMusicaRecibidos;
                 }
             }
         } catch (IOException ex) {

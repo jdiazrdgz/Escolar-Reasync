@@ -9,7 +9,6 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import reasyncserver.server.Server;
 import reasyncserver.server.conexiones.clientes.info.ClienteConectado;
-import reasyncserver.sistema.configuracion.Configuracion;
 import reasyncserver.sistema.configuracion.GestorConfiguracion;
 import reasyncserver.vistas.ReaSyncServer;
 
@@ -49,6 +48,9 @@ public class ReaSyncController {
         DefaultTableModel yourModel = (DefaultTableModel)  frame.clientsTable.getModel();
         yourModel.addRow(new Object[]{clienteConectado.getId(), clienteConectado.getIp(),clienteConectado.getNombre()});
     }
+    public void mostrarMensajeLog(String mensaje){
+        frame.logTextArea.append(mensaje+"\n");
+    }
     public void mostrarError(String titulo, String error) {
         JOptionPane.showMessageDialog(frame, error, titulo, JOptionPane.ERROR_MESSAGE);
     }
@@ -60,6 +62,7 @@ public class ReaSyncController {
     public void mostrarEstadoReaSyncServer(String estado) {
         switch (estado) {
             case "iniciado": {
+                mostrarMensajeLog("El servicio ReaSync ha sido activado");
                 frame.reasyncServicesServerLabel.setText("El servicio ReaSync esta activo");
                 frame.reasyncServicesServerLabel.setText("El servicio ReaSync esta activo");
                 String ip = server.getPublicIP();
@@ -73,6 +76,7 @@ public class ReaSyncController {
             }
             break;
             case "detenido": {
+                mostrarMensajeLog("El servicio ReaSync ha desactivado");
                 frame.reasyncServerLabel.setText("El servicio ReaSync esta detenido");
                 frame.reasyncServicesServerLabel.setText("El servicio ReaSync esta detenido");
                 frame.reasyncServerStopButton.setEnabled(false);

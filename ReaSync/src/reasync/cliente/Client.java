@@ -6,6 +6,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import reasync.cliente.conexion.GestorConexion;
 import reasync.cliente.respuestas.EsperadorRespuestas;
+import reasync.sistema.cambios.GestorCambios;
 import reasync.sistema.configuracion.GestorConfiguracion;
 import reasync.sistema.directorios.GestorDirectorio;
 import reasync.sistema.sync.GestorSincronizacion;
@@ -20,10 +21,11 @@ public class Client {
     private final ReaSyncController reaSyncController;
     private Socket conexion;
     private GestorConexion gestorConexion;
-    private ExecutorService esperadorRespuestas;
+    //private ExecutorService esperadorRespuestas;
     private final GestorDirectorio gestorDirectorio;
     private final GestorConfiguracion gestorConfiguracion;
     private final GestorSincronizacion gestorSincronizacion;
+    private final GestorCambios gestorCambios;
 
     public Client(ReaSyncController reaSyncController) {
         this.reaSyncController = reaSyncController;
@@ -31,6 +33,7 @@ public class Client {
         gestorConfiguracion = new GestorConfiguracion();
         gestorDirectorio = new GestorDirectorio(this);
         gestorSincronizacion = new GestorSincronizacion(this);
+        gestorCambios = new GestorCambios(this);
     }
 
     public int conectarConServidor(int puerto, String host) {
@@ -38,9 +41,9 @@ public class Client {
             conexion = new Socket(host, puerto);
             gestorConexion = new GestorConexion(conexion);
             int error = gestorConexion.iniciarConexion();
-            if (error == 1) {
+            /*if (error == 1) {
                 esperarRespuestas();
-            }
+            }*/
             return 1;
         } catch (IOException ex) {
             return 0;
@@ -57,10 +60,10 @@ public class Client {
         }
     }
 
-    public void esperarRespuestas() {
+    /*public void esperarRespuestas() {
         esperadorRespuestas = Executors.newCachedThreadPool();
         esperadorRespuestas.execute(new EsperadorRespuestas(this));
-    }
+    }*/
 
     public GestorConexion getGestorConexion() {
         return gestorConexion;
@@ -82,4 +85,8 @@ public class Client {
         return gestorSincronizacion;
     }
 
+    public GestorCambios getGestorCambios() {
+        return gestorCambios;
+    }
+    
 }

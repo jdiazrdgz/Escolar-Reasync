@@ -37,6 +37,7 @@ public class EsperadorConexiones implements Runnable {
                 String ipCliente=(((InetSocketAddress)conexion.getRemoteSocketAddress()).getAddress()).toString().replace("/","");
                 server.getReaSyncController()
                         .mostrarClienteTabla(new ClienteConectado(Integer.toString(idCliente),ipCliente, "Identificando"));
+                server.getReaSyncController().mostrarMensajeLog("Se ha conectado el cliente no: "+idCliente);
                 clientes.add(new Cliente(conexion,idCliente));
                 manejadorHilosCliente.execute(clientes.get(idCliente));
             } catch (IOException ex) {

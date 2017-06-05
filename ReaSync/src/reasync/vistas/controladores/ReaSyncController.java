@@ -5,9 +5,9 @@
  */
 package reasync.vistas.controladores;
 
+import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
 import reasync.cliente.Client;
-import reasync.sistema.configuracion.GestorConfiguracion;
 import reasync.vistas.ReaSync;
 
 /**
@@ -20,7 +20,6 @@ public class ReaSyncController {
     private final Client cliente;
     private final ActionEventsController actionController;
     private final MouseEventsController mouseEventsController;
-    
 
     public ReaSyncController(ReaSync frame) {
         this.frame = frame;
@@ -31,7 +30,7 @@ public class ReaSyncController {
     }
 
     public void mostrarError(String titulo, String error) {
-         JOptionPane.showMessageDialog(frame, error, titulo, JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(frame, error, titulo, JOptionPane.ERROR_MESSAGE);
     }
 
     public void mostrarAviso(String titulo, String aviso) {
@@ -41,20 +40,30 @@ public class ReaSyncController {
     public void cambiarEstadoConexion(String estado) {
         switch (estado) {
             case "conectado": {
+                mostrarMensajeLog("Conexion establecida con el servidor de ReaSync");
                 frame.statusConnectionServerLabel.setText("Estas conectado con el servidor de ReaSync");
                 frame.connectServerButton.setEnabled(false);
                 frame.disconectServerButton.setEnabled(true);
             }
             case "desconectado": {
+                mostrarMensajeLog("Desconectado del servidor de ReaSync");
                 frame.statusConnectionServerLabel.setText("No estas conectado con el servidor de ReaSync");
                 frame.connectServerButton.setEnabled(true);
                 frame.disconectServerButton.setEnabled(false);
             }
         }
     }
-    public void cargarConfiguracion(){
+
+    public void cargarConfiguracion() {
         frame.urlDirectoryLabel.setText(cliente.getGestorConfiguracion().getConfiguracion().getDirectorioSincronizacion());
+
     }
+
+    public void mostrarMensajeLog(String mensaje) {
+        LocalDateTime ahora = LocalDateTime.now();
+        frame.logTextArea.append(ahora + " " + mensaje + "\n");
+    }
+
     public ReaSync getFrame() {
         return frame;
     }

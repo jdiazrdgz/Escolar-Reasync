@@ -52,14 +52,15 @@ class ActionEventsController implements ActionListener {
                 int puerto = Integer.parseInt(reaSyncController.getFrame().portServerField.getText());
                 String ipServer = reaSyncController.getFrame().urlServerField.getText();
                 int error = reaSyncController.getCliente().conectarConServidor(puerto, ipServer);
-                System.err.println("Conectado");
                 if (error == 1) {
+                    reaSyncController.mostrarMensajeLog("Conexion establecida con el servidor de ReaSync");
                     reaSyncController.getFrame().statusConnectionServerLabel
                             .setText("Conectado con el servidor de ReaSync");
                     reaSyncController.getFrame().connectServerButton.setEnabled(false);
                     reaSyncController.getFrame().disconectServerButton.setEnabled(true);
 
                 } else {
+                    reaSyncController.mostrarMensajeLog("Error al conectarse con el servidor de ReaSync");
                     reaSyncController.getFrame().statusConnectionServerLabel
                             .setText("Error al conectarse con el servidor de ReaSync");
                     reaSyncController.getFrame().connectServerButton.setEnabled(true);
@@ -70,22 +71,21 @@ class ActionEventsController implements ActionListener {
             case "disconectServerButton": {
                 int error = reaSyncController.getCliente().desconectarConServidor();
                 if (error == 1) {
+                    reaSyncController.mostrarMensajeLog("Desconectado del servidor de ReaSync");
                     reaSyncController.getFrame().statusConnectionServerLabel
                             .setText("No estas conectado con el servidor de ReaSync");
                 } else {
+                    reaSyncController.mostrarMensajeLog("Error al desconectarse con el servidor de ReaSync");
                     reaSyncController.getFrame().statusConnectionServerLabel
-                            .setText("Ocurrio un error al cerrar la conexión con el servidor");
+                            .setText("Error al desconectarse con el servidor de ReaSync");
                 }
                 break;
             }
             case "syncNowButton": {
-                //Generar lista local
-                //generar lista cambios
-                //comparar listas y crear una resultante con las diferencias
-                //enviar al server
+                reaSyncController.mostrarMensajeLog("Se ha solicitado sincronización manual");
                 reaSyncController.getCliente()
                         .getGestorSincronizacion()
-                        .hacerSincronizacionManual();
+                        .hacerSincronizacion();
                 break;
             }
             default: {

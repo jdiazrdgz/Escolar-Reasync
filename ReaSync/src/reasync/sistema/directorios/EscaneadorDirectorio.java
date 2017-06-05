@@ -19,20 +19,31 @@ public class EscaneadorDirectorio {
         this.directorioSyncPrincipal = directorioSyncPrincipal;
     }
 
-    public int getNoArchivosMusica(Path directorio) {
-        int noArchivosMusica = 0;
+    public List<Path> obtenerPathArchivos(List<Path> arbolDirectorios) {
+        List<Path> archivos = new ArrayList<>();
+        arbolDirectorios.forEach((directorio) -> {
+            obtenerArchivosDirectorio(directorio,archivos);
+        });
+        return archivos;
+    }
+
+    public List<Path> obtenerArbolDirectorios() {
+        List<Path> pathDirectorios = new ArrayList<>();
+        getDirectorios(pathDirectorios);
+        pathDirectorios.forEach((pathDirectorio) -> {
+            pathDirectorios.add(pathDirectorio);
+        });
+        return pathDirectorios;
+    }
+
+    public void obtenerArchivosDirectorio(Path directorio,List<Path> archivos) {
         try (DirectoryStream<Path> stream
                 = Files.newDirectoryStream(directorio, "*.{mp3,wav,ogg,midi}")) {
             for (Path entry : stream) {
-                System.out.println(entry.getFileName());
-                noArchivosMusica++;
+                archivos.add(entry);
             }
-            return noArchivosMusica;
         } catch (IOException x) {
-            // IOException can never be thrown by the iteration.
-            // In this snippet, it can // only be thrown by newDirectoryStream.
             System.err.println(x);
-            return -1;
         }
     }
 
@@ -64,21 +75,29 @@ public class EscaneadorDirectorio {
         }
     }
 
-    public List<Path> getSubdirectorios() {
-        List<Path> pathDirectorios = new ArrayList<>();
-        getDirectorios(pathDirectorios);
-        pathDirectorios.forEach((pathDirectorio) -> {
-            System.err.println(pathDirectorio);
-        });
-        return pathDirectorios;
-    }
-
     public int getTotalArchivosMusicaDirectorioPrincipal() {
         int noArchivosMusica = 0;
-        List<Path> pathDirectorios = getSubdirectorios();
+        List<Path> pathDirectorios = obtenerArbolDirectorios();
         for (int i = 0; i < pathDirectorios.size(); i++) {
             noArchivosMusica += getNoArchivosMusica(pathDirectorios.get(i));
         }
         return noArchivosMusica;
+    }
+
+    public int getNoArchivosMusica(Path directorio) {
+        int noArchivosMusica = 0;
+        try (DirectoryStream<Path> stream
+                = Files.newDirectoryStream(directorio, "*.{mp3,wav,ogg,midi}")) {
+            for (Path entry : stream) {
+                System.out.println(entry.getFileName());
+                noArchivosMusica++;
+            }
+            return noArchivosMusica;
+        } catch (IOException x) {
+            // IOException can never be thrown by the iteration.
+            // In this snippet, it can // only be thrown by newDirectoryStream.
+            System.err.println(x);
+            return -1;
+        }
     }
 }
