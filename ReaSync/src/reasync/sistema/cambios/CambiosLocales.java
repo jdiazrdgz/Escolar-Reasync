@@ -8,22 +8,22 @@ import java.util.List;
  *
  * @author jdiaz
  */
-public class Cambios implements Serializable{
+public class CambiosLocales implements Serializable{
     private List<Path> archivosEliminados;
     private List<Path> archivosSimilares;
     private List<Path> archivosNuevos;
 
-    public Cambios(List<Path> archivosEliminados, List<Path> archivosSimilares, List<Path> archivosNuevos) {
+    public CambiosLocales(List<Path> archivosEliminados, List<Path> archivosSimilares, List<Path> archivosNuevos) {
         this.archivosEliminados = archivosEliminados;
         this.archivosSimilares = archivosSimilares;
         this.archivosNuevos = archivosNuevos;
     }
 
-    public Cambios(List<Path> archivosSimilares) {
+    public CambiosLocales(List<Path> archivosSimilares) {
         this.archivosSimilares = archivosSimilares;
     }
     
-    public Cambios() {
+    public CambiosLocales() {
     }
     
 

@@ -1,5 +1,6 @@
 package reasync.sistema.cambios;
 
+import archivos.ArchivosMusica;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -22,46 +23,62 @@ import reasync.sistema.configuracion.GestorConfiguracion;
 public class GestorCambios {
 
     private final Client cliente;
-    //private final Cambios cambios;
     private final Path directorioCambios = Paths.get("cambios.dat");
 
     public GestorCambios(Client cliente) {
         this.cliente = cliente;
-        //cambios = new Cambios();
     }
 
-    public Cambios generarListaCambios() { //cambios locales
+    public CambiosGlobales generarListaCambiosGlobales(CambiosLocales cambiosLocales, ArchivosMusica archivosMusicaRecibidos) {
+        return determinarCambiosGlobales(cambiosLocales, archivosMusicaRecibidos);
+    }
+
+    public CambiosGlobales determinarCambiosGlobales(CambiosLocales cambiosLocales, ArchivosMusica archivosMusicaRecibidos) {
+        ArchivosMusica archivosLocales_Eliminar;
+        ArchivosMusica archivosLocales_Descargar;
+        ArchivosMusica archivosRemotos_Subir;
+        ArchivosMusica archivosRemotos_Eliminar;
+    }
+    public ArchivosMusica determinarArchivosLocales_Eliminar(){
+        
+    }
+    //-------------------------CambiosLocales Locales----------------------------------------------------
+    public CambiosLocales generarListaCambiosLocales() { //cambios locales
         List<Path> estadoArchivosAnterior = obtenerEstadoArchivosAnterior();
         List<Path> estadoArchivosActual = obtenerEstadoArchivosActual();
-        if(estadoArchivosAnterior==null){
+        if (estadoArchivosAnterior == null) {
             System.err.println("no hay estado anterior");
-            return new Cambios(estadoArchivosActual);
+            return new CambiosLocales(estadoArchivosActual);
         }
-        return determinarCambiosLocales(estadoArchivosAnterior,estadoArchivosActual);
+        return determinarCambiosLocales(estadoArchivosAnterior, estadoArchivosActual);
     }
 
-    private Cambios determinarCambiosLocales(List<Path> estadoArchivosAnterior,List<Path> estadoArchivosActual){
+    private CambiosLocales determinarCambiosLocales(List<Path> estadoArchivosAnterior, List<Path> estadoArchivosActual) {
         List<Path> archivosNuevos = deterinarArchivosNuevos(estadoArchivosAnterior, estadoArchivosActual);
         List<Path> archivosIguales = determinarArchivosIguales(estadoArchivosAnterior, estadoArchivosActual);
         List<Path> archivosEliminados = determinarArchivosEliminados(estadoArchivosAnterior, estadoArchivosActual);
-        Cambios cambios = new Cambios(archivosEliminados, archivosIguales, archivosNuevos);
+        CambiosLocales cambios = new CambiosLocales(archivosEliminados, archivosIguales, archivosNuevos);
         return cambios;
     }
-    private List<Path> determinarArchivosIguales(List<Path> estadoArchivosAnterior,List<Path> estadoArchivosActual){
+
+    private List<Path> determinarArchivosIguales(List<Path> estadoArchivosAnterior, List<Path> estadoArchivosActual) {
         List<Path> archivosIguales = estadoArchivosAnterior;
         archivosIguales.retainAll(estadoArchivosActual);
         return archivosIguales;
     }
-    private List<Path> determinarArchivosEliminados(List<Path> estadoArchivosAnterior, List<Path> estadoArchivosActual){
-        List<Path> archivosEliminados  = estadoArchivosAnterior;
+
+    private List<Path> determinarArchivosEliminados(List<Path> estadoArchivosAnterior, List<Path> estadoArchivosActual) {
+        List<Path> archivosEliminados = estadoArchivosAnterior;
         archivosEliminados.removeAll(estadoArchivosActual);
         return archivosEliminados;
     }
-    private List<Path> deterinarArchivosNuevos(List<Path> estadoArchivosAnterior, List<Path> estadoArchivosActual){
-        List<Path> archivosNuevos  = estadoArchivosActual;
+
+    private List<Path> deterinarArchivosNuevos(List<Path> estadoArchivosAnterior, List<Path> estadoArchivosActual) {
+        List<Path> archivosNuevos = estadoArchivosActual;
         archivosNuevos.removeAll(estadoArchivosAnterior);
         return archivosNuevos;
     }
+
     private List<Path> obtenerEstadoArchivosAnterior() {
         File directorio = new File(directorioCambios.toString());
         if (directorio.exists()) {

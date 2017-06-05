@@ -16,7 +16,6 @@ public class EsperadorRespuestas implements Runnable {
 
     private final Client cliente;
     private ObjectInputStream ois;
-    private volatile ArchivosMusica archivosMusica;
 
     public EsperadorRespuestas(Client cliente) {
         this.cliente = cliente;
@@ -35,21 +34,14 @@ public class EsperadorRespuestas implements Runnable {
                 if(objeto instanceof ArchivosMusica ){
                     System.err.println("Era archivosMusica");
                     ArchivosMusica archivosMusicaRecibidos= (ArchivosMusica)objeto;
-                    this.archivosMusica=archivosMusicaRecibidos;
+                    cliente.getGestorSincronizacion().setArchivosMusicaRecibidos(archivosMusicaRecibidos);
+                    cliente.getGestorSincronizacion().continarProcesoSincronizacion();
                 }
             }
         } catch (IOException ex) {
             Logger.getLogger(EsperadorRespuestas.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    }
-
-    public ArchivosMusica getArchivosMusica() {
-        return archivosMusica;
-    }
-
-    public void setArchivosMusica(ArchivosMusica archivosMusica) {
-        this.archivosMusica = archivosMusica;
     }
     
 }
