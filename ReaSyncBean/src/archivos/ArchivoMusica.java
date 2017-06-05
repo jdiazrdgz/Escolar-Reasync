@@ -11,12 +11,12 @@ public class ArchivoMusica implements Serializable{
 
     private Path rutaArchivo;
     private String nombreArchivo;
-    private int pesoArchivo;
+    private String pesoArchivo;
 
     public ArchivoMusica() {
     }
 
-    public ArchivoMusica(Path rutaArchivo, String nombreArchivo, int pesoArchivo) {
+    public ArchivoMusica(Path rutaArchivo, String nombreArchivo, String pesoArchivo) {
         this.rutaArchivo = rutaArchivo;
         this.nombreArchivo = nombreArchivo;
         this.pesoArchivo = pesoArchivo;
@@ -38,11 +38,11 @@ public class ArchivoMusica implements Serializable{
         this.nombreArchivo = nombreArchivo;
     }
 
-    public int getPesoArchivo() {
+    public String getPesoArchivo() {
         return pesoArchivo;
     }
 
-    public void setPesoArchivo(int pesoArchivo) {
+    public void setPesoArchivo(String pesoArchivo) {
         this.pesoArchivo = pesoArchivo;
     }
 

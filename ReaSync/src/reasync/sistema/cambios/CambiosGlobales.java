@@ -18,6 +18,13 @@ public class CambiosGlobales {
     public CambiosGlobales() {
     }
 
+    public CambiosGlobales(List<Path> archivosLocales_Eliminar, List<Path> archivosLocales_Descargar, ArchivosMusica archivosRemotos_Subir, ArchivosMusica archivosRemotos_Eliminar) {
+        this.archivosLocales_Eliminar = archivosLocales_Eliminar;
+        this.archivosLocales_Descargar = archivosLocales_Descargar;
+        this.archivosRemotos_Subir = archivosRemotos_Subir;
+        this.archivosRemotos_Eliminar = archivosRemotos_Eliminar;
+    }
+    
     public List<Path> getArchivosLocales_Eliminar() {
         return archivosLocales_Eliminar;
     }

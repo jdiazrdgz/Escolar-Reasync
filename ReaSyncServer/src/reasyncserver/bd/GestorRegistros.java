@@ -78,7 +78,7 @@ public class GestorRegistros {
                 archivosMusica.getArchivosMusica().add(new ArchivoMusica(
                         Paths.get(resultset.getString("path")), 
                         resultset.getString("nombre"), 
-                        Integer.parseInt(resultset.getString("peso"))));
+                        resultset.getString("peso")));
             }
             gestorConexionBD.desconectar();
             return archivosMusica;
