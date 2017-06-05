@@ -21,7 +21,8 @@ public class Client {
     private final ReaSyncController reaSyncController;
     private Socket conexion;
     private GestorConexion gestorConexion;
-    //private ExecutorService esperadorRespuestas;
+    private ExecutorService ejecutorEsperadorRespuestas;
+    private EsperadorRespuestas esperadorRespuestas;
     private final GestorDirectorio gestorDirectorio;
     private final GestorConfiguracion gestorConfiguracion;
     private final GestorSincronizacion gestorSincronizacion;
@@ -41,9 +42,9 @@ public class Client {
             conexion = new Socket(host, puerto);
             gestorConexion = new GestorConexion(conexion);
             int error = gestorConexion.iniciarConexion();
-            /*if (error == 1) {
+            if (error == 1) {
                 esperarRespuestas();
-            }*/
+            }
             return 1;
         } catch (IOException ex) {
             return 0;
@@ -60,10 +61,11 @@ public class Client {
         }
     }
 
-    /*public void esperarRespuestas() {
-        esperadorRespuestas = Executors.newCachedThreadPool();
-        esperadorRespuestas.execute(new EsperadorRespuestas(this));
-    }*/
+    public void esperarRespuestas() {
+        esperadorRespuestas= new EsperadorRespuestas(this);
+        ejecutorEsperadorRespuestas = Executors.newCachedThreadPool();
+        ejecutorEsperadorRespuestas.execute(esperadorRespuestas);
+    }
 
     public GestorConexion getGestorConexion() {
         return gestorConexion;
@@ -88,5 +90,14 @@ public class Client {
     public GestorCambios getGestorCambios() {
         return gestorCambios;
     }
+
+    public EsperadorRespuestas getEsperadorRespuestas() {
+        return esperadorRespuestas;
+    }
+
+    public void setEsperadorRespuestas(EsperadorRespuestas esperadorRespuestas) {
+        this.esperadorRespuestas = esperadorRespuestas;
+    }
+    
     
 }

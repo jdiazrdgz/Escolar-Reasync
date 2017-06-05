@@ -1,6 +1,5 @@
 package reasync.sistema.cambios;
 
-import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -10,14 +9,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import reasync.cliente.Client;
-import reasync.sistema.configuracion.Configuracion;
 import reasync.sistema.configuracion.GestorConfiguracion;
 
 /**
@@ -38,22 +33,34 @@ public class GestorCambios {
     public Cambios generarListaCambios() { //cambios locales
         List<Path> estadoArchivosAnterior = obtenerEstadoArchivosAnterior();
         List<Path> estadoArchivosActual = obtenerEstadoArchivosActual();
+        if(estadoArchivosAnterior==null){
+            System.err.println("no hay estado anterior");
+            return new Cambios(estadoArchivosActual);
+        }
         return determinarCambiosLocales(estadoArchivosAnterior,estadoArchivosActual);
     }
 
     private Cambios determinarCambiosLocales(List<Path> estadoArchivosAnterior,List<Path> estadoArchivosActual){
-        Cambios cambios;
-        Set<Path> mathListas = new HashSet<>();
-        mathListas.addAll(estadoArchivosAnterior);
-        estadoArchivosAnterior.addAll(estadoArchivosActual);
-        Set<Path> archivosNuevos = deterinarArchivosNuevos(estadoArchivosAnterior, mathListas);
+        List<Path> archivosNuevos = deterinarArchivosNuevos(estadoArchivosAnterior, estadoArchivosActual);
+        List<Path> archivosIguales = determinarArchivosIguales(estadoArchivosAnterior, estadoArchivosActual);
+        List<Path> archivosEliminados = determinarArchivosEliminados(estadoArchivosAnterior, estadoArchivosActual);
+        Cambios cambios = new Cambios(archivosEliminados, archivosIguales, archivosNuevos);
         return cambios;
     }
-    
-    private Set<Path> deterinarArchivosNuevos(List<Path> estadoArchivosAnterior, Set<Path> matchListas){
-        Set<Path> matchListasAux  = matchListas;
-        matchListasAux.removeAll(estadoArchivosAnterior);
-        return matchListasAux;
+    private List<Path> determinarArchivosIguales(List<Path> estadoArchivosAnterior,List<Path> estadoArchivosActual){
+        List<Path> archivosIguales = estadoArchivosAnterior;
+        archivosIguales.retainAll(estadoArchivosActual);
+        return archivosIguales;
+    }
+    private List<Path> determinarArchivosEliminados(List<Path> estadoArchivosAnterior, List<Path> estadoArchivosActual){
+        List<Path> archivosEliminados  = estadoArchivosAnterior;
+        archivosEliminados.removeAll(estadoArchivosActual);
+        return archivosEliminados;
+    }
+    private List<Path> deterinarArchivosNuevos(List<Path> estadoArchivosAnterior, List<Path> estadoArchivosActual){
+        List<Path> archivosNuevos  = estadoArchivosActual;
+        archivosNuevos.removeAll(estadoArchivosAnterior);
+        return archivosNuevos;
     }
     private List<Path> obtenerEstadoArchivosAnterior() {
         File directorio = new File(directorioCambios.toString());

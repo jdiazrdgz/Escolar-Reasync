@@ -30,9 +30,6 @@ public class EscaneadorDirectorio {
     public List<Path> obtenerArbolDirectorios() {
         List<Path> pathDirectorios = new ArrayList<>();
         getDirectorios(pathDirectorios);
-        pathDirectorios.forEach((pathDirectorio) -> {
-            pathDirectorios.add(pathDirectorio);
-        });
         return pathDirectorios;
     }
 

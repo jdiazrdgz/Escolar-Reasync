@@ -16,7 +16,7 @@ public class EsperadorRespuestas implements Runnable {
 
     private final Client cliente;
     private ObjectInputStream ois;
-    public ArchivosMusica archivosMusica;
+    private volatile ArchivosMusica archivosMusica;
 
     public EsperadorRespuestas(Client cliente) {
         this.cliente = cliente;
@@ -44,4 +44,12 @@ public class EsperadorRespuestas implements Runnable {
 
     }
 
+    public ArchivosMusica getArchivosMusica() {
+        return archivosMusica;
+    }
+
+    public void setArchivosMusica(ArchivosMusica archivosMusica) {
+        this.archivosMusica = archivosMusica;
+    }
+    
 }

@@ -5,7 +5,6 @@ import peticion.Peticion;
 import reasync.cliente.Client;
 import reasync.cliente.peticiones.GestorPeticiones;
 import reasync.sistema.cambios.Cambios;
-import reasync.sistema.cambios.GestorCambios;
 
 /**
  *
@@ -28,6 +27,11 @@ public class GestorSincronizacion {
                 .hacerPeticion(new Peticion("registroArchivosMusica"));
         cliente.getReaSyncController()
                 .mostrarMensajeLog("Petición de registros de musica enviada al servidor");
+        while(cliente.getEsperadorRespuestas().getArchivosMusica()==null){
+            System.err.println("");
+        }
+        ArchivosMusica registrosArchivosServer = cliente.getEsperadorRespuestas().getArchivosMusica();
+        System.err.println("Recibidos");
     }
     public void encontrarDiferencias(){
         

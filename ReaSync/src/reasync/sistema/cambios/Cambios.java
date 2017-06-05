@@ -19,8 +19,13 @@ public class Cambios implements Serializable{
         this.archivosNuevos = archivosNuevos;
     }
 
+    public Cambios(List<Path> archivosSimilares) {
+        this.archivosSimilares = archivosSimilares;
+    }
+    
     public Cambios() {
     }
+    
 
     public List<Path> getArchivosEliminados() {
         return archivosEliminados;
