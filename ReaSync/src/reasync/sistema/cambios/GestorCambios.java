@@ -1,5 +1,6 @@
 package reasync.sistema.cambios;
 
+import archivos.ArchivoMusica;
 import archivos.ArchivosMusica;
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import reasync.cliente.Client;
+import reasync.sistema.archivos.GestorArchivosMusica;
 import reasync.sistema.configuracion.GestorConfiguracion;
 
 /**
@@ -34,15 +36,30 @@ public class GestorCambios {
     }
 
     public CambiosGlobales determinarCambiosGlobales(CambiosLocales cambiosLocales, ArchivosMusica archivosMusicaRecibidos) {
-        ArchivosMusica archivosLocales_Eliminar;
-        ArchivosMusica archivosLocales_Descargar;
+        ArchivosMusica archivosMusicaRecibidosEspecificados
+                = new GestorArchivosMusica(cliente.getGestorConfiguracion())
+                        .especificarPathArchivosMusica(archivosMusicaRecibidos);
+        List<Path> listaPathArchivosMusicaRecibidos
+                = new GestorArchivosMusica(cliente.getGestorConfiguracion())
+                        .obtenerPathArchivosMusica(archivosMusicaRecibidosEspecificados);
+        List<Path> archivosLocales_Eliminar = determinarArchivosLocales_Eliminar(cambiosLocales.getArchivosSimilares(), listaPathArchivosMusicaRecibidos);
+        List<Path> archivosLocales_Descargar;
         ArchivosMusica archivosRemotos_Subir;
         ArchivosMusica archivosRemotos_Eliminar;
     }
-    public ArchivosMusica determinarArchivosLocales_Eliminar(){
-        
-    }
-    //-------------------------CambiosLocales Locales----------------------------------------------------
+
+    public List<Path> determinarArchivosLocales_Eliminar(List<Path> archivosLocalesSimilares, List<Path> listaPathArchivosMusicaRecibidos) {
+        archivosLocalesSimilares.removeAll(listaPathArchivosMusicaRecibidos);
+        if (archivosLocalesSimilares.isEmpty()) {
+            //no hay nada que eliminar localmente
+            return null;
+        } else {
+            //estos son los que se eliminan
+            return archivosLocalesSimilares;
+        }
+
+    } //-------------------------CambiosLocales Locales----------------------------------------------------
+
     public CambiosLocales generarListaCambiosLocales() { //cambios locales
         List<Path> estadoArchivosAnterior = obtenerEstadoArchivosAnterior();
         List<Path> estadoArchivosActual = obtenerEstadoArchivosActual();

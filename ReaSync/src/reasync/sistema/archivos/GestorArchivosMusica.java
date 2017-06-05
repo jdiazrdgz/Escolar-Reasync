@@ -4,6 +4,7 @@ import archivos.ArchivoMusica;
 import archivos.ArchivosMusica;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import reasync.sistema.configuracion.GestorConfiguracion;
@@ -59,5 +60,12 @@ public class GestorArchivosMusica {
             archivoMusica.setRutaArchivo(localPath);
         }
         return archivosMusica;
+    }
+    public List<Path> obtenerPathArchivosMusica(ArchivosMusica archivosMusica){
+        List<Path> listPathArchivos = new ArrayList<>();
+        archivosMusica.getArchivosMusica().forEach(archivoMusica -> {
+            listPathArchivos.add(archivoMusica.getRutaArchivo());
+        });
+        return listPathArchivos;
     }
 }
