@@ -43,7 +43,7 @@ public class GestorCambios {
                 = new GestorArchivosMusica(cliente.getGestorConfiguracion())
                         .obtenerPathArchivosMusica(archivosMusicaRecibidosEspecificados);
         List<Path> archivosLocales_Eliminar = determinarArchivosLocales_Eliminar(cambiosLocales.getArchivosSimilares(), listaPathArchivosMusicaRecibidos);
-        List<Path> archivosLocales_Descargar;
+        List<Path> archivosLocales_Descargar = determinarArchivosLocales_Descargar(cambiosLocales.getArchivosSimilares(), listaPathArchivosMusicaRecibidos);;
         ArchivosMusica archivosRemotos_Subir;
         ArchivosMusica archivosRemotos_Eliminar;
     }
@@ -58,7 +58,19 @@ public class GestorCambios {
             return archivosLocalesSimilares;
         }
 
-    } //-------------------------CambiosLocales Locales----------------------------------------------------
+    }
+
+    public List<Path> determinarArchivosLocales_Descargar(List<Path> archivosLocalesSimilares, List<Path> listaPathArchivosMusicaRecibidos) {
+        listaPathArchivosMusicaRecibidos.removeAll(archivosLocalesSimilares);
+        if (listaPathArchivosMusicaRecibidos.isEmpty()) {
+            //siginifca que tenemos todos los archivos no nos hace falta ninguno
+            return null;
+        } else {
+            //son los que hay que descargar
+            return listaPathArchivosMusicaRecibidos;
+        }
+    }
+//-------------------------CambiosLocales Locales----------------------------------------------------
 
     public CambiosLocales generarListaCambiosLocales() { //cambios locales
         List<Path> estadoArchivosAnterior = obtenerEstadoArchivosAnterior();
