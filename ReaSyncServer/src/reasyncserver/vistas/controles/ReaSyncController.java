@@ -5,6 +5,7 @@
  */
 package reasyncserver.vistas.controles;
 
+import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import reasyncserver.server.Server;
@@ -48,8 +49,9 @@ public class ReaSyncController {
         DefaultTableModel yourModel = (DefaultTableModel)  frame.clientsTable.getModel();
         yourModel.addRow(new Object[]{clienteConectado.getId(), clienteConectado.getIp(),clienteConectado.getNombre()});
     }
-    public void mostrarMensajeLog(String mensaje){
-        frame.logTextArea.append(mensaje+"\n");
+    public void mostrarMensajeLog(String mensaje) {
+        LocalDateTime ahora = LocalDateTime.now();
+        frame.logTextArea.append(ahora + " " + mensaje + "\n");
     }
     public void mostrarError(String titulo, String error) {
         JOptionPane.showMessageDialog(frame, error, titulo, JOptionPane.ERROR_MESSAGE);

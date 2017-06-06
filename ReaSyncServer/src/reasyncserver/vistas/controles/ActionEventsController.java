@@ -55,12 +55,24 @@ class ActionEventsController implements ActionListener {
                 gbd.desconectar();
                 reaSyncController.mostrarMensajeLog("El servicio MYSQL esta activo");
                 reaSyncController.getFrame().mysqlServicesServiceLabel.setText("El servicio MYSQL esta activo");
-                reaSyncController.getFrame().conexionBDButton.setEnabled(true);
+                reaSyncController.getFrame().conexionBDButton.setEnabled(false);
             } catch (SQLException | ClassNotFoundException | IllegalAccessException | InstantiationException ex) {
                 //Logger.getLogger(ActionEventsController.class.getName()).log(Level.SEVERE, null, ex);
                 reaSyncController.mostrarMensajeLog("El servicio MYSQL esta detenido");
                 reaSyncController.getFrame().mysqlServicesServiceLabel.setText("El servicio MYSQL esta detenido");
                 reaSyncController.mostrarError("Base de datos", "Error al conectarse al servicio");
+                reaSyncController.getFrame().conexionBDButton.setEnabled(true);
+            }
+        }
+        if(comando.equals("ftpServiceButton")){
+            if(reaSyncController.getServer().isLocalPortInUse(14147)){
+                reaSyncController.getFrame().ftpServicesServiceLabel.setText("El servicio FTP esta activo");
+                reaSyncController.mostrarMensajeLog("El servicio FTP esta activo");
+                reaSyncController.getFrame().ftpServiceButton.setEnabled(false);
+            }else{
+                reaSyncController.getFrame().ftpServicesServiceLabel.setText("Error, Verifique el servidor FTP");
+                reaSyncController.mostrarMensajeLog("El servicio FTP no esta activado");
+                reaSyncController.getFrame().ftpServiceButton.setEnabled(true);
             }
         }
     }

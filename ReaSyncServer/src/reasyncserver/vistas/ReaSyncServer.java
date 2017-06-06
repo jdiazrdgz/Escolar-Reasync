@@ -32,6 +32,7 @@ public class ReaSyncServer extends javax.swing.JFrame {
         reasyncServerStartButton.addActionListener(control.getActionController());
         reasyncServerStopButton.addActionListener(control.getActionController());
         conexionBDButton.addActionListener(control.getActionController());
+        ftpServiceButton.addActionListener(control.getActionController());
     }
 
     private void initMouseListeners(ReaSyncController control) {
@@ -527,6 +528,7 @@ public class ReaSyncServer extends javax.swing.JFrame {
         ftpServicesServiceLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         ftpServiceButton.setText("Verificar Servicio FTP");
+        ftpServiceButton.setActionCommand("ftpServiceButton");
 
         javax.swing.GroupLayout servicesFTPPanelLayout = new javax.swing.GroupLayout(servicesFTPPanel);
         servicesFTPPanel.setLayout(servicesFTPPanelLayout);

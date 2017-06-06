@@ -48,6 +48,18 @@ public class Server {
         }
     }
 
+    public boolean isLocalPortInUse(int port) { //14147
+        try {
+            // ServerSocket try to open a LOCAL port
+            new ServerSocket(port).close();
+            // local port can be opened, it's available
+            return false;
+        } catch (IOException e) {
+            // local port cannot be opened, it's in use
+            return true;
+        }
+    }
+
     public void esperarConexiones() {
         esperadorConexiones = Executors.newCachedThreadPool();
         esperadorConexiones.execute(new EsperadorConexiones(this));
