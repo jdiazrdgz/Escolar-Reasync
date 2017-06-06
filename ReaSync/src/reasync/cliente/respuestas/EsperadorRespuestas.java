@@ -27,21 +27,22 @@ public class EsperadorRespuestas implements Runnable {
         try {
             ois = new ObjectInputStream(cliente.getGestorConexion().getIn());
             while (true) {
-                objeto = (Object) cliente.getGestorConexion().getIn();
+                objeto = (Object) ois.readObject();
                 if (objeto instanceof Respuesta) {
                     System.err.println("Es respuesta");
                 }
-                if(objeto instanceof ArchivosMusica ){
-                    System.err.println("Era archivosMusica");
-                    ArchivosMusica archivosMusicaRecibidos= (ArchivosMusica)objeto;
+                if (objeto instanceof ArchivosMusica) {
+                    cliente.getReaSyncController().mostrarMensajeLog("Registros de musica recibidos desde el Server");
+                    ArchivosMusica archivosMusicaRecibidos = (ArchivosMusica) objeto;
                     cliente.getGestorSincronizacion().setArchivosMusicaRecibidos(archivosMusicaRecibidos);
                     cliente.getGestorSincronizacion().continarProcesoSincronizacion();
+                    //Si el server no tiene registros lleva adentro nulo
                 }
             }
-        } catch (IOException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(EsperadorRespuestas.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
-    
+
 }

@@ -22,7 +22,6 @@ public class Client {
     private Socket conexion;
     private GestorConexion gestorConexion;
     private ExecutorService ejecutorEsperadorRespuestas;
-    private EsperadorRespuestas esperadorRespuestas;
     private final GestorDirectorio gestorDirectorio;
     private final GestorConfiguracion gestorConfiguracion;
     private final GestorSincronizacion gestorSincronizacion;
@@ -62,9 +61,8 @@ public class Client {
     }
 
     public void esperarRespuestas() {
-        esperadorRespuestas= new EsperadorRespuestas(this);
         ejecutorEsperadorRespuestas = Executors.newCachedThreadPool();
-        ejecutorEsperadorRespuestas.execute(esperadorRespuestas);
+        ejecutorEsperadorRespuestas.execute(new EsperadorRespuestas(this));
     }
 
     public GestorConexion getGestorConexion() {
@@ -90,14 +88,5 @@ public class Client {
     public GestorCambios getGestorCambios() {
         return gestorCambios;
     }
-
-    public EsperadorRespuestas getEsperadorRespuestas() {
-        return esperadorRespuestas;
-    }
-
-    public void setEsperadorRespuestas(EsperadorRespuestas esperadorRespuestas) {
-        this.esperadorRespuestas = esperadorRespuestas;
-    }
-    
     
 }

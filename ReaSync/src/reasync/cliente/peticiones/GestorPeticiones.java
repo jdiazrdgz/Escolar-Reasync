@@ -23,7 +23,6 @@ public class GestorPeticiones {
             oos= new ObjectOutputStream(cliente.getGestorConexion().getOut());
             oos.writeObject(peticion);
             oos.flush();
-            System.out.println("Peticion enviada");
         } catch (IOException ex) {
             Logger.getLogger(GestorPeticiones.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -27,12 +27,18 @@ public class GestorSincronizacion {
         hacerPeticionRegistrosServer();
     }
 
-    public int continarProcesoSincronizacion() {
+    public void continarProcesoSincronizacion() {
         if (cambiosLocales != null && archivosMusicaRecibidos != null) {
             CambiosGlobales cambiosGlobales=encontrarCambiosGlobales(cambiosLocales,archivosMusicaRecibidos);
-            return 1;
-        } else {
-            return 0;
+            if(cambiosGlobales==null){
+                //nada que sincronizar
+                cliente.getReaSyncController().mostrarMensajeLog("Nada que sincronizar");
+                System.err.println("Nada que sincronizar");
+            }else{
+                
+            }
+        }else{
+            System.err.println("error recibiendo archivos de musica o generando los cambios locales");
         }
     }
 

@@ -82,10 +82,10 @@ class ActionEventsController implements ActionListener {
                 break;
             }
             case "syncNowButton": {
-                reaSyncController.mostrarMensajeLog("Se ha solicitado sincronización manual");
+                reaSyncController.mostrarMensajeLog("Se ha solicitado inicio de sincronización manual");
                 reaSyncController.getCliente()
                         .getGestorSincronizacion()
-                        .hacerSincronizacion();
+                        .iniciarProcesoSincronizacion();
                 break;
             }
             default: {
