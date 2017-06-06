@@ -6,6 +6,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import reasync.cliente.conexion.GestorConexion;
 import reasync.cliente.respuestas.EsperadorRespuestas;
+import reasync.ftp.GestorFTP;
 import reasync.sistema.cambios.GestorCambios;
 import reasync.sistema.configuracion.GestorConfiguracion;
 import reasync.sistema.directorios.GestorDirectorio;
@@ -26,6 +27,7 @@ public class Client {
     private final GestorConfiguracion gestorConfiguracion;
     private final GestorSincronizacion gestorSincronizacion;
     private final GestorCambios gestorCambios;
+    private GestorFTP gestorFTP;
 
     public Client(ReaSyncController reaSyncController) {
         this.reaSyncController = reaSyncController;
@@ -87,6 +89,16 @@ public class Client {
 
     public GestorCambios getGestorCambios() {
         return gestorCambios;
+    }
+    public void iniciarGestorFTP(String ipServer, int port){
+        gestorFTP= new GestorFTP(this, ipServer, port);
+    }
+    public void terminarGestorFTP(){
+        gestorFTP=null;
+    }
+
+    public GestorFTP getGestorFTP() {
+        return gestorFTP;
     }
     
 }

@@ -74,6 +74,8 @@ public class ReaSync extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         deviceNameField = new javax.swing.JTextField();
         disconectServerButton = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
         syncContainerPanel = new javax.swing.JPanel();
         syncBannerPanel = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -252,7 +254,7 @@ public class ReaSync extends javax.swing.JFrame {
         urlServerField.setText("127.0.0.1");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel3.setText("Puerto:");
+        jLabel3.setText("Puerto ReaSync:");
 
         portServerField.setText("9000");
         portServerField.addActionListener(new java.awt.event.ActionListener() {
@@ -276,6 +278,11 @@ public class ReaSync extends javax.swing.JFrame {
         disconectServerButton.setText("Desconectar");
         disconectServerButton.setActionCommand("disconectServerButton");
 
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel10.setText("Puerto FTP:");
+
+        jTextField1.setText("14147");
+
         javax.swing.GroupLayout servicesBodyPanelLayout = new javax.swing.GroupLayout(servicesBodyPanel);
         servicesBodyPanel.setLayout(servicesBodyPanelLayout);
         servicesBodyPanelLayout.setHorizontalGroup(
@@ -295,7 +302,9 @@ public class ReaSync extends javax.swing.JFrame {
                         .addGroup(servicesBodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
                             .addComponent(disconectServerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(deviceNameField)))
+                            .addComponent(deviceNameField)
+                            .addComponent(jLabel10)
+                            .addComponent(jTextField1)))
                     .addComponent(statusConnectionServerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -311,9 +320,13 @@ public class ReaSync extends javax.swing.JFrame {
                     .addComponent(urlServerField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(deviceNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel3)
+                .addGroup(servicesBodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(portServerField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(servicesBodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(portServerField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(servicesBodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(connectServerButton)
@@ -612,6 +625,7 @@ public class ReaSync extends javax.swing.JFrame {
     public javax.swing.JPanel homeBodyPanel;
     public javax.swing.JPanel homeContainerPanel;
     public javax.swing.JLabel jLabel1;
+    public javax.swing.JLabel jLabel10;
     public javax.swing.JLabel jLabel2;
     public javax.swing.JLabel jLabel3;
     public javax.swing.JLabel jLabel4;
@@ -625,6 +639,7 @@ public class ReaSync extends javax.swing.JFrame {
     public javax.swing.JSeparator jSeparator3;
     public javax.swing.JSeparator jSeparator4;
     public javax.swing.JSeparator jSeparator5;
+    public javax.swing.JTextField jTextField1;
     public javax.swing.JPanel logContainerPanel;
     public javax.swing.JPanel logContainerPanel1;
     public javax.swing.JButton logMenuButton;
