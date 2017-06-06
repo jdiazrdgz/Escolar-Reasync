@@ -38,12 +38,12 @@ public class GestorCambios {
     }
 
     public CambiosGlobales determinarCambiosGlobales(CambiosLocales cambiosLocales, ArchivosMusica archivosMusicaRecibidos) {
-        if (archivosMusicaRecibidos.getArchivosMusica()==null && cambiosLocales.getArchivosSimilares().isEmpty()) {
+        if (archivosMusicaRecibidos.getArchivosMusica() == null && cambiosLocales.getArchivosSimilares().isEmpty()) {
             cliente.getReaSyncController().mostrarMensajeLog("No se detectan archivos en server y archivos locales");
             //el server no tiene archivos musica registros y nosotros tampoco, no hay nada que sincronizar
             return null;
         }
-        if (archivosMusicaRecibidos.getArchivosMusica()==null) {
+        if (archivosMusicaRecibidos.getArchivosMusica() == null) {
             Object[] options = {"Subir Archivos locales a server",
                 "Eliminar los archivos locales", "Cancelar Sincronización"};
             int n = JOptionPane.showOptionDialog(null,
@@ -54,32 +54,44 @@ public class GestorCambios {
                     null, //do not use a custom Icon
                     options, //the titles of buttons
                     options[0]); //default button title
-            switch(n){
-                case 0:{
+            switch (n) {
+                case 0: {
                     //Subir todos los locales a server
                     List<Path> pathArchivosSubir = new ArrayList<>();
-                    pathArchivosSubir.addAll(cambiosLocales.getArchivosSimilares());
-                    pathArchivosSubir.addAll(cambiosLocales.getArchivosNuevos());
-                    List<ArchivoMusica> listaArchivosMusica =new ArrayList<>();
-                    pathArchivosSubir.forEach(path ->{
-                        listaArchivosMusica.add(new ArchivoMusica(path, path.getFileName().toString(), Long.toString(new File(path.toString()).length())));
-                    });
-                    ArchivosMusica archivosRemotos_Subir = new ArchivosMusica(listaArchivosMusica);
-                    ArchivosMusica archivosRemotos_Eliminar = null;
-                    List<Path> archivosLocales_Eliminar = null;
-                    List<Path> archivosLocales_Descargar = null;
-                    return new CambiosGlobales(archivosLocales_Eliminar, archivosLocales_Descargar, archivosRemotos_Subir, archivosRemotos_Eliminar);
+                    if (cambiosLocales.getArchivosNuevos() != null) {
+                        pathArchivosSubir.addAll(cambiosLocales.getArchivosNuevos());
+                    }
+                    if (cambiosLocales.getArchivosSimilares() != null) {
+                        pathArchivosSubir.addAll(cambiosLocales.getArchivosSimilares());
+                        List<ArchivoMusica> listaArchivosMusica = new ArrayList<>();
+                        pathArchivosSubir.forEach(path -> {
+                            listaArchivosMusica.add(new ArchivoMusica(path, path.getFileName().toString(), Long.toString(new File(path.toString()).length())));
+                        });
+                        ArchivosMusica archivosRemotos_Subir = new ArchivosMusica(listaArchivosMusica);
+                        ArchivosMusica archivosRemotos_Eliminar = null;
+                        List<Path> archivosLocales_Eliminar = null;
+                        List<Path> archivosLocales_Descargar = null;
+                        return new CambiosGlobales(archivosLocales_Eliminar, archivosLocales_Descargar, archivosRemotos_Subir, archivosRemotos_Eliminar);
+                    } else {
+                        return null;
+                    }
                 }
-                case 1:{
+                case 1: {
                     //Eliminar los locales
                     ArchivosMusica archivosRemotos_Subir = null;
                     ArchivosMusica archivosRemotos_Eliminar = null;
                     List<Path> archivosLocales_Eliminar = cambiosLocales.getArchivosSimilares();
-                    archivosLocales_Eliminar.addAll(cambiosLocales.getArchivosNuevos());
-                    List<Path> archivosLocales_Descargar = null;
-                    return new CambiosGlobales(archivosLocales_Eliminar, archivosLocales_Descargar, archivosRemotos_Subir, archivosRemotos_Eliminar);
+                    if (archivosLocales_Eliminar != null) {
+                        if (cambiosLocales.getArchivosNuevos() != null) {
+                            archivosLocales_Eliminar.addAll(cambiosLocales.getArchivosNuevos());
+                        }
+                        List<Path> archivosLocales_Descargar = null;
+                        return new CambiosGlobales(archivosLocales_Eliminar, archivosLocales_Descargar, archivosRemotos_Subir, archivosRemotos_Eliminar);
+                    } else {
+                        return null;
+                    }
                 }
-                case 2:{
+                case 2: {
                     //Nada
                     return null;
                 }

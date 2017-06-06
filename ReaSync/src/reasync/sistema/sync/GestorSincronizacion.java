@@ -35,13 +35,15 @@ public class GestorSincronizacion {
                 cliente.getReaSyncController().mostrarMensajeLog("Nada que sincronizar");
                 System.err.println("Nada que sincronizar");
             }else{
-                
+                ejecutarAccionesSincronizacion(cambiosGlobales);
             }
         }else{
             System.err.println("error recibiendo archivos de musica o generando los cambios locales");
         }
     }
-
+    public void ejecutarAccionesSincronizacion(CambiosGlobales cambiosGlobales){
+        
+    }
     public CambiosLocales encontrarCambiosLocales() {
         return cliente.getGestorCambios().generarListaCambiosLocales();
     }
