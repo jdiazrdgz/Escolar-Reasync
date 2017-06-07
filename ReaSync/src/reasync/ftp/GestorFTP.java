@@ -11,8 +11,8 @@ import java.io.OutputStream;
 import java.nio.file.Path;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPReply;
 import reasync.cliente.Client;
 import reasync.sistema.archivos.GestorArchivosMusica;
 
@@ -24,54 +24,86 @@ public class GestorFTP {
 
     private final Client cliente;
     private final String ipserver;
-    private final int port;
+    private final int port = 21;
     private final String user = "reasync";
-    private final String pass = "jenesais53";
-    private final FTPClient ftpClient;
+    private final String pass = "jenesais";
+    private FTPClient ftpClient;
 
     public GestorFTP(Client cliente, String ipserver, int port) {
         this.cliente = cliente;
         this.ipserver = ipserver;
-        this.port = port;
         ftpClient = new FTPClient();
+        System.err.println("se inicia ftp client");
     }
 
     public int conectarClienteFTP() {
         try {
             ftpClient.connect(ipserver, port);
-            ftpClient.login(user, pass);
-            ftpClient.enterLocalPassiveMode();
-            ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
-            return 1;
+            showServerReply(ftpClient);
+            int replyCode = ftpClient.getReplyCode();
+            if (!FTPReply.isPositiveCompletion(replyCode)) {
+                System.out.println("Operation failed. Server reply code: " + replyCode);
+                return 0;
+            }
+            boolean success = ftpClient.login(user, pass);
+            showServerReply(ftpClient);
+            if (!success) {
+                System.out.println("Could not login to the server");
+                return 0;
+            } else {
+                System.out.println("LOGGED IN SERVER");
+                return 1;
+            }
         } catch (IOException ex) {
             Logger.getLogger(GestorFTP.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
         }
     }
 
+    private void showServerReply(FTPClient ftpClient) {
+        String[] replies = ftpClient.getReplyStrings();
+        if (replies != null && replies.length > 0) {
+            for (String aReply : replies) {
+                System.out.println("SERVER: " + aReply);
+            }
+        }
+    }
+
     public int desconectarClienteFTP() {
-        try {
-            if (ftpClient.isConnected()) {
+        if (ftpClient.isConnected()) {
+            try {
                 ftpClient.logout();
                 ftpClient.disconnect();
                 return 1;
+            } catch (IOException ex) {
+                Logger.getLogger(GestorFTP.class.getName()).log(Level.SEVERE, null, ex);
+                return 0;
             }
-            return 1;
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return 0;
         }
+        return 1;
     }
 
     public int subirArchivo(Path pathArchivo) {
         InputStream inputStream = null;
         try {
             File archivo = pathArchivo.toFile();
-            String pathArchivoRemoto = new GestorArchivosMusica(cliente.getGestorConfiguracion())
-                    .generalizarPathArchivoMusica(pathArchivo).toString();
+            //Esto hara que la path ya no tenga la ruta relativa del equipo cliente
+            Path pathArchivoRemoto = new GestorArchivosMusica(cliente.getGestorConfiguracion())
+                    .generalizarPathArchivoMusica(pathArchivo);
+            //Esto nos devuelve la ruta sin el nombre del archivo
+            String pathDirectorio = pathArchivoRemoto.getParent().toString();
+            //Para que el server escriba en esa capeta, necesitamos que exista
+            ftpClient.changeWorkingDirectory("/");
+            ftpClient.changeWorkingDirectory(pathDirectorio);
+            int returnCode = ftpClient.getReplyCode();
+            if (returnCode == 550) {
+                if (crearDirectorio(pathDirectorio)) {
+                    ftpClient.changeWorkingDirectory(pathDirectorio);
+                }
+            }
             inputStream = new FileInputStream(archivo);
             System.out.println("Start uploading the file");
-            boolean done = ftpClient.storeFile(pathArchivoRemoto, inputStream);
+            boolean done = ftpClient.storeFile(pathArchivoRemoto.getFileName().toString(), inputStream);
             inputStream.close();
             if (done) {
                 System.out.println("The first file is uploaded successfully.");
@@ -94,6 +126,24 @@ public class GestorFTP {
         }
     }
 
+    public boolean crearDirectorio(String pathDirectorio) {
+        try {
+            String dirToCreate = pathDirectorio;
+            Boolean success = ftpClient.makeDirectory(dirToCreate);
+            showServerReply(ftpClient);
+            if (success) {
+                System.out.println("Successfully created directory: " + dirToCreate);
+                return true;
+            } else {
+                System.out.println("Failed to create directory. See server's reply.");
+                return false;
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(GestorFTP.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+
     public int descargarArchivo(Path pathArchivo) {
         OutputStream outputStream1 = null;
         try {
@@ -107,7 +157,7 @@ public class GestorFTP {
             if (success) {
                 System.out.println("File has been downloaded successfully.");
                 return 1;
-            }else{
+            } else {
                 return 0;
             }
         } catch (FileNotFoundException ex) {

@@ -34,6 +34,7 @@ public class GestorArchivosMusica {
             int inicio = 0;
             int fin = 0;
             while (ittotal.hasNext()) {
+                ittotal.next();
                 fin++;
             }
             while (itparcial.hasNext()) {
@@ -56,20 +57,23 @@ public class GestorArchivosMusica {
         originalPath = archivoMusica;
         Iterator<Path> ittotal = originalPath.iterator();
         Iterator<Path> itparcial = originalPath.iterator();
-        int i = 0;
         int inicio = 0;
         int fin = 0;
         while (ittotal.hasNext()) {
+            ittotal.next();
+            //System.err.println(ittotal.next());
             fin++;
         }
         while (itparcial.hasNext()) {
-            if (itparcial.next().toString().equals(nombredirSync)) {
+            String parcial= itparcial.next().toString();
+            if (parcial.equals(nombredirSync)) {
                 break;
             } else {
                 inicio++;
             }
         }
-        return fixedPath = originalPath.subpath(inicio, fin);
+        fixedPath = originalPath.subpath(inicio, fin);
+        return fixedPath;
     }
 
     public ArchivosMusica especificarPathArchivosMusica(ArchivosMusica archivosMusica) {

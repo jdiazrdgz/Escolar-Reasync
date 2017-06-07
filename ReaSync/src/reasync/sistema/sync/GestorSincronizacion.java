@@ -93,12 +93,16 @@ public class GestorSincronizacion {
 
     public void subirArchivosMusica(List<ArchivoMusica> archivosMusica) {
         System.err.println("Se subiran los siguientes archivos al servidor");
-        archivosMusica.forEach(archivoMusica -> System.err.println(archivoMusica.getRutaArchivo().toString()));
-        cliente.getGestorFTP().conectarClienteFTP();
-        archivosMusica.forEach(archivo -> {
-            cliente.getGestorFTP().subirArchivo(archivo.getRutaArchivo());
-        });
-        cliente.getGestorFTP().desconectarClienteFTP();
+        //archivosMusica.forEach(archivoMusica -> System.err.println(archivoMusica.getRutaArchivo().toString()));
+        if (cliente.getGestorFTP().conectarClienteFTP() == 1) {
+            archivosMusica.forEach(archivo -> {
+                cliente.getGestorFTP().subirArchivo(archivo.getRutaArchivo());
+            });
+            cliente.getGestorFTP().desconectarClienteFTP();
+        }else{
+            
+        }
+        
     }
 
     public void eliminarArchivosMusicaRemotos(List<ArchivoMusica> archivosMusica) {
