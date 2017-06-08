@@ -9,6 +9,7 @@ import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import reasyncserver.server.conexiones.EsperadorConexiones;
+import reasyncserver.sistema.configuracion.GestorConfiguracion;
 import reasyncserver.vistas.controles.ReaSyncController;
 
 public class Server {
@@ -17,12 +18,14 @@ public class Server {
     private int puerto;
     private final ReaSyncController reaSyncController;
     private ExecutorService esperadorConexiones;
+    private GestorConfiguracion gestorConfigurcion;
 
     public Server(ReaSyncController reaSyncController) {
         this.reaSyncController = reaSyncController;
         serverSocket = null;
         esperadorConexiones = null;
         puerto = 0;
+        gestorConfigurcion = new GestorConfiguracion();
     }
 
     public int iniciarServidor(int puerto) {
@@ -90,4 +93,12 @@ public class Server {
         return reaSyncController;
     }
 
+    public GestorConfiguracion getGestorConfigurcion() {
+        return gestorConfigurcion;
+    }
+
+    public void setGestorConfigurcion(GestorConfiguracion gestorConfigurcion) {
+        this.gestorConfigurcion = gestorConfigurcion;
+    }
+    
 }

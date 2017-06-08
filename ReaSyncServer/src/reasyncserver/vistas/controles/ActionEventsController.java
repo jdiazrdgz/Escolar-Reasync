@@ -7,10 +7,11 @@ package reasyncserver.vistas.controles;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.nio.file.Path;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import reasyncserver.bd.GestorConexionBD;
+import reasyncserver.sistema.configuracion.ServerInfo;
 
 /**
  *
@@ -48,7 +49,7 @@ class ActionEventsController implements ActionListener {
                 reaSyncController.mostrarError("Servidor", "Ocurrio un error al cerrar el servidor");
             }
         }
-        if(comando.equals("conexionBDButton")){
+        if (comando.equals("conexionBDButton")) {
             try {
                 GestorConexionBD gbd = new GestorConexionBD();
                 gbd.conectar();
@@ -64,15 +65,34 @@ class ActionEventsController implements ActionListener {
                 reaSyncController.getFrame().conexionBDButton.setEnabled(true);
             }
         }
-        if(comando.equals("ftpServiceButton")){
-            if(reaSyncController.getServer().isLocalPortInUse(14147)){
+        if (comando.equals("ftpServiceButton")) {
+            if (reaSyncController.getServer().isLocalPortInUse(14147)) {
                 reaSyncController.getFrame().ftpServicesServiceLabel.setText("El servicio FTP esta activo");
                 reaSyncController.mostrarMensajeLog("El servicio FTP esta activo");
                 reaSyncController.getFrame().ftpServiceButton.setEnabled(false);
-            }else{
+            } else {
                 reaSyncController.getFrame().ftpServicesServiceLabel.setText("Error, Verifique el servidor FTP");
                 reaSyncController.mostrarMensajeLog("El servicio FTP no esta activado");
                 reaSyncController.getFrame().ftpServiceButton.setEnabled(true);
+            }
+        }
+        if (comando.equals("updatePathSync")) {
+            JFileChooser chooser = new JFileChooser();
+            chooser.setDialogTitle("Carpeta de sincronización");
+            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            chooser.setAcceptAllFileFilterUsed(false);
+            if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                Path ruta = chooser.getSelectedFile().toPath();
+                reaSyncController.getFrame().pathDirectorioSync.setText(ruta.toString());
+                reaSyncController.getFrame().updatePathSync.setEnabled(false);
+                String directorio = ruta.toString();
+                String nombreDirectorio = ruta.getFileName().toString();
+                reaSyncController.getServer()
+                        .getGestorConfigurcion()
+                        .actualizarServerInfo(new ServerInfo(directorio,nombreDirectorio));
+            } else {
+                reaSyncController.getFrame().pathDirectorioSync
+                        .setText("Elija una ruta para hacer la sincronizacion");
             }
         }
     }

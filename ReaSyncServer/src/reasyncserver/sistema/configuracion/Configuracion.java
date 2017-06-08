@@ -1,8 +1,6 @@
 package reasyncserver.sistema.configuracion;
 
 import java.io.Serializable;
-import reasyncserver.bd.config.BDInfo;
-import reasyncserver.server.config.ServerInfo;
 
 /**
  *
@@ -10,24 +8,13 @@ import reasyncserver.server.config.ServerInfo;
  */
 public class Configuracion implements Serializable {
 
-    private BDInfo bdinfo;
-
     private ServerInfo serverInfo;
 
-    public Configuracion(BDInfo bdinfo, ServerInfo serverInfo) {
-        this.bdinfo = bdinfo;
+    public Configuracion(ServerInfo serverInfo) {
         this.serverInfo = serverInfo;
     }
 
     public Configuracion() {
-    }
-
-    public BDInfo getBdinfo() {
-        return bdinfo;
-    }
-
-    public void setBdinfo(BDInfo bdinfo) {
-        this.bdinfo = bdinfo;
     }
 
     public ServerInfo getServerInfo() {

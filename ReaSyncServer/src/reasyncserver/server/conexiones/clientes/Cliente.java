@@ -1,11 +1,15 @@
 package reasyncserver.server.conexiones.clientes;
 
+import archivos.ArchivoMusica;
 import archivos.ArchivosMusica;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import peticion.Peticion;
@@ -25,8 +29,9 @@ public class Cliente implements Runnable {
     private OutputStream out;
     private GestorRegistros gestorRegistros;
     private GestorRespuestas gestorRespuestas;
+    private final Path directorio;
 
-    public Cliente(Socket conexion, int id) {
+    public Cliente(Socket conexion, int id, Path directorio) {
         this.conexion = conexion;
         this.id = id;
         int error = iniciarCanalesEntradaSalida();
@@ -36,6 +41,7 @@ public class Cliente implements Runnable {
         }
         gestorRegistros = new GestorRegistros();
         gestorRespuestas = new GestorRespuestas(this);
+        this.directorio=directorio;
     }
 
     @Override
@@ -70,6 +76,18 @@ public class Cliente implements Runnable {
                             ArchivosMusica archivosMusica = gestorRegistros.getArchivosMusica();
                             gestorRespuestas.enviarArchivosMusicaRegistrados(archivosMusica);
                             System.out.println("Se han enviado los registros de musica al cliente" + id);
+                            break;
+                        }
+                        case "eliminarRegistroMusica":{
+                            break;
+                        }case "guardarRegistroArchivo":{
+                            System.err.println("guardar archivo musica");
+                            Path pathArchivoMusica = Paths.get(directorio.toString(),peticion.getInfo());
+                            System.err.println(pathArchivoMusica);
+                            ArchivoMusica archivoMusica = 
+                                    new ArchivoMusica(pathArchivoMusica, pathArchivoMusica.getFileName().toString(), Long.toString(new File(pathArchivoMusica.toString()).length()));
+                            gestorRegistros.guardarRegistroArchivoMusica(archivoMusica);
+                            break;
                         }
                         default: {
 

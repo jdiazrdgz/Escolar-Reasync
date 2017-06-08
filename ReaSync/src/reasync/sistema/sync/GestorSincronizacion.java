@@ -7,6 +7,7 @@ import java.util.List;
 import peticion.Peticion;
 import reasync.cliente.Client;
 import reasync.cliente.peticiones.GestorPeticiones;
+import reasync.sistema.archivos.GestorArchivosMusica;
 import reasync.sistema.cambios.CambiosGlobales;
 import reasync.sistema.cambios.CambiosLocales;
 
@@ -48,6 +49,8 @@ public class GestorSincronizacion {
     public void ejecutarAccionesSincronizacion(CambiosGlobales cambiosGlobales) {
         determinarAccionesLocales(cambiosGlobales);
         determinarAccionesRemotas(cambiosGlobales);
+        //guardar estado local
+
     }
 
     public void determinarAccionesLocales(CambiosGlobales cambiosGlobales) {
@@ -93,20 +96,27 @@ public class GestorSincronizacion {
 
     public void subirArchivosMusica(List<ArchivoMusica> archivosMusica) {
         System.err.println("Se subiran los siguientes archivos al servidor");
-        //archivosMusica.forEach(archivoMusica -> System.err.println(archivoMusica.getRutaArchivo().toString()));
+        String comandoPeticion = "guardarRegistroArchivo";
         if (cliente.getGestorFTP().conectarClienteFTP() == 1) {
             archivosMusica.forEach(archivo -> {
                 cliente.getGestorFTP().subirArchivo(archivo.getRutaArchivo());
+                //gestor remoto
+                Peticion peticion = new Peticion(comandoPeticion, new GestorArchivosMusica(cliente.getGestorConfiguracion())
+                        .generalizarPathArchivoMusica(archivo.getRutaArchivo()).toString());
+                System.err.println(peticion.getPeticion() + peticion.getInfo());
+                cliente.getGestorPeticiones()
+                        .hacerPeticion(peticion);
             });
             cliente.getGestorFTP().desconectarClienteFTP();
-        }else{
-            
+        } else {
+
         }
-        
+
     }
 
     public void eliminarArchivosMusicaRemotos(List<ArchivoMusica> archivosMusica) {
         System.err.println("Se eliminaran los siguientes archivos del servidor");
+        String comandoPeticion = "guardarRegistroArchivo";
         archivosMusica.forEach(archivoMusica -> System.err.println(archivoMusica.getRutaArchivo().toString()));
     }
 
@@ -119,7 +129,7 @@ public class GestorSincronizacion {
     }
 
     private void hacerPeticionRegistrosServer() {
-        new GestorPeticiones(cliente)
+        cliente.getGestorPeticiones()
                 .hacerPeticion(new Peticion("registroArchivosMusica"));
         cliente.getReaSyncController()
                 .mostrarMensajeLog("Petición de registros de musica enviada al servidor");

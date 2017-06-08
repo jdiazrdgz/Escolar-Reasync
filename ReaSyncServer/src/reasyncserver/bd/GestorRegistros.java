@@ -37,13 +37,14 @@ public class GestorRegistros {
     public int guardarRegistroArchivoMusica(ArchivoMusica archivoMusica) {
         try {
             conexion = gestorConexionBD.conectar();
+            String pathEspecialMysql = archivoMusica.getRutaArchivo().toString().replace("\\","\\\\");
             statement = conexion
                     .createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             String query = "INSERT INTO registroarchivosmusica (nombre,peso,path)"
                     + "VALUES("
                     + "'" + archivoMusica.getNombreArchivo() + "',"
                     + "'" + archivoMusica.getPesoArchivo() + "',"
-                    + "'" + archivoMusica.getRutaArchivo() + "');";
+                    + "'" + pathEspecialMysql + "');";
             statement.execute(query);
             gestorConexionBD.desconectar();
             return 1;

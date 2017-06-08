@@ -38,12 +38,12 @@ public class GestorCambios {
     }
 
     public CambiosGlobales determinarCambiosGlobales(CambiosLocales cambiosLocales, ArchivosMusica archivosMusicaRecibidos) {
-        if (archivosMusicaRecibidos.getArchivosMusica() == null && cambiosLocales.getArchivosSimilares().isEmpty()) {
+        if (archivosMusicaRecibidos.getArchivosMusica().isEmpty() && cambiosLocales.getArchivosSimilares().isEmpty()) {
             cliente.getReaSyncController().mostrarMensajeLog("No se detectan archivos en server y archivos locales");
             //el server no tiene archivos musica registros y nosotros tampoco, no hay nada que sincronizar
             return null;
         }
-        if (archivosMusicaRecibidos.getArchivosMusica() == null) {
+        if (archivosMusicaRecibidos.getArchivosMusica().isEmpty()) {
             Object[] options = {"Subir Archivos locales a server",
                 "Eliminar los archivos locales", "Cancelar Sincronización"};
             int n = JOptionPane.showOptionDialog(null,

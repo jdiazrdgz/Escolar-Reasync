@@ -15,8 +15,7 @@ public class ReaSyncServer {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        reasyncserver.vistas.ReaSyncServer frame =new  reasyncserver.vistas.ReaSyncServer();
-        frame.setVisible(true);
+        new IniciarSistema().iniciarSistema();
     }
     
 }

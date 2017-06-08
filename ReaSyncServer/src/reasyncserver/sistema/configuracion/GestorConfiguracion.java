@@ -11,8 +11,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import reasyncserver.bd.config.BDInfo;
-import reasyncserver.server.config.ServerInfo;
 
 /**
  *
@@ -58,11 +56,7 @@ public class GestorConfiguracion {
             return null;
         }
     }
-    
-    public int actualizarBDInfo(BDInfo bdinfo) {
-        this.configuracion.setBdinfo(bdinfo);
-        return guardarConfiguracion(configuracion);
-    }
+   
     public int actualizarServerInfo(ServerInfo serverInfo) {
         this.configuracion.setServerInfo(serverInfo);
         return guardarConfiguracion(configuracion);

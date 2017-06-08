@@ -1,6 +1,7 @@
 package archivos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,6 +17,7 @@ public class ArchivosMusica implements Serializable{
     }
 
     public ArchivosMusica() {
+        archivosMusica = new ArrayList<>();
     }
 
     public List<ArchivoMusica> getArchivosMusica() {

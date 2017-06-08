@@ -59,6 +59,7 @@ class ActionEventsController implements ActionListener {
                     reaSyncController.getFrame().connectServerButton.setEnabled(false);
                     reaSyncController.getFrame().disconectServerButton.setEnabled(true);
                     reaSyncController.getCliente().iniciarGestorFTP(ipServer, puerto);
+                    reaSyncController.getCliente().iniciarGestorPeticiones();
                 } else {
                     reaSyncController.mostrarMensajeLog("Error al conectarse con el servidor de ReaSync");
                     reaSyncController.getFrame().statusConnectionServerLabel

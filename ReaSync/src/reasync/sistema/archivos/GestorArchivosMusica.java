@@ -61,7 +61,6 @@ public class GestorArchivosMusica {
         int fin = 0;
         while (ittotal.hasNext()) {
             ittotal.next();
-            //System.err.println(ittotal.next());
             fin++;
         }
         while (itparcial.hasNext()) {
@@ -72,7 +71,7 @@ public class GestorArchivosMusica {
                 inicio++;
             }
         }
-        fixedPath = originalPath.subpath(inicio, fin);
+        fixedPath = originalPath.subpath(inicio+1, fin);
         return fixedPath;
     }
 

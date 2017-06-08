@@ -4,6 +4,7 @@ import reasyncserver.server.conexiones.clientes.Cliente;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -38,7 +39,13 @@ public class EsperadorConexiones implements Runnable {
                 server.getReaSyncController()
                         .mostrarClienteTabla(new ClienteConectado(Integer.toString(idCliente),ipCliente, "Identificando"));
                 server.getReaSyncController().mostrarMensajeLog("Se ha conectado el cliente no: "+idCliente);
-                clientes.add(new Cliente(conexion,idCliente));
+                clientes.add(new 
+                            Cliente(conexion,
+                                    idCliente, 
+                                    Paths.get(server.getGestorConfigurcion()
+                                            .getConfiguracion()
+                                            .getServerInfo()
+                                            .getRutaDirectorioSync())));
                 manejadorHilosCliente.execute(clientes.get(idCliente));
             } catch (IOException ex) {
                 Logger.getLogger(EsperadorConexiones.class.getName()).log(Level.SEVERE, null, ex);

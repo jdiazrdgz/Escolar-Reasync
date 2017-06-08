@@ -36,8 +36,8 @@ public class ReaSyncController {
 
     public void cargarConfiguracion() {
         iniciarTablaClientes();
+        frame.pathDirectorioSync.setText(server.getGestorConfigurcion().getConfiguracion().getServerInfo().getRutaDirectorioSync());
     }
-    
     public void iniciarTablaClientes(){
         DefaultTableModel datos = new DefaultTableModel();
         datos.addColumn("ID");

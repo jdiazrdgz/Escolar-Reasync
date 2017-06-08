@@ -10,10 +10,15 @@ import java.util.ArrayList;
 public class Peticion implements Serializable {
 
     private String peticion;
-    private ArrayList<Object> informacion;
+    private String info;
 
     public Peticion(String peticion) {
         this.peticion = peticion;
+    }
+
+    public Peticion(String peticion, String info) {
+        this.peticion = peticion;
+        this.info = info;
     }
 
     public String getPeticion() {
@@ -24,11 +29,12 @@ public class Peticion implements Serializable {
         this.peticion = peticion;
     }
 
-    public ArrayList<Object> getInformacion() {
-        return informacion;
+    public String getInfo() {
+        return info;
     }
 
-    public void setInformacion(ArrayList<Object> informacion) {
-        this.informacion = informacion;
+    public void setInfo(String info) {
+        this.info = info;
     }
+
 }

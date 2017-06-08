@@ -33,6 +33,7 @@ public class ReaSyncServer extends javax.swing.JFrame {
         reasyncServerStopButton.addActionListener(control.getActionController());
         conexionBDButton.addActionListener(control.getActionController());
         ftpServiceButton.addActionListener(control.getActionController());
+        updatePathSync.addActionListener(control.getActionController());
     }
 
     private void initMouseListeners(ReaSyncController control) {
@@ -102,6 +103,9 @@ public class ReaSyncServer extends javax.swing.JFrame {
         jSeparator8 = new javax.swing.JSeparator();
         ftpServicesServiceLabel = new javax.swing.JLabel();
         ftpServiceButton = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        pathDirectorioSync = new javax.swing.JLabel();
+        updatePathSync = new javax.swing.JButton();
         servicesReaSyncPanel = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jSeparator9 = new javax.swing.JSeparator();
@@ -258,7 +262,7 @@ public class ReaSyncServer extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addContainerGap(242, Short.MAX_VALUE))
         );
 
         homeContainerServicesPanel.add(jPanel3);
@@ -288,7 +292,7 @@ public class ReaSyncServer extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addContainerGap(242, Short.MAX_VALUE))
         );
 
         homeContainerServicesPanel.add(jPanel4);
@@ -329,7 +333,7 @@ public class ReaSyncServer extends javax.swing.JFrame {
                 .addComponent(reasyncServerLabel)
                 .addGap(18, 18, 18)
                 .addComponent(reaSyncServerPortLabel)
-                .addContainerGap(133, Short.MAX_VALUE))
+                .addContainerGap(218, Short.MAX_VALUE))
         );
 
         homeContainerServicesPanel.add(jPanel5);
@@ -512,7 +516,7 @@ public class ReaSyncServer extends javax.swing.JFrame {
                 .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(conexionBDButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 219, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 304, Short.MAX_VALUE)
                 .addComponent(mysqlServicesServiceLabel)
                 .addContainerGap())
         );
@@ -522,13 +526,23 @@ public class ReaSyncServer extends javax.swing.JFrame {
         servicesFTPPanel.setBackground(new java.awt.Color(250, 250, 250));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("FTP Server");
+        jLabel8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         ftpServicesServiceLabel.setText("El servicio FTP esta detenido");
         ftpServicesServiceLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         ftpServiceButton.setText("Verificar Servicio FTP");
         ftpServiceButton.setActionCommand("ftpServiceButton");
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel10.setText("Directorio Sincronización");
+
+        pathDirectorioSync.setText("ruta");
+
+        updatePathSync.setText("Establecer Ruta");
+        updatePathSync.setActionCommand("updatePathSync");
 
         javax.swing.GroupLayout servicesFTPPanelLayout = new javax.swing.GroupLayout(servicesFTPPanel);
         servicesFTPPanel.setLayout(servicesFTPPanelLayout);
@@ -537,16 +551,16 @@ public class ReaSyncServer extends javax.swing.JFrame {
             .addGroup(servicesFTPPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(servicesFTPPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, servicesFTPPanelLayout.createSequentialGroup()
-                        .addGap(0, 68, Short.MAX_VALUE)
-                        .addComponent(jLabel8)
-                        .addGap(75, 75, 75))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, servicesFTPPanelLayout.createSequentialGroup()
-                        .addGroup(servicesFTPPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(ftpServiceButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jSeparator8, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ftpServicesServiceLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())))
+                    .addComponent(updatePathSync, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator8)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ftpServiceButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ftpServicesServiceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(servicesFTPPanelLayout.createSequentialGroup()
+                        .addComponent(pathDirectorioSync, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 8, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         servicesFTPPanelLayout.setVerticalGroup(
             servicesFTPPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -557,7 +571,13 @@ public class ReaSyncServer extends javax.swing.JFrame {
                 .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ftpServiceButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 219, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pathDirectorioSync)
+                .addGap(18, 18, 18)
+                .addComponent(updatePathSync)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 206, Short.MAX_VALUE)
                 .addComponent(ftpServicesServiceLabel)
                 .addContainerGap())
         );
@@ -641,7 +661,7 @@ public class ReaSyncServer extends javax.swing.JFrame {
                 .addComponent(reasyncServerStartButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(reasyncServerStopButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
                 .addComponent(reasyncServicesServerLabel)
                 .addContainerGap())
         );
@@ -737,6 +757,7 @@ public class ReaSyncServer extends javax.swing.JFrame {
     public javax.swing.JSeparator homeTitleSeparator;
     public javax.swing.JLabel ipReaSyncServerLabel;
     public javax.swing.JLabel jLabel1;
+    public javax.swing.JLabel jLabel10;
     public javax.swing.JLabel jLabel13;
     public javax.swing.JLabel jLabel14;
     public javax.swing.JLabel jLabel2;
@@ -767,6 +788,7 @@ public class ReaSyncServer extends javax.swing.JFrame {
     public javax.swing.JPanel logTitlePanel;
     public javax.swing.JPanel menuContainerPanel;
     public javax.swing.JLabel mysqlServicesServiceLabel;
+    public javax.swing.JLabel pathDirectorioSync;
     public javax.swing.JTextField portReaSyncServerField;
     public javax.swing.JLabel reaSyncServerPortLabel;
     public javax.swing.JLabel reasyncServerLabel;
@@ -781,5 +803,6 @@ public class ReaSyncServer extends javax.swing.JFrame {
     public javax.swing.JPanel servicesReaSyncPanel;
     public javax.swing.JPanel tilteServicesPanel;
     public javax.swing.JLabel titleClientsLabel;
+    public javax.swing.JButton updatePathSync;
     // End of variables declaration//GEN-END:variables
 }
