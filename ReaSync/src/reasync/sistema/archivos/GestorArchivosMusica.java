@@ -27,7 +27,7 @@ public class GestorArchivosMusica {
         Path fixedPath = null;
         String nombredirSync = gestorConfiguracion.getConfiguracion().getNombreDirectorioConfiguracion();
         for (ArchivoMusica archivoMusica : listaArchivosMusica) {
-            originalPath = archivoMusica.getRutaArchivo();
+            originalPath = Paths.get(archivoMusica.getRutaArchivo());
             Iterator<Path> ittotal = originalPath.iterator();
             Iterator<Path> itparcial = originalPath.iterator();
             int i = 0;
@@ -45,7 +45,7 @@ public class GestorArchivosMusica {
                 }
             }
             fixedPath = originalPath.subpath(inicio, fin);
-            archivoMusica.setRutaArchivo(fixedPath);
+            archivoMusica.setRutaArchivo(fixedPath.toString());
         }
         return archivosMusica;
     }
@@ -64,14 +64,14 @@ public class GestorArchivosMusica {
             fin++;
         }
         while (itparcial.hasNext()) {
-            String parcial= itparcial.next().toString();
+            String parcial = itparcial.next().toString();
             if (parcial.equals(nombredirSync)) {
                 break;
             } else {
                 inicio++;
             }
         }
-        fixedPath = originalPath.subpath(inicio+1, fin);
+        fixedPath = originalPath.subpath(inicio + 1, fin);
         return fixedPath;
     }
 
@@ -79,11 +79,12 @@ public class GestorArchivosMusica {
         List<ArchivoMusica> listaArchivosMusica = archivosMusica.getArchivosMusica();
         Path generalPath = null;
         Path localPath = null;
-        String localdirSync = gestorConfiguracion.getConfiguracion().getNombreDirectorioConfiguracion();
+        String dirSync = gestorConfiguracion.getConfiguracion().getDirectorioSincronizacion();
         for (ArchivoMusica archivoMusica : listaArchivosMusica) {
-            generalPath = archivoMusica.getRutaArchivo();
-            localPath = Paths.get(localdirSync, generalPath.toString());
-            archivoMusica.setRutaArchivo(localPath);
+            generalPath = Paths.get(archivoMusica.getRutaArchivo());
+            localPath = Paths.get(dirSync,generalPath.toString());
+            System.err.println(localPath.toString());
+            archivoMusica.setRutaArchivo(localPath.toString());
         }
         return archivosMusica;
     }
@@ -91,15 +92,17 @@ public class GestorArchivosMusica {
     public Path especificarPathArchivoMusica(Path archivoMusica) {
         Path generalPath = null;
         Path localPath = null;
-        String localdirSync = gestorConfiguracion.getConfiguracion().getNombreDirectorioConfiguracion();
+        String nombreDirSync = gestorConfiguracion.getConfiguracion().getNombreDirectorioConfiguracion();
+        String dirSync = gestorConfiguracion.getConfiguracion().getDirectorioSincronizacion();
         generalPath = archivoMusica;
-        return localPath = Paths.get(localdirSync, generalPath.toString());
+        localPath = Paths.get(dirSync, nombreDirSync, generalPath.toString());
+        return localPath;
     }
 
     public List<Path> obtenerPathArchivosMusica(ArchivosMusica archivosMusica) {
         List<Path> listPathArchivos = new ArrayList<>();
         archivosMusica.getArchivosMusica().forEach(archivoMusica -> {
-            listPathArchivos.add(archivoMusica.getRutaArchivo());
+            listPathArchivos.add(Paths.get(archivoMusica.getRutaArchivo()));
         });
         return listPathArchivos;
     }

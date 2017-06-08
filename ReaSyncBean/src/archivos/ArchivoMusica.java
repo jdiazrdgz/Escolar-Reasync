@@ -7,27 +7,27 @@ import java.nio.file.Path;
  *
  * @author jdiaz
  */
-public class ArchivoMusica implements Serializable{
+public class ArchivoMusica implements Serializable {
 
-    private Path rutaArchivo;
+    private String rutaArchivo;
     private String nombreArchivo;
     private String pesoArchivo;
 
     public ArchivoMusica() {
     }
 
-    public ArchivoMusica(Path rutaArchivo, String nombreArchivo, String pesoArchivo) {
+    public ArchivoMusica(String rutaArchivo, String nombreArchivo, String pesoArchivo) {
         this.rutaArchivo = rutaArchivo;
         this.nombreArchivo = nombreArchivo;
         this.pesoArchivo = pesoArchivo;
     }
 
-    public Path getRutaArchivo() {
-        return rutaArchivo;
+    public void setRutaArchivo(String rutaArchivo) {
+        this.rutaArchivo = rutaArchivo;
     }
 
-    public void setRutaArchivo(Path rutaArchivo) {
-        this.rutaArchivo = rutaArchivo;
+    public String getRutaArchivo() {
+        return rutaArchivo;
     }
 
     public String getNombreArchivo() {

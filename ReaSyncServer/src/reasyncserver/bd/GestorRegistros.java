@@ -2,6 +2,7 @@ package reasyncserver.bd;
 
 import archivos.ArchivoMusica;
 import archivos.ArchivosMusica;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -11,22 +12,24 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import reasyncserver.server.Server;
+import reasyncserver.server.conexiones.clientes.Cliente;
 
 /**
  *
  * @author jdiaz
  */
 public class GestorRegistros {
-    private Server server;
     private GestorConexionBD gestorConexionBD;
     private Connection conexion;
     private Statement statement;
     private ResultSet resultset;
+    private Cliente cliente;
 
-    public GestorRegistros() {
+    public GestorRegistros(Cliente cliente) {
         this.conexion = null;
         this.statement = null;
         this.resultset = null;
+        this.cliente = cliente;
         try {
             gestorConexionBD= new GestorConexionBD();
         } catch (SQLException | ClassNotFoundException | IllegalAccessException | InstantiationException ex) {
@@ -37,7 +40,7 @@ public class GestorRegistros {
     public int guardarRegistroArchivoMusica(ArchivoMusica archivoMusica) {
         try {
             conexion = gestorConexionBD.conectar();
-            String pathEspecialMysql = archivoMusica.getRutaArchivo().toString().replace("\\","\\\\");
+            String pathEspecialMysql = archivoMusica.getRutaArchivo().replace("\\","\\\\");
             statement = conexion
                     .createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             String query = "INSERT INTO registroarchivosmusica (nombre,peso,path)"
@@ -76,8 +79,11 @@ public class GestorRegistros {
                     .createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             resultset = statement.executeQuery("select * from registroarchivosmusica");
             while (resultset.next()) {
+               Path localPathArchivo = Paths.get(resultset.getString("path"));
+                Path generalPath= cliente.getGestorArchivosCliente()
+                        .generalizarPathArchivoMusica(localPathArchivo, cliente.getDirectorio());
                 archivosMusica.getArchivosMusica().add(new ArchivoMusica(
-                        Paths.get(resultset.getString("path")), 
+                        generalPath.toString(), 
                         resultset.getString("nombre"), 
                         resultset.getString("peso")));
             }

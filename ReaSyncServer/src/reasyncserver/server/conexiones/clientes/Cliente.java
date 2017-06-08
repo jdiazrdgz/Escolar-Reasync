@@ -27,8 +27,9 @@ public class Cliente implements Runnable {
     private final int id;
     private InputStream in;
     private OutputStream out;
-    private GestorRegistros gestorRegistros;
-    private GestorRespuestas gestorRespuestas;
+    private final GestorRegistros gestorRegistros;
+    private final GestorRespuestas gestorRespuestas;
+    private final GestorArchivosCliente gestorArchivosCliente;
     private final Path directorio;
 
     public Cliente(Socket conexion, int id, Path directorio) {
@@ -39,9 +40,10 @@ public class Cliente implements Runnable {
             System.out.println("El cliente " + id + " no puede obtener "
                     + "canales de entrada salida");
         }
-        gestorRegistros = new GestorRegistros();
+        gestorRegistros = new GestorRegistros(this);
         gestorRespuestas = new GestorRespuestas(this);
-        this.directorio=directorio;
+        gestorArchivosCliente = new GestorArchivosCliente(this);
+        this.directorio = directorio;
     }
 
     @Override
@@ -78,14 +80,15 @@ public class Cliente implements Runnable {
                             System.out.println("Se han enviado los registros de musica al cliente" + id);
                             break;
                         }
-                        case "eliminarRegistroMusica":{
+                        case "eliminarRegistroMusica": {
                             break;
-                        }case "guardarRegistroArchivo":{
+                        }
+                        case "guardarRegistroArchivo": {
                             System.err.println("guardar archivo musica");
-                            Path pathArchivoMusica = Paths.get(directorio.toString(),peticion.getInfo());
+                            Path pathArchivoMusica = Paths.get(directorio.toString(), peticion.getInfo());
                             System.err.println(pathArchivoMusica);
-                            ArchivoMusica archivoMusica = 
-                                    new ArchivoMusica(pathArchivoMusica, pathArchivoMusica.getFileName().toString(), Long.toString(new File(pathArchivoMusica.toString()).length()));
+                            ArchivoMusica archivoMusica
+                                    = new ArchivoMusica(pathArchivoMusica.toString(), pathArchivoMusica.getFileName().toString(), Long.toString(new File(pathArchivoMusica.toString()).length()));
                             gestorRegistros.guardarRegistroArchivoMusica(archivoMusica);
                             break;
                         }
@@ -109,4 +112,12 @@ public class Cliente implements Runnable {
         return out;
     }
 
+    public GestorArchivosCliente getGestorArchivosCliente() {
+        return gestorArchivosCliente;
+    }
+
+    public Path getDirectorio() {
+        return directorio;
+    }
+    
 }

@@ -65,7 +65,7 @@ public class GestorCambios {
                         pathArchivosSubir.addAll(cambiosLocales.getArchivosSimilares());
                         List<ArchivoMusica> listaArchivosMusica = new ArrayList<>();
                         pathArchivosSubir.forEach(path -> {
-                            listaArchivosMusica.add(new ArchivoMusica(path, path.getFileName().toString(), Long.toString(new File(path.toString()).length())));
+                            listaArchivosMusica.add(new ArchivoMusica(path.toString(), path.getFileName().toString(), Long.toString(new File(path.toString()).length())));
                         });
                         ArchivosMusica archivosRemotos_Subir = new ArchivosMusica(listaArchivosMusica);
                         ArchivosMusica archivosRemotos_Eliminar = null;
@@ -143,7 +143,7 @@ public class GestorCambios {
         } else {
             //son los que vamos a subir
             archivosLocalesNuevos.forEach(path -> archivosMusica_subir
-                    .add(new ArchivoMusica(path, path.getFileName().toString(), Long.toString(new File(path.toString()).length()))));
+                    .add(new ArchivoMusica(path.toString(), path.getFileName().toString(), Long.toString(new File(path.toString()).length()))));
         }
         return new ArchivosMusica(archivosMusica_subir);
     }
@@ -157,7 +157,7 @@ public class GestorCambios {
         } else {
             //son los que vamos a subir
             pathArchivosMusica_Eliminar.forEach(path -> archivosMusica_Eliminar
-                    .add(new ArchivoMusica(path, path.getFileName().toString(), Long.toString(new File(path.toString()).length()))));
+                    .add(new ArchivoMusica(path.toString(), path.getFileName().toString(), Long.toString(new File(path.toString()).length()))));
         }
         return new ArchivosMusica(archivosMusica_Eliminar);
     }

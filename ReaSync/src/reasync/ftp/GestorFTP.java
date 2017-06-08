@@ -102,11 +102,9 @@ public class GestorFTP {
                 }
             }
             inputStream = new FileInputStream(archivo);
-            System.out.println("Start uploading the file");
             boolean done = ftpClient.storeFile(pathArchivoRemoto.getFileName().toString(), inputStream);
             inputStream.close();
             if (done) {
-                System.out.println("The first file is uploaded successfully.");
                 return 1;
             } else {
                 return 0;
@@ -123,6 +121,27 @@ public class GestorFTP {
             } catch (IOException ex) {
                 Logger.getLogger(GestorFTP.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+    }
+
+    public boolean eliminarArchivo(Path pathArchivo) {
+        try {
+            //Esto hara que la path ya no tenga la ruta relativa del equipo cliente
+            Path pathArchivoRemoto = new GestorArchivosMusica(cliente.getGestorConfiguracion())
+                    .generalizarPathArchivoMusica(pathArchivo);
+            //Esto nos devuelve la ruta sin el nombre del archivo
+            String pathDirectorio = pathArchivoRemoto.getParent().toString();
+            boolean deleted = ftpClient.deleteFile(pathDirectorio);
+            if (deleted) {
+                System.out.println("The file was deleted successfully.");
+                return true;
+            } else {
+                System.out.println("Could not delete the  file, it may not exist.");
+                return false;
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(GestorFTP.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
     }
 

@@ -3,10 +3,10 @@ package reasync.sistema.sync;
 import archivos.ArchivoMusica;
 import archivos.ArchivosMusica;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import peticion.Peticion;
 import reasync.cliente.Client;
-import reasync.cliente.peticiones.GestorPeticiones;
 import reasync.sistema.archivos.GestorArchivosMusica;
 import reasync.sistema.cambios.CambiosGlobales;
 import reasync.sistema.cambios.CambiosLocales;
@@ -95,17 +95,24 @@ public class GestorSincronizacion {
     }
 
     public void subirArchivosMusica(List<ArchivoMusica> archivosMusica) {
-        System.err.println("Se subiran los siguientes archivos al servidor");
         String comandoPeticion = "guardarRegistroArchivo";
         if (cliente.getGestorFTP().conectarClienteFTP() == 1) {
             archivosMusica.forEach(archivo -> {
-                cliente.getGestorFTP().subirArchivo(archivo.getRutaArchivo());
-                //gestor remoto
-                Peticion peticion = new Peticion(comandoPeticion, new GestorArchivosMusica(cliente.getGestorConfiguracion())
-                        .generalizarPathArchivoMusica(archivo.getRutaArchivo()).toString());
-                System.err.println(peticion.getPeticion() + peticion.getInfo());
-                cliente.getGestorPeticiones()
-                        .hacerPeticion(peticion);
+                int enviado = cliente.getGestorFTP().subirArchivo(Paths.get(archivo.getRutaArchivo()));
+                if (enviado == 1) {
+                    cliente.getReaSyncController()
+                            .mostrarMensajeLog("Archivo "
+                                    + archivo.getRutaArchivo()
+                                    + " Enviado");
+                    Peticion peticion = new Peticion(comandoPeticion, new GestorArchivosMusica(cliente.getGestorConfiguracion())
+                            .generalizarPathArchivoMusica(Paths.get(archivo.getRutaArchivo())).toString());
+                    cliente.getGestorPeticiones()
+                            .hacerPeticion(peticion);
+                } else {
+                    cliente.getReaSyncController()
+                            .mostrarMensajeLog("Error al enviar el archivo "
+                                    + Paths.get(archivo.getRutaArchivo()).getFileName());
+                }
             });
             cliente.getGestorFTP().desconectarClienteFTP();
         } else {
@@ -116,8 +123,29 @@ public class GestorSincronizacion {
 
     public void eliminarArchivosMusicaRemotos(List<ArchivoMusica> archivosMusica) {
         System.err.println("Se eliminaran los siguientes archivos del servidor");
-        String comandoPeticion = "guardarRegistroArchivo";
-        archivosMusica.forEach(archivoMusica -> System.err.println(archivoMusica.getRutaArchivo().toString()));
+        String comandoPeticion = "eliminarRegistroArchivo";
+        if (cliente.getGestorFTP().conectarClienteFTP() == 1) {
+            archivosMusica.forEach(archivo -> {
+                boolean eliminado = cliente.getGestorFTP().eliminarArchivo(Paths.get(archivo.getRutaArchivo()));
+                if (eliminado) {
+                    cliente.getReaSyncController()
+                            .mostrarMensajeLog("Archivo "
+                                    + archivo.getRutaArchivo()
+                                    + "eliminado del servidor");
+                    Peticion peticion = new Peticion(comandoPeticion, new GestorArchivosMusica(cliente.getGestorConfiguracion())
+                            .generalizarPathArchivoMusica(Paths.get(archivo.getRutaArchivo())).toString());
+                    cliente.getGestorPeticiones()
+                            .hacerPeticion(peticion);
+                } else {
+                    cliente.getReaSyncController()
+                            .mostrarMensajeLog("Error al enviar eliminar el archivo "
+                                    + archivo.getRutaArchivo()+" del servidor");
+                }
+            });
+        } else {
+
+        }
+
     }
 
     public CambiosLocales encontrarCambiosLocales() {
@@ -148,6 +176,7 @@ public class GestorSincronizacion {
     }
 
     public void setArchivosMusicaRecibidos(ArchivosMusica archivosMusicaRecibidos) {
+        //archivosMusicaRecibidos = new GestorArchivosMusica(cliente.getGestorConfiguracion()).especificarPathArchivosMusica(archivosMusicaRecibidos);
         this.archivosMusicaRecibidos = archivosMusicaRecibidos;
     }
 
