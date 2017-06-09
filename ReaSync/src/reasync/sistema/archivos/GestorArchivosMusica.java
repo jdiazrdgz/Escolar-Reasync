@@ -103,6 +103,7 @@ public class GestorArchivosMusica {
         archivosMusica.getArchivosMusica().forEach(archivoMusica -> {
             listPathArchivos.add(Paths.get(archivoMusica.getRutaArchivo()));
         });
+        //listPathArchivos.forEach(path -> System.err.println(path.toString()+ "pruebs"));
         return listPathArchivos;
     }
 }

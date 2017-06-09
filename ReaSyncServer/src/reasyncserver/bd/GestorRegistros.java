@@ -19,6 +19,7 @@ import reasyncserver.server.conexiones.clientes.Cliente;
  * @author jdiaz
  */
 public class GestorRegistros {
+
     private GestorConexionBD gestorConexionBD;
     private Connection conexion;
     private Statement statement;
@@ -31,7 +32,7 @@ public class GestorRegistros {
         this.resultset = null;
         this.cliente = cliente;
         try {
-            gestorConexionBD= new GestorConexionBD();
+            gestorConexionBD = new GestorConexionBD();
         } catch (SQLException | ClassNotFoundException | IllegalAccessException | InstantiationException ex) {
             Logger.getLogger(GestorRegistros.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -40,7 +41,7 @@ public class GestorRegistros {
     public int guardarRegistroArchivoMusica(ArchivoMusica archivoMusica) {
         try {
             conexion = gestorConexionBD.conectar();
-            String pathEspecialMysql = archivoMusica.getRutaArchivo().replace("\\","\\\\");
+            String pathEspecialMysql = archivoMusica.getRutaArchivo().replace("\\", "\\\\");
             statement = conexion
                     .createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             String query = "INSERT INTO registroarchivosmusica (nombre,peso,path)"
@@ -54,6 +55,21 @@ public class GestorRegistros {
         } catch (SQLException ex) {
             Logger.getLogger(GestorRegistros.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
+        }
+    }
+
+    public boolean existeRegistro(ArchivoMusica archivoMusica) {
+        try {
+            resultset = null;
+            conexion = gestorConexionBD.conectar();
+            String pathEspecialMysql = archivoMusica.getRutaArchivo().replace("\\", "\\\\");
+            statement = conexion
+                    .createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            resultset = statement.executeQuery("select path from registroarchivosmusica where path = '"+pathEspecialMysql+"';");
+            return resultset.next();
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorRegistros.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
     }
 
@@ -71,7 +87,7 @@ public class GestorRegistros {
     }
 
     public ArchivosMusica getArchivosMusica() {
-        ArchivosMusica archivosMusica=new ArchivosMusica();
+        ArchivosMusica archivosMusica = new ArchivosMusica();
         try {
             resultset = null;
             conexion = gestorConexionBD.conectar();
@@ -79,12 +95,12 @@ public class GestorRegistros {
                     .createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             resultset = statement.executeQuery("select * from registroarchivosmusica");
             while (resultset.next()) {
-               Path localPathArchivo = Paths.get(resultset.getString("path"));
-                Path generalPath= cliente.getGestorArchivosCliente()
+                Path localPathArchivo = Paths.get(resultset.getString("path"));
+                Path generalPath = cliente.getGestorArchivosCliente()
                         .generalizarPathArchivoMusica(localPathArchivo, cliente.getDirectorio());
                 archivosMusica.getArchivosMusica().add(new ArchivoMusica(
-                        generalPath.toString(), 
-                        resultset.getString("nombre"), 
+                        generalPath.toString(),
+                        resultset.getString("nombre"),
                         resultset.getString("peso")));
             }
             gestorConexionBD.desconectar();

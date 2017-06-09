@@ -166,9 +166,11 @@ public class GestorFTP {
     public int descargarArchivo(Path pathArchivo) {
         OutputStream outputStream1 = null;
         try {
-            String pathArchivoRemoto = pathArchivo.toString();
-            String pathArchivoLocal = new GestorArchivosMusica(cliente.getGestorConfiguracion())
-                    .especificarPathArchivoMusica(pathArchivo).toString();
+            String pathArchivoLocal = pathArchivo.toString();
+            System.err.println(pathArchivoLocal+ "local");
+            String pathArchivoRemoto = new GestorArchivosMusica(cliente.getGestorConfiguracion())
+                    .generalizarPathArchivoMusica(pathArchivo).toString();
+            System.err.println(pathArchivoLocal + "local");
             File archivo = new File(pathArchivoLocal);
             outputStream1 = new BufferedOutputStream(new FileOutputStream(archivo));
             boolean success = ftpClient.retrieveFile(pathArchivoRemoto, outputStream1);

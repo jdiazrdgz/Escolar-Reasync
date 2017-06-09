@@ -86,10 +86,12 @@ public class Cliente implements Runnable {
                         case "guardarRegistroArchivo": {
                             System.err.println("guardar archivo musica");
                             Path pathArchivoMusica = Paths.get(directorio.toString(), peticion.getInfo());
-                            System.err.println(pathArchivoMusica);
+                            //System.err.println(pathArchivoMusica);
                             ArchivoMusica archivoMusica
                                     = new ArchivoMusica(pathArchivoMusica.toString(), pathArchivoMusica.getFileName().toString(), Long.toString(new File(pathArchivoMusica.toString()).length()));
-                            gestorRegistros.guardarRegistroArchivoMusica(archivoMusica);
+                            if(!gestorRegistros.existeRegistro(archivoMusica)){
+                                gestorRegistros.guardarRegistroArchivoMusica(archivoMusica);
+                            }
                             break;
                         }
                         default: {

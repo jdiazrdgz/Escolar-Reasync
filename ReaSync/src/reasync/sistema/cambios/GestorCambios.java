@@ -67,7 +67,9 @@ public class GestorCambios {
                     if (!cambiosLocales.getArchivosSimilares().isEmpty()) {
                         pathArchivosSubir.addAll(cambiosLocales.getArchivosSimilares());
                     }
-                    if (!cambiosLocales.getArchivosNuevos().isEmpty() && !cambiosLocales.getArchivosSimilares().isEmpty()) {
+                    if (cambiosLocales.getArchivosNuevos().isEmpty() && cambiosLocales.getArchivosSimilares().isEmpty()) {
+                        return null;
+                    } else {
                         List<ArchivoMusica> listaArchivosMusica = new ArrayList<>();
                         pathArchivosSubir.forEach(path -> {
                             listaArchivosMusica.add(new ArchivoMusica(path.toString(), path.getFileName().toString(), Long.toString(new File(path.toString()).length())));
@@ -77,8 +79,6 @@ public class GestorCambios {
                         List<Path> archivosLocales_Eliminar = null;
                         List<Path> archivosLocales_Descargar = null;
                         return new CambiosGlobales(archivosLocales_Eliminar, archivosLocales_Descargar, archivosRemotos_Subir, archivosRemotos_Eliminar);
-                    } else {
-                        return null;
                     }
                 }
                 case 1: {
@@ -93,10 +93,10 @@ public class GestorCambios {
                     if (!cambiosLocales.getArchivosSimilares().isEmpty()) {
                         archivosLocales_Eliminar.addAll(cambiosLocales.getArchivosSimilares());
                     }
-                    if (!cambiosLocales.getArchivosNuevos().isEmpty() && !cambiosLocales.getArchivosSimilares().isEmpty()) {
-                        return new CambiosGlobales(archivosLocales_Eliminar, archivosLocales_Descargar, archivosRemotos_Subir, archivosRemotos_Eliminar);
-                    } else {
+                    if (cambiosLocales.getArchivosNuevos().isEmpty() && cambiosLocales.getArchivosSimilares().isEmpty()) {
                         return null;
+                    } else {
+                        return new CambiosGlobales(archivosLocales_Eliminar, archivosLocales_Descargar, archivosRemotos_Subir, archivosRemotos_Eliminar);
                     }
                 }
                 case 2: {
@@ -107,17 +107,34 @@ public class GestorCambios {
             return null;
         } else {
             //De cajon si hay archivos de server
-            ArchivosMusica archivosMusicaRecibidosEspecificados
-                    = new GestorArchivosMusica(cliente.getGestorConfiguracion())
-                            .especificarPathArchivosMusica(archivosMusicaRecibidos);
-            List<Path> listaPathArchivosMusicaRecibidos
-                    = new GestorArchivosMusica(cliente.getGestorConfiguracion())
-                            .obtenerPathArchivosMusica(archivosMusicaRecibidosEspecificados);
-            List<Path> archivosLocales_Eliminar = determinarArchivosLocales_Eliminar(cambiosLocales, listaPathArchivosMusicaRecibidos);
-            List<Path> archivosLocales_Descargar = determinarArchivosLocales_Descargar(cambiosLocales, listaPathArchivosMusicaRecibidos);
-            ArchivosMusica archivosRemotos_Subir = determinarArchivosRemotos_Subir(cambiosLocales, listaPathArchivosMusicaRecibidos);
-            ArchivosMusica archivosRemotos_Eliminar = determinarArchivosRemotos_Eliminar(cambiosLocales, listaPathArchivosMusicaRecibidos);
-            return new CambiosGlobales(archivosLocales_Eliminar, archivosLocales_Descargar, archivosRemotos_Subir, archivosRemotos_Eliminar);
+            if (cambiosLocales.getArchivosSimilares().isEmpty()
+                    && cambiosLocales.getArchivosNuevos().isEmpty()
+                    && cambiosLocales.getArchivosEliminados().isEmpty()) {
+                //no hay locales solo queda descargar del server
+                ArchivosMusica archivosRemotos_Subir = null;
+                ArchivosMusica archivosRemotos_Eliminar = null;
+                List<Path> archivosLocales_Eliminar = null;
+                List<Path> archivosLocales_Descargar = new ArrayList<>();
+                archivosMusicaRecibidos.getArchivosMusica().forEach(archivo -> {
+                    archivosLocales_Descargar.add(Paths.get(archivo.getRutaArchivo()));
+                });
+                return new CambiosGlobales(archivosLocales_Eliminar, archivosLocales_Descargar, archivosRemotos_Subir, archivosRemotos_Eliminar);
+            } else {
+                ArchivosMusica archivosMusicaRecibidosEspecificados
+                        = new GestorArchivosMusica(cliente.getGestorConfiguracion())
+                                .especificarPathArchivosMusica(archivosMusicaRecibidos);
+                List<Path> listaPathArchivosMusicaRecibidos
+                        = new GestorArchivosMusica(cliente.getGestorConfiguracion())
+                                .obtenerPathArchivosMusica(archivosMusicaRecibidosEspecificados);
+                ArchivosMusica archivosRemotos_Subir = null;
+                ArchivosMusica archivosRemotos_Eliminar = null;
+                List<Path> archivosLocales_Eliminar = null;
+                List<Path> archivosLocales_Descargar = null;
+                if(!cambiosLocales.getArchivosEliminados().isEmpty()){
+                    archivosRemotos_Eliminar=determinarArchivosRemotos_Eliminar(cambiosLocales.getArchivosEliminados(), listaPathArchivosMusicaRecibidos);
+                }
+                return new CambiosGlobales(archivosLocales_Eliminar, archivosLocales_Descargar, archivosRemotos_Subir, archivosRemotos_Eliminar);
+            }
         }
     }
 
@@ -143,45 +160,77 @@ public class GestorCambios {
         }
     }
 
-    public List<Path> determinarArchivosLocales_Descargar(List<Path> archivosLocalesSimilares, List<Path> listaPathArchivosMusicaRecibidos) {
-        listaPathArchivosMusicaRecibidos.removeAll(archivosLocalesSimilares);
-        if (listaPathArchivosMusicaRecibidos.isEmpty()) {
+    public List<Path> determinarArchivosLocales_Descargar(CambiosLocales cambiosLocales, List<Path> listaPathArchivosMusicaRecibidos) {
+        if (cambiosLocales.getArchivosNuevos().isEmpty() && cambiosLocales.getArchivosSimilares().isEmpty()) {
+            //nada que hacer, no se comprueba eliminados porque ya no existen en este equipo
+            return null;
+        }
+        List<Path> misArchivos = new ArrayList<>();
+        if (!cambiosLocales.getArchivosNuevos().isEmpty()) {
+            misArchivos.addAll(cambiosLocales.getArchivosNuevos());
+        }
+        if (!cambiosLocales.getArchivosSimilares().isEmpty()) {
+            misArchivos.addAll(cambiosLocales.getArchivosSimilares());
+        }
+        // si se trabaja directo sobre la lista que mandamos, las siguientes operaciones son afectadas
+        List<Path> recibidosAux = listaPathArchivosMusicaRecibidos;
+        recibidosAux.removeAll(misArchivos);
+        if (recibidosAux.isEmpty()) {
             //siginifca que tenemos todos los archivos no nos hace falta ninguno
             return null;
         } else {
             //son los que hay que descargar
-            return listaPathArchivosMusicaRecibidos;
+            return recibidosAux;
         }
     }
 
-    public ArchivosMusica determinarArchivosRemotos_Subir(List<Path> archivosLocalesNuevos, List<Path> listaPathArchivosMusicaRecibidos) {
-        List<ArchivoMusica> archivosMusica_subir = new ArrayList<>();
-        if (archivosLocalesNuevos == null) {
-            //no hay archivos nuevos
+    public ArchivosMusica determinarArchivosRemotos_Subir(CambiosLocales cambiosLocales, List<Path> listaPathArchivosMusicaRecibidos) {
+        System.err.println("Subir remotos " + listaPathArchivosMusicaRecibidos.size());
+        if (cambiosLocales.getArchivosNuevos().isEmpty() && cambiosLocales.getArchivosSimilares().isEmpty()) {
+            //nada que hacer, no se comprueba eliminados porque ya no existen en este equipo
+            return null;
         }
-        archivosLocalesNuevos.removeAll(listaPathArchivosMusicaRecibidos);
-        if (archivosLocalesNuevos.isEmpty()) {
-            //server ya tiene estos archivos
+        List<ArchivoMusica> archivosMusica_subir = new ArrayList<>();
+        List<Path> misArchivos = new ArrayList<>();
+        if (!cambiosLocales.getArchivosNuevos().isEmpty()) {
+            misArchivos.addAll(cambiosLocales.getArchivosNuevos());
+        }
+        if (!cambiosLocales.getArchivosSimilares().isEmpty()) {
+            misArchivos.addAll(cambiosLocales.getArchivosSimilares());
+        }
+        misArchivos.removeAll(listaPathArchivosMusicaRecibidos);
+        if (misArchivos.isEmpty()) {
+            //tenemos los mismos server y nosotros
+            return null;
         } else {
-            //son los que vamos a subir
-            archivosLocalesNuevos.forEach(path -> archivosMusica_subir
+            //server no tiene estos archivos, si no tenemos eliminados quiere
+            misArchivos.forEach(path -> archivosMusica_subir
                     .add(new ArchivoMusica(path.toString(), path.getFileName().toString(), Long.toString(new File(path.toString()).length()))));
         }
         return new ArchivosMusica(archivosMusica_subir);
     }
 
-    public ArchivosMusica determinarArchivosRemotos_Eliminar(List<Path> archivosLocalesEliminados, List<Path> listaPathArchivosMusicaRecibidos) {;
-        List<Path> pathArchivosMusica_Eliminar = archivosLocalesEliminados;
+    public ArchivosMusica determinarArchivosRemotos_Eliminar(List<Path> cambiosLocalesEliminados, List<Path> listaPathArchivosMusicaRecibidos) {;
+        List<Path> misArchivos = new ArrayList<>();
+        if (cambiosLocalesEliminados.isEmpty()) {
+            //nada que hacer, no se comprueba eliminados porque ya no existen en este equipo
+            return null;
+        } else {
+            misArchivos.addAll(cambiosLocalesEliminados);
+        }
         List<ArchivoMusica> archivosMusica_Eliminar = new ArrayList<>();
-        pathArchivosMusica_Eliminar.retainAll(listaPathArchivosMusicaRecibidos);
-        if (pathArchivosMusica_Eliminar.isEmpty()) {
+        misArchivos.forEach(archivo -> {
+            if(listaPathArchivosMusicaRecibidos.contains(archivo)){
+                archivosMusica_Eliminar.add(new ArchivoMusica(archivo.toString(), archivo.getFileName().toString(), Long.toString(new File(archivo.toString()).length())));
+            }
+        });
+        if (archivosMusica_Eliminar.isEmpty()) {
+            return null;
             //nada que eliminar en el server
         } else {
             //son los que vamos a subir
-            pathArchivosMusica_Eliminar.forEach(path -> archivosMusica_Eliminar
-                    .add(new ArchivoMusica(path.toString(), path.getFileName().toString(), Long.toString(new File(path.toString()).length()))));
+            return new ArchivosMusica(archivosMusica_Eliminar);
         }
-        return new ArchivosMusica(archivosMusica_Eliminar);
     }
 //-------------------------CambiosLocales Locales----------------------------------------------------
 
