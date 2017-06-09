@@ -15,9 +15,6 @@ public class CambiosGlobales {
     private ArchivosMusica archivosRemotos_Subir;
     private ArchivosMusica archivosRemotos_Eliminar;
 
-    public CambiosGlobales() {
-    }
-
     public CambiosGlobales(List<Path> archivosLocales_Eliminar, List<Path> archivosLocales_Descargar, ArchivosMusica archivosRemotos_Subir, ArchivosMusica archivosRemotos_Eliminar) {
         this.archivosLocales_Eliminar = archivosLocales_Eliminar;
         this.archivosLocales_Descargar = archivosLocales_Descargar;

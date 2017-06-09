@@ -38,7 +38,10 @@ public class GestorCambios {
     }
 
     public CambiosGlobales determinarCambiosGlobales(CambiosLocales cambiosLocales, ArchivosMusica archivosMusicaRecibidos) {
-        if (archivosMusicaRecibidos.getArchivosMusica().isEmpty() && cambiosLocales.getArchivosSimilares().isEmpty()) {
+        if (archivosMusicaRecibidos.getArchivosMusica().isEmpty()
+                && cambiosLocales.getArchivosSimilares().isEmpty()
+                && cambiosLocales.getArchivosNuevos().isEmpty()
+                && cambiosLocales.getArchivosEliminados().isEmpty()) {
             cliente.getReaSyncController().mostrarMensajeLog("No se detectan archivos en server y archivos locales");
             //el server no tiene archivos musica registros y nosotros tampoco, no hay nada que sincronizar
             return null;
@@ -58,11 +61,13 @@ public class GestorCambios {
                 case 0: {
                     //Subir todos los locales a server
                     List<Path> pathArchivosSubir = new ArrayList<>();
-                    if (cambiosLocales.getArchivosNuevos() != null) {
+                    if (!cambiosLocales.getArchivosNuevos().isEmpty()) {
                         pathArchivosSubir.addAll(cambiosLocales.getArchivosNuevos());
                     }
-                    if (cambiosLocales.getArchivosSimilares() != null) {
+                    if (!cambiosLocales.getArchivosSimilares().isEmpty()) {
                         pathArchivosSubir.addAll(cambiosLocales.getArchivosSimilares());
+                    }
+                    if (!cambiosLocales.getArchivosNuevos().isEmpty() && !cambiosLocales.getArchivosSimilares().isEmpty()) {
                         List<ArchivoMusica> listaArchivosMusica = new ArrayList<>();
                         pathArchivosSubir.forEach(path -> {
                             listaArchivosMusica.add(new ArchivoMusica(path.toString(), path.getFileName().toString(), Long.toString(new File(path.toString()).length())));
@@ -80,12 +85,15 @@ public class GestorCambios {
                     //Eliminar los locales
                     ArchivosMusica archivosRemotos_Subir = null;
                     ArchivosMusica archivosRemotos_Eliminar = null;
-                    List<Path> archivosLocales_Eliminar = cambiosLocales.getArchivosSimilares();
-                    if (archivosLocales_Eliminar != null) {
-                        if (cambiosLocales.getArchivosNuevos() != null) {
-                            archivosLocales_Eliminar.addAll(cambiosLocales.getArchivosNuevos());
-                        }
-                        List<Path> archivosLocales_Descargar = null;
+                    List<Path> archivosLocales_Descargar = null;
+                    List<Path> archivosLocales_Eliminar = new ArrayList<>();
+                    if (!cambiosLocales.getArchivosNuevos().isEmpty()) {
+                        archivosLocales_Eliminar.addAll(cambiosLocales.getArchivosNuevos());
+                    }
+                    if (!cambiosLocales.getArchivosSimilares().isEmpty()) {
+                        archivosLocales_Eliminar.addAll(cambiosLocales.getArchivosSimilares());
+                    }
+                    if (!cambiosLocales.getArchivosNuevos().isEmpty() && !cambiosLocales.getArchivosSimilares().isEmpty()) {
                         return new CambiosGlobales(archivosLocales_Eliminar, archivosLocales_Descargar, archivosRemotos_Subir, archivosRemotos_Eliminar);
                     } else {
                         return null;
@@ -98,30 +106,41 @@ public class GestorCambios {
             }
             return null;
         } else {
+            //De cajon si hay archivos de server
             ArchivosMusica archivosMusicaRecibidosEspecificados
                     = new GestorArchivosMusica(cliente.getGestorConfiguracion())
                             .especificarPathArchivosMusica(archivosMusicaRecibidos);
             List<Path> listaPathArchivosMusicaRecibidos
                     = new GestorArchivosMusica(cliente.getGestorConfiguracion())
                             .obtenerPathArchivosMusica(archivosMusicaRecibidosEspecificados);
-            List<Path> archivosLocales_Eliminar = determinarArchivosLocales_Eliminar(cambiosLocales.getArchivosSimilares(), listaPathArchivosMusicaRecibidos);
-            List<Path> archivosLocales_Descargar = determinarArchivosLocales_Descargar(cambiosLocales.getArchivosSimilares(), listaPathArchivosMusicaRecibidos);
-            ArchivosMusica archivosRemotos_Subir = determinarArchivosRemotos_Subir(cambiosLocales.getArchivosNuevos(), listaPathArchivosMusicaRecibidos);
-            ArchivosMusica archivosRemotos_Eliminar = determinarArchivosRemotos_Eliminar(cambiosLocales.getArchivosEliminados(), listaPathArchivosMusicaRecibidos);
+            List<Path> archivosLocales_Eliminar = determinarArchivosLocales_Eliminar(cambiosLocales, listaPathArchivosMusicaRecibidos);
+            List<Path> archivosLocales_Descargar = determinarArchivosLocales_Descargar(cambiosLocales, listaPathArchivosMusicaRecibidos);
+            ArchivosMusica archivosRemotos_Subir = determinarArchivosRemotos_Subir(cambiosLocales, listaPathArchivosMusicaRecibidos);
+            ArchivosMusica archivosRemotos_Eliminar = determinarArchivosRemotos_Eliminar(cambiosLocales, listaPathArchivosMusicaRecibidos);
             return new CambiosGlobales(archivosLocales_Eliminar, archivosLocales_Descargar, archivosRemotos_Subir, archivosRemotos_Eliminar);
         }
     }
 
-    public List<Path> determinarArchivosLocales_Eliminar(List<Path> archivosLocalesSimilares, List<Path> listaPathArchivosMusicaRecibidos) {
-        archivosLocalesSimilares.removeAll(listaPathArchivosMusicaRecibidos);
-        if (archivosLocalesSimilares.isEmpty()) {
+    public List<Path> determinarArchivosLocales_Eliminar(CambiosLocales cambiosLocales, List<Path> listaPathArchivosMusicaRecibidos) {
+        if (cambiosLocales.getArchivosNuevos().isEmpty() && cambiosLocales.getArchivosSimilares().isEmpty()) {
+            //nada que hacer, no se comprueba eliminados porque ya no existen en este equipo
+            return null;
+        }
+        List<Path> archivosEliminar = new ArrayList<>();
+        if (!cambiosLocales.getArchivosNuevos().isEmpty()) {
+            archivosEliminar.addAll(cambiosLocales.getArchivosNuevos());
+        }
+        if (!cambiosLocales.getArchivosSimilares().isEmpty()) {
+            archivosEliminar.addAll(cambiosLocales.getArchivosSimilares());
+        }
+        archivosEliminar.removeAll(listaPathArchivosMusicaRecibidos);
+        if (archivosEliminar.isEmpty()) {
             //no hay nada que eliminar localmente
             return null;
         } else {
             //estos son los que se eliminan
-            return archivosLocalesSimilares;
+            return archivosEliminar;
         }
-
     }
 
     public List<Path> determinarArchivosLocales_Descargar(List<Path> archivosLocalesSimilares, List<Path> listaPathArchivosMusicaRecibidos) {
@@ -137,6 +156,9 @@ public class GestorCambios {
 
     public ArchivosMusica determinarArchivosRemotos_Subir(List<Path> archivosLocalesNuevos, List<Path> listaPathArchivosMusicaRecibidos) {
         List<ArchivoMusica> archivosMusica_subir = new ArrayList<>();
+        if (archivosLocalesNuevos == null) {
+            //no hay archivos nuevos
+        }
         archivosLocalesNuevos.removeAll(listaPathArchivosMusicaRecibidos);
         if (archivosLocalesNuevos.isEmpty()) {
             //server ya tiene estos archivos
@@ -221,11 +243,15 @@ public class GestorCambios {
             ObjectInputStream in = new ObjectInputStream(fis);
             List<Path> estadoanterior = (List<Path>) in.readObject();
             return estadoanterior;
+
         } catch (FileNotFoundException | ClassNotFoundException ex) {
-            Logger.getLogger(GestorConfiguracion.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GestorConfiguracion.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return null;
+
         } catch (IOException ex) {
-            Logger.getLogger(GestorConfiguracion.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GestorConfiguracion.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
@@ -241,17 +267,23 @@ public class GestorCambios {
             ObjectOutputStream out = new ObjectOutputStream(fos);
             out.writeObject(archivos); //se guarda y serializa al estudiante
             return 1;
+
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(GestorCambios.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GestorCambios.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return 0;
+
         } catch (IOException ex) {
-            Logger.getLogger(GestorCambios.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GestorCambios.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return 0;
         } finally {
             try {
                 fos.close();
+
             } catch (IOException ex) {
-                Logger.getLogger(GestorCambios.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(GestorCambios.class
+                        .getName()).log(Level.SEVERE, null, ex);
                 return 0;
             }
         }

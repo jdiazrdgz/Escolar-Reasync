@@ -83,7 +83,6 @@ public class GestorArchivosMusica {
         for (ArchivoMusica archivoMusica : listaArchivosMusica) {
             generalPath = Paths.get(archivoMusica.getRutaArchivo());
             localPath = Paths.get(dirSync,generalPath.toString());
-            System.err.println(localPath.toString());
             archivoMusica.setRutaArchivo(localPath.toString());
         }
         return archivosMusica;
