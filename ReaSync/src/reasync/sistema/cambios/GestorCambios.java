@@ -31,6 +31,7 @@ public class GestorCambios {
 
     public GestorCambios(Client cliente) {
         this.cliente = cliente;
+         guardarRegistroActual();
     }
 
     public CambiosGlobales generarListaCambiosGlobales(CambiosLocales cambiosLocales, ArchivosMusica archivosMusicaRecibidos) {
@@ -130,9 +131,16 @@ public class GestorCambios {
                 ArchivosMusica archivosRemotos_Eliminar = null;
                 List<Path> archivosLocales_Eliminar = null;
                 List<Path> archivosLocales_Descargar = null;
+                //Acciones Remotas
                 if(!cambiosLocales.getArchivosEliminados().isEmpty()){
-                    archivosRemotos_Eliminar=determinarArchivosRemotos_Eliminar(cambiosLocales.getArchivosEliminados(), listaPathArchivosMusicaRecibidos);
+                    archivosRemotos_Eliminar=determinarArchivosRemotos_Eliminar(cambiosLocales, listaPathArchivosMusicaRecibidos);
                 }
+                if(!cambiosLocales.getArchivosNuevos().isEmpty()){
+                    archivosRemotos_Subir = determinarArchivosRemotos_Subir(cambiosLocales, listaPathArchivosMusicaRecibidos);
+                }
+                //acciones locales
+                archivosLocales_Descargar=determinarArchivosLocales_Descargar(cambiosLocales, listaPathArchivosMusicaRecibidos);
+                archivosLocales_Eliminar=determinarArchivosLocales_Eliminar(cambiosLocales, listaPathArchivosMusicaRecibidos);
                 return new CambiosGlobales(archivosLocales_Eliminar, archivosLocales_Descargar, archivosRemotos_Subir, archivosRemotos_Eliminar);
             }
         }
@@ -185,7 +193,7 @@ public class GestorCambios {
     }
 
     public ArchivosMusica determinarArchivosRemotos_Subir(CambiosLocales cambiosLocales, List<Path> listaPathArchivosMusicaRecibidos) {
-        System.err.println("Subir remotos " + listaPathArchivosMusicaRecibidos.size());
+        //System.err.println("Subir remotos " + listaPathArchivosMusicaRecibidos.size());
         if (cambiosLocales.getArchivosNuevos().isEmpty() && cambiosLocales.getArchivosSimilares().isEmpty()) {
             //nada que hacer, no se comprueba eliminados porque ya no existen en este equipo
             return null;
@@ -194,9 +202,6 @@ public class GestorCambios {
         List<Path> misArchivos = new ArrayList<>();
         if (!cambiosLocales.getArchivosNuevos().isEmpty()) {
             misArchivos.addAll(cambiosLocales.getArchivosNuevos());
-        }
-        if (!cambiosLocales.getArchivosSimilares().isEmpty()) {
-            misArchivos.addAll(cambiosLocales.getArchivosSimilares());
         }
         misArchivos.removeAll(listaPathArchivosMusicaRecibidos);
         if (misArchivos.isEmpty()) {
@@ -210,13 +215,13 @@ public class GestorCambios {
         return new ArchivosMusica(archivosMusica_subir);
     }
 
-    public ArchivosMusica determinarArchivosRemotos_Eliminar(List<Path> cambiosLocalesEliminados, List<Path> listaPathArchivosMusicaRecibidos) {;
+    public ArchivosMusica determinarArchivosRemotos_Eliminar(CambiosLocales cambiosLocalesEliminados, List<Path> listaPathArchivosMusicaRecibidos) {;
         List<Path> misArchivos = new ArrayList<>();
-        if (cambiosLocalesEliminados.isEmpty()) {
+        if (cambiosLocalesEliminados.getArchivosEliminados().isEmpty()) {
             //nada que hacer, no se comprueba eliminados porque ya no existen en este equipo
             return null;
         } else {
-            misArchivos.addAll(cambiosLocalesEliminados);
+            misArchivos.addAll(cambiosLocalesEliminados.getArchivosEliminados());
         }
         List<ArchivoMusica> archivosMusica_Eliminar = new ArrayList<>();
         misArchivos.forEach(archivo -> {
@@ -273,7 +278,11 @@ public class GestorCambios {
     private List<Path> obtenerEstadoArchivosAnterior() {
         File directorio = new File(directorioCambios.toString());
         if (directorio.exists()) {
-            return leerEstadoArchivosAnterior();
+            List<Path> archivos = new ArrayList<>();
+            leerEstadoArchivosAnterior().forEach( path -> {
+                archivos.add(Paths.get(path));
+            });
+            return archivos;
         } else {
             return null;
         }
@@ -287,10 +296,10 @@ public class GestorCambios {
         return estadoArchivosActual;
     }
 
-    public List<Path> leerEstadoArchivosAnterior() {
+    public List<String> leerEstadoArchivosAnterior() {
         try (FileInputStream fis = new FileInputStream(directorioCambios.getFileName().toString())) {
             ObjectInputStream in = new ObjectInputStream(fis);
-            List<Path> estadoanterior = (List<Path>) in.readObject();
+            List<String> estadoanterior = (List<String>) in.readObject();
             return estadoanterior;
 
         } catch (FileNotFoundException | ClassNotFoundException ex) {
@@ -312,9 +321,14 @@ public class GestorCambios {
                     .getEscaneadorDirectorio().obtenerArbolDirectorios();
             List<Path> archivos = cliente.getGestorDirectorio()
                     .getEscaneadorDirectorio().obtenerPathArchivos(arbolDirectorios);
+            List<String> pathsArchivos= new ArrayList<>();
+            archivos.forEach(archivo -> {
+                pathsArchivos.add(archivo.toString());
+            });
             fos = new FileOutputStream(directorioCambios.getFileName().toString());
             ObjectOutputStream out = new ObjectOutputStream(fos);
-            out.writeObject(archivos); //se guarda y serializa al estudiante
+            out.writeObject(pathsArchivos); //se guarda y serializa al estudiante
+            fos.close();
             return 1;
 
         } catch (FileNotFoundException ex) {
@@ -326,15 +340,6 @@ public class GestorCambios {
             Logger.getLogger(GestorCambios.class
                     .getName()).log(Level.SEVERE, null, ex);
             return 0;
-        } finally {
-            try {
-                fos.close();
-
-            } catch (IOException ex) {
-                Logger.getLogger(GestorCambios.class
-                        .getName()).log(Level.SEVERE, null, ex);
-                return 0;
-            }
         }
     }
 }
