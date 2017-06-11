@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import peticion.Peticion;
 import reasync.cliente.Client;
 import respuesta.Respuesta;
 
@@ -29,7 +30,14 @@ public class EsperadorRespuestas implements Runnable {
             while (true) {
                 objeto = (Object) ois.readObject();
                 if (objeto instanceof Respuesta) {
-                    System.err.println("Es respuesta");
+                    Respuesta respuesta = (Respuesta) objeto;
+                    switch (respuesta.getRespuesta()) {
+                        case "dameUsuario": {
+                            cliente.getGestorPeticiones()
+                                    .hacerPeticion(new Peticion("guardarNombreUsuario",
+                                             cliente.getReaSyncController().getFrame().deviceNameField.getText()));
+                        }
+                    }
                 }
                 if (objeto instanceof ArchivosMusica) {
                     cliente.getReaSyncController().mostrarMensajeLog("Registros de musica recibidos desde el Server");

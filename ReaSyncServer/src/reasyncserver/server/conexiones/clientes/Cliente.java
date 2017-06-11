@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import peticion.Peticion;
 import reasyncserver.bd.GestorRegistros;
 import reasyncserver.server.conexiones.clientes.respuesta.GestorRespuestas;
+import respuesta.Respuesta;
 
 /**
  *
@@ -31,6 +32,7 @@ public class Cliente implements Runnable {
     private final GestorRespuestas gestorRespuestas;
     private final GestorArchivosCliente gestorArchivosCliente;
     private final Path directorio;
+    private String nombreUsuario;
 
     public Cliente(Socket conexion, int id, Path directorio) {
         this.conexion = conexion;
@@ -44,14 +46,18 @@ public class Cliente implements Runnable {
         gestorRespuestas = new GestorRespuestas(this);
         gestorArchivosCliente = new GestorArchivosCliente(this);
         this.directorio = directorio;
+        nombreUsuario = "";
     }
 
     @Override
     public void run() {
         System.out.println("El cliente " + id + " Se ha conectado");
+        solicitarNombreUsuario();
         iniciarEsperaPeticiones();
     }
-
+    private void solicitarNombreUsuario(){
+        gestorRespuestas.enviarRespuesta(new Respuesta("dameUsuario"));
+    }
     private int iniciarCanalesEntradaSalida() {
         try {
             in = conexion.getInputStream();
@@ -85,8 +91,8 @@ public class Cliente implements Runnable {
                             //System.err.println(pathArchivoMusica);
                             ArchivoMusica archivoMusica
                                     = new ArchivoMusica(pathArchivoMusica.toString(), pathArchivoMusica.getFileName().toString(), Long.toString(new File(pathArchivoMusica.toString()).length()));
-                            if(gestorRegistros.existeRegistro(archivoMusica)){
-                                System.err.println("existe" + archivoMusica.getRutaArchivo());
+                            if (gestorRegistros.existeRegistro(archivoMusica)) {
+                                //System.err.println("existe" + archivoMusica.getRutaArchivo());
                                 gestorRegistros.eliminarRegistroArchivoMusica(archivoMusica);
                             }
                             break;
@@ -97,11 +103,14 @@ public class Cliente implements Runnable {
                             //System.err.println(pathArchivoMusica);
                             ArchivoMusica archivoMusica
                                     = new ArchivoMusica(pathArchivoMusica.toString(), pathArchivoMusica.getFileName().toString(), Long.toString(new File(pathArchivoMusica.toString()).length()));
-                            if(!gestorRegistros.existeRegistro(archivoMusica)){
-                                
+                            if (!gestorRegistros.existeRegistro(archivoMusica)) {
                                 gestorRegistros.guardarRegistroArchivoMusica(archivoMusica);
                             }
                             break;
+                        }
+                        case "guardarNombreUsuario": {
+                            nombreUsuario = peticion.getInfo();
+                            System.err.println("EL nombre del usuario es: "+nombreUsuario);
                         }
                         default: {
 
@@ -130,5 +139,5 @@ public class Cliente implements Runnable {
     public Path getDirectorio() {
         return directorio;
     }
-    
+
 }

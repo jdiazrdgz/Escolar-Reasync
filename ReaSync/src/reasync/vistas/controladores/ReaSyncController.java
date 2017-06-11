@@ -27,6 +27,7 @@ public class ReaSyncController {
         actionController = new ActionEventsController(this);
         mouseEventsController = new MouseEventsController(this);
         cargarConfiguracion();
+        
     }
 
     public void mostrarError(String titulo, String error) {

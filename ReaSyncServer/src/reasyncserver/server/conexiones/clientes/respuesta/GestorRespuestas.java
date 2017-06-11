@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import reasyncserver.server.conexiones.clientes.Cliente;
+import respuesta.Respuesta;
 
 /**
  *
@@ -28,6 +29,16 @@ public class GestorRespuestas {
     public int enviarArchivosMusicaRegistrados(ArchivosMusica archivosMusica) {
         try {
             out.writeObject(archivosMusica);
+            out.flush();
+            return 1;
+        } catch (IOException ex) {
+            Logger.getLogger(GestorRespuestas.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+    }
+    public int enviarRespuesta(Respuesta respuesta){
+        try {
+            out.writeObject(respuesta);
             out.flush();
             return 1;
         } catch (IOException ex) {

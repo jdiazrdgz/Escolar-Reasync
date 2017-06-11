@@ -221,8 +221,8 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="493" max="32767" attributes="0"/>
+                              <Component id="servicesHomeLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="458" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -230,16 +230,16 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace pref="45" max="32767" attributes="0"/>
-                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              <Component id="servicesHomeLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JLabel" name="jLabel1">
+                    <Component class="javax.swing.JLabel" name="servicesHomeLabel">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Todos los servicios estan conectados."/>
+                        <Property name="text" type="java.lang.String" value="Los servicios de ReaSync estan desactivados"/>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -267,13 +267,20 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
-                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="105" max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jSeparator1" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
+                                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="95" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="ftpHomeLabel" alignment="1" max="32767" attributes="0"/>
+                                              <Component id="jSeparator1" max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -285,7 +292,9 @@
                                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
-                                  <EmptySpace pref="242" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="ftpHomeLabel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="222" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -300,6 +309,11 @@
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JSeparator" name="jSeparator1">
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="ftpHomeLabel">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Inicie el Servidor FTP"/>
+                          </Properties>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -318,9 +332,12 @@
                                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="1" attributes="0">
+                              <Group type="102" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jSeparator2" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jSeparator2" max="32767" attributes="0"/>
+                                      <Component id="mysqlHomeLabel" max="32767" attributes="0"/>
+                                  </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -332,7 +349,9 @@
                                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
-                                  <EmptySpace pref="242" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="mysqlHomeLabel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="222" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -347,6 +366,11 @@
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JSeparator" name="jSeparator2">
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="mysqlHomeLabel">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Inicie el Servicio Mysql"/>
+                          </Properties>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -369,10 +393,7 @@
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="reasyncServerLabel" alignment="1" max="32767" attributes="0"/>
-                                              <Component id="jSeparator3" max="32767" attributes="0"/>
-                                          </Group>
+                                          <Component id="jSeparator3" max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace max="-2" attributes="0"/>
@@ -391,10 +412,8 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jSeparator3" min="-2" pref="10" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="reasyncServerLabel" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="reaSyncServerPortLabel" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="218" max="32767" attributes="0"/>
+                                  <EmptySpace pref="222" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -410,9 +429,10 @@
                         </Component>
                         <Component class="javax.swing.JSeparator" name="jSeparator3">
                         </Component>
-                        <Component class="javax.swing.JLabel" name="reasyncServerLabel">
-                        </Component>
                         <Component class="javax.swing.JLabel" name="reaSyncServerPortLabel">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Inicie el servicio de ReaSync"/>
+                          </Properties>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -840,7 +860,7 @@
                               <Component id="pathDirectorioSync" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="updatePathSync" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="206" max="32767" attributes="0"/>
+                              <EmptySpace pref="203" max="32767" attributes="0"/>
                               <Component id="ftpServicesServiceLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -985,6 +1005,7 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Detener Servidor"/>
                         <Property name="actionCommand" type="java.lang.String" value="reasyncServerStopButton"/>
+                        <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="reasyncServicesServerLabel">

@@ -53,13 +53,14 @@ class ActionEventsController implements ActionListener {
                 String ipServer = reaSyncController.getFrame().urlServerField.getText();
                 int error = reaSyncController.getCliente().conectarConServidor(puerto, ipServer);
                 if (error == 1) {
+                    reaSyncController.getCliente().iniciarGestorPeticiones();
                     reaSyncController.mostrarMensajeLog("Conexion establecida con el servidor de ReaSync");
                     reaSyncController.getFrame().statusConnectionServerLabel
                             .setText("Conectado con el servidor de ReaSync");
                     reaSyncController.getFrame().connectServerButton.setEnabled(false);
                     reaSyncController.getFrame().disconectServerButton.setEnabled(true);
                     reaSyncController.getCliente().iniciarGestorFTP(ipServer, puerto);
-                    reaSyncController.getCliente().iniciarGestorPeticiones();
+                    
                 } else {
                     reaSyncController.mostrarMensajeLog("Error al conectarse con el servidor de ReaSync");
                     reaSyncController.getFrame().statusConnectionServerLabel

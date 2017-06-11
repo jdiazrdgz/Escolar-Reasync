@@ -10,7 +10,6 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import reasyncserver.server.Server;
 import reasyncserver.server.conexiones.clientes.info.ClienteConectado;
-import reasyncserver.sistema.configuracion.GestorConfiguracion;
 import reasyncserver.vistas.ReaSyncServer;
 
 /**
@@ -23,14 +22,18 @@ public class ReaSyncController {
     private final ReaSyncServer frame;
     private final ActionEventsController actionController;
     private final MouseEventsController mouseEventsController;
-    private final GestorConfiguracion gestorConfiguracion;
+    public boolean mysql;
+    public boolean ftp;
+    public boolean reasync;
 
     public ReaSyncController(ReaSyncServer frame) {
         this.frame = frame;
         this.server = new Server(this);
         actionController = new ActionEventsController(this);
         mouseEventsController = new MouseEventsController(this);
-        gestorConfiguracion = new GestorConfiguracion();
+        this.mysql=false;
+        this.ftp=false;
+        this.reasync=false;
         cargarConfiguracion();
     }
 
@@ -79,7 +82,6 @@ public class ReaSyncController {
             break;
             case "detenido": {
                 mostrarMensajeLog("El servicio ReaSync ha desactivado");
-                frame.reasyncServerLabel.setText("El servicio ReaSync esta detenido");
                 frame.reasyncServicesServerLabel.setText("El servicio ReaSync esta detenido");
                 frame.reasyncServerStopButton.setEnabled(false);
                 frame.reasyncServerStartButton.setEnabled(true);
