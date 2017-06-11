@@ -31,7 +31,6 @@ public class GestorCambios {
 
     public GestorCambios(Client cliente) {
         this.cliente = cliente;
-         guardarRegistroActual();
     }
 
     public CambiosGlobales generarListaCambiosGlobales(CambiosLocales cambiosLocales, ArchivosMusica archivosMusicaRecibidos) {
@@ -67,8 +66,10 @@ public class GestorCambios {
                     }
                     if (!cambiosLocales.getArchivosSimilares().isEmpty()) {
                         pathArchivosSubir.addAll(cambiosLocales.getArchivosSimilares());
+                        System.err.println("similares tiene");
                     }
                     if (cambiosLocales.getArchivosNuevos().isEmpty() && cambiosLocales.getArchivosSimilares().isEmpty()) {
+                        System.err.println("vacios");
                         return null;
                     } else {
                         List<ArchivoMusica> listaArchivosMusica = new ArrayList<>();
@@ -79,6 +80,7 @@ public class GestorCambios {
                         ArchivosMusica archivosRemotos_Eliminar = null;
                         List<Path> archivosLocales_Eliminar = null;
                         List<Path> archivosLocales_Descargar = null;
+                        archivosRemotos_Subir.getArchivosMusica().forEach(archivo -> System.err.println(archivo.getRutaArchivo()));
                         return new CambiosGlobales(archivosLocales_Eliminar, archivosLocales_Descargar, archivosRemotos_Subir, archivosRemotos_Eliminar);
                     }
                 }
@@ -127,21 +129,39 @@ public class GestorCambios {
                 List<Path> listaPathArchivosMusicaRecibidos
                         = new GestorArchivosMusica(cliente.getGestorConfiguracion())
                                 .obtenerPathArchivosMusica(archivosMusicaRecibidosEspecificados);
-                ArchivosMusica archivosRemotos_Subir = null;
-                ArchivosMusica archivosRemotos_Eliminar = null;
-                List<Path> archivosLocales_Eliminar = null;
-                List<Path> archivosLocales_Descargar = null;
-                //Acciones Remotas
-                if(!cambiosLocales.getArchivosEliminados().isEmpty()){
-                    archivosRemotos_Eliminar=determinarArchivosRemotos_Eliminar(cambiosLocales, listaPathArchivosMusicaRecibidos);
+                if (!cambiosLocales.getArchivosSimilares().isEmpty()
+                        && cambiosLocales.getArchivosNuevos().isEmpty()
+                        && cambiosLocales.getArchivosNuevos().isEmpty()) {
+                    //No habia estado anterior de archivos
+                    //tendra preferencia servidor
+                    //entonces
+                    //Si server tiene archivos que nosotros no, los descargaremos
+                    List<Path> archivosLocales_Descargar = determinarArchivosLocales_Descargar(cambiosLocales, listaPathArchivosMusicaRecibidos);
+                    //Si server no tiene archivos que nosotros si se subiran
+                    ArchivosMusica archivosRemotos_Subir = determinarArchivosRemotosSEA_Subir(cambiosLocales, listaPathArchivosMusicaRecibidos);
+                    // no se eliminara ningun remoto, ya que server tiene preferencia, ya que si server no tiene cosas que nosotros si
+                    //entendemos que las eliminaron
+                    ArchivosMusica archivosRemotos_Eliminar = null;
+                    //server tiene cosas que nosotros no por lo tanto las eliminaremos
+                    List<Path> archivosLocales_Eliminar = null;
+                    return new CambiosGlobales(archivosLocales_Eliminar, archivosLocales_Descargar, archivosRemotos_Subir, archivosRemotos_Eliminar);
+                } else {
+                    ArchivosMusica archivosRemotos_Subir = null;
+                    ArchivosMusica archivosRemotos_Eliminar = null;
+                    List<Path> archivosLocales_Eliminar = null;
+                    List<Path> archivosLocales_Descargar = null;
+                    //Acciones Remotas
+                    if (!cambiosLocales.getArchivosEliminados().isEmpty()) {
+                        archivosRemotos_Eliminar = determinarArchivosRemotos_Eliminar(cambiosLocales, listaPathArchivosMusicaRecibidos);
+                    }
+                    if (!cambiosLocales.getArchivosNuevos().isEmpty()) {
+                        archivosRemotos_Subir = determinarArchivosRemotos_Subir(cambiosLocales, listaPathArchivosMusicaRecibidos);
+                    }
+                    //acciones locales
+                    archivosLocales_Descargar = determinarArchivosLocales_Descargar(cambiosLocales, listaPathArchivosMusicaRecibidos);
+                    archivosLocales_Eliminar = determinarArchivosLocales_Eliminar(cambiosLocales, listaPathArchivosMusicaRecibidos);
+                    return new CambiosGlobales(archivosLocales_Eliminar, archivosLocales_Descargar, archivosRemotos_Subir, archivosRemotos_Eliminar);
                 }
-                if(!cambiosLocales.getArchivosNuevos().isEmpty()){
-                    archivosRemotos_Subir = determinarArchivosRemotos_Subir(cambiosLocales, listaPathArchivosMusicaRecibidos);
-                }
-                //acciones locales
-                archivosLocales_Descargar=determinarArchivosLocales_Descargar(cambiosLocales, listaPathArchivosMusicaRecibidos);
-                archivosLocales_Eliminar=determinarArchivosLocales_Eliminar(cambiosLocales, listaPathArchivosMusicaRecibidos);
-                return new CambiosGlobales(archivosLocales_Eliminar, archivosLocales_Descargar, archivosRemotos_Subir, archivosRemotos_Eliminar);
             }
         }
     }
@@ -181,7 +201,7 @@ public class GestorCambios {
             misArchivos.addAll(cambiosLocales.getArchivosSimilares());
         }
         // si se trabaja directo sobre la lista que mandamos, las siguientes operaciones son afectadas
-        List<Path> recibidosAux = listaPathArchivosMusicaRecibidos;
+        List<Path> recibidosAux = new ArrayList<>(listaPathArchivosMusicaRecibidos);
         recibidosAux.removeAll(misArchivos);
         if (recibidosAux.isEmpty()) {
             //siginifca que tenemos todos los archivos no nos hace falta ninguno
@@ -214,7 +234,28 @@ public class GestorCambios {
         }
         return new ArchivosMusica(archivosMusica_subir);
     }
-
+    public ArchivosMusica determinarArchivosRemotosSEA_Subir(CambiosLocales cambiosLocales, List<Path> listaPathArchivosMusicaRecibidos) {
+        //System.err.println("Subir remotos " + listaPathArchivosMusicaRecibidos.size());
+        if (cambiosLocales.getArchivosNuevos().isEmpty() && cambiosLocales.getArchivosSimilares().isEmpty()) {
+            //nada que hacer, no se comprueba eliminados porque ya no existen en este equipo
+            return null;
+        }
+        List<ArchivoMusica> archivosMusica_subir = new ArrayList<>();
+        List<Path> misArchivos = new ArrayList<>();
+        if (!cambiosLocales.getArchivosSimilares().isEmpty()) {
+            misArchivos.addAll(cambiosLocales.getArchivosSimilares());
+        }
+        misArchivos.removeAll(listaPathArchivosMusicaRecibidos);
+        if (misArchivos.isEmpty()) {
+            //tenemos los mismos server y nosotros
+            return null;
+        } else {
+            //server no tiene estos archivos, si no tenemos eliminados quiere
+            misArchivos.forEach(path -> archivosMusica_subir
+                    .add(new ArchivoMusica(path.toString(), path.getFileName().toString(), Long.toString(new File(path.toString()).length()))));
+        }
+        return new ArchivosMusica(archivosMusica_subir);
+    } 
     public ArchivosMusica determinarArchivosRemotos_Eliminar(CambiosLocales cambiosLocalesEliminados, List<Path> listaPathArchivosMusicaRecibidos) {;
         List<Path> misArchivos = new ArrayList<>();
         if (cambiosLocalesEliminados.getArchivosEliminados().isEmpty()) {
@@ -225,7 +266,7 @@ public class GestorCambios {
         }
         List<ArchivoMusica> archivosMusica_Eliminar = new ArrayList<>();
         misArchivos.forEach(archivo -> {
-            if(listaPathArchivosMusicaRecibidos.contains(archivo)){
+            if (listaPathArchivosMusicaRecibidos.contains(archivo)) {
                 archivosMusica_Eliminar.add(new ArchivoMusica(archivo.toString(), archivo.getFileName().toString(), Long.toString(new File(archivo.toString()).length())));
             }
         });
@@ -244,6 +285,12 @@ public class GestorCambios {
         List<Path> estadoArchivosActual = obtenerEstadoArchivosActual();
         if (estadoArchivosAnterior == null) {
             System.err.println("no hay estado anterior");
+            cliente.getReaSyncController().mostrarMensajeLog("No se encuentra "
+                    + "un estado anterior de archivos");
+            cliente.getReaSyncController().mostrarMensajeLog("Los archivos que tenga server y "
+                    + "nosotros no, se descargaran");
+            cliente.getReaSyncController().mostrarMensajeLog("Los archivos que tenga no server y "
+                    + "nosotros si, se subiran");
             return new CambiosLocales(estadoArchivosActual);
         }
         return determinarCambiosLocales(estadoArchivosAnterior, estadoArchivosActual);
@@ -260,18 +307,30 @@ public class GestorCambios {
     private List<Path> determinarArchivosIguales(List<Path> estadoArchivosAnterior, List<Path> estadoArchivosActual) {
         List<Path> archivosIguales = estadoArchivosAnterior;
         archivosIguales.retainAll(estadoArchivosActual);
+        if (archivosIguales.isEmpty()) {
+            System.err.println("no hay iguales");
+        } else {
+            System.err.println("hay iguales");
+        }
         return archivosIguales;
     }
 
     private List<Path> determinarArchivosEliminados(List<Path> estadoArchivosAnterior, List<Path> estadoArchivosActual) {
-        List<Path> archivosEliminados = estadoArchivosAnterior;
+        List<Path> archivosEliminados = new ArrayList<>(estadoArchivosAnterior);
         archivosEliminados.removeAll(estadoArchivosActual);
+        if (archivosEliminados.isEmpty()) {
+            System.err.println("no hay eliminados");
+        }
         return archivosEliminados;
     }
 
     private List<Path> deterinarArchivosNuevos(List<Path> estadoArchivosAnterior, List<Path> estadoArchivosActual) {
-        List<Path> archivosNuevos = estadoArchivosActual;
+        List<Path> archivosNuevos = new ArrayList<>(estadoArchivosActual);
+        archivosNuevos.forEach(path -> path.toString());
         archivosNuevos.removeAll(estadoArchivosAnterior);
+        if (archivosNuevos.isEmpty()) {
+            System.err.println("no hay nuevos");
+        }
         return archivosNuevos;
     }
 
@@ -279,7 +338,7 @@ public class GestorCambios {
         File directorio = new File(directorioCambios.toString());
         if (directorio.exists()) {
             List<Path> archivos = new ArrayList<>();
-            leerEstadoArchivosAnterior().forEach( path -> {
+            leerEstadoArchivosAnterior().forEach(path -> {
                 archivos.add(Paths.get(path));
             });
             return archivos;
@@ -314,14 +373,14 @@ public class GestorCambios {
         }
     }
 
-    private int guardarRegistroActual() {
+    public int guardarRegistroActual() {
         FileOutputStream fos = null;
         try {
             List<Path> arbolDirectorios = cliente.getGestorDirectorio()
                     .getEscaneadorDirectorio().obtenerArbolDirectorios();
             List<Path> archivos = cliente.getGestorDirectorio()
                     .getEscaneadorDirectorio().obtenerPathArchivos(arbolDirectorios);
-            List<String> pathsArchivos= new ArrayList<>();
+            List<String> pathsArchivos = new ArrayList<>();
             archivos.forEach(archivo -> {
                 pathsArchivos.add(archivo.toString());
             });

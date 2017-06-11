@@ -39,7 +39,18 @@ public class GestorSincronizacion {
                 cliente.getReaSyncController().mostrarMensajeLog("Nada que sincronizar");
                 System.err.println("Nada que sincronizar");
             } else {
-                ejecutarAccionesSincronizacion(cambiosGlobales);
+                if (cambiosGlobales.getArchivosLocales_Descargar() == null
+                        && cambiosGlobales.getArchivosLocales_Eliminar() == null
+                        && cambiosGlobales.getArchivosRemotos_Eliminar() == null
+                        && cambiosGlobales.getArchivosRemotos_Subir() == null) {
+                    cliente.getReaSyncController().mostrarMensajeLog("Nada que sincronizar");
+                    System.err.println("Nada que sincronizar");
+                } else {
+                    System.err.println("cambios encontrados");
+                    cliente.getReaSyncController().mostrarMensajeLog("Cambios Encontrados, Se ejecutaran acciones de sincronización");
+                    ejecutarAccionesSincronizacion(cambiosGlobales);
+                    cliente.getGestorCambios().guardarRegistroActual();
+                }
             }
         } else {
             System.err.println("error recibiendo archivos de musica o generando los cambios locales");
@@ -139,7 +150,7 @@ public class GestorSincronizacion {
                 } else {
                     cliente.getReaSyncController()
                             .mostrarMensajeLog("Error al enviar eliminar el archivo "
-                                    + archivo.getRutaArchivo()+" del servidor");
+                                    + archivo.getRutaArchivo() + " del servidor");
                 }
             });
         } else {
