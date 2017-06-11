@@ -132,19 +132,29 @@ public class GestorCambios {
                 if (!cambiosLocales.getArchivosSimilares().isEmpty()
                         && cambiosLocales.getArchivosNuevos().isEmpty()
                         && cambiosLocales.getArchivosEliminados().isEmpty()) {
-                    //No habia estado anterior de archivos
-                    //tendra preferencia servidor
-                    //entonces
-                    //Si server tiene archivos que nosotros no, los descargaremos
-                    List<Path> archivosLocales_Descargar = determinarArchivosLocales_Descargar(cambiosLocales, listaPathArchivosMusicaRecibidos);
-                    //Si server no tiene archivos que nosotros si se subiran
-                    ArchivosMusica archivosRemotos_Subir = determinarArchivosRemotosSEA_Subir(cambiosLocales, listaPathArchivosMusicaRecibidos);
-                    // no se eliminara ningun remoto, ya que server tiene preferencia, ya que si server no tiene cosas que nosotros si
-                    //entendemos que las eliminaron
-                    ArchivosMusica archivosRemotos_Eliminar = null;
-                    //server tiene cosas que nosotros no por lo tanto las eliminaremos
-                    List<Path> archivosLocales_Eliminar = null;
-                    return new CambiosGlobales(archivosLocales_Eliminar, archivosLocales_Descargar, archivosRemotos_Subir, archivosRemotos_Eliminar);
+                    if (!existeEstadoAnterior()) {
+                        //No habia estado anterior de archivos
+                        //tendra preferencia servidor
+                        //entonces
+                        //Si server tiene archivos que nosotros no, los descargaremos
+                        List<Path> archivosLocales_Descargar = determinarArchivosLocales_Descargar(cambiosLocales, listaPathArchivosMusicaRecibidos);
+                        //Si server no tiene archivos que nosotros si se subiran
+                        ArchivosMusica archivosRemotos_Subir = determinarArchivosRemotosSEA_Subir(cambiosLocales, listaPathArchivosMusicaRecibidos);
+                        // no se eliminara ningun remoto, ya que server tiene preferencia, ya que si server no tiene cosas que nosotros si
+                        //entendemos que las eliminaron
+                        ArchivosMusica archivosRemotos_Eliminar = null;
+                        //server tiene cosas que nosotros no por lo tanto las eliminaremos
+                        List<Path> archivosLocales_Eliminar = null;
+                        return new CambiosGlobales(archivosLocales_Eliminar, archivosLocales_Descargar, archivosRemotos_Subir, archivosRemotos_Eliminar);
+                    } else {
+                        //En este caso no hubo ningun cambio local por lo tanto los del server tienen preferencia
+                        List<Path> archivosLocales_Descargar = determinarArchivosLocales_Descargar(cambiosLocales, listaPathArchivosMusicaRecibidos);
+                        ArchivosMusica archivosRemotos_Subir = null;
+                        ArchivosMusica archivosRemotos_Eliminar = null;
+                        List<Path> archivosLocales_Eliminar = determinarArchivosLocales_Eliminar(cambiosLocales, listaPathArchivosMusicaRecibidos);
+                        return new CambiosGlobales(archivosLocales_Eliminar, archivosLocales_Descargar, archivosRemotos_Subir, archivosRemotos_Eliminar);
+                    }
+
                 } else {
                     ArchivosMusica archivosRemotos_Subir = null;
                     ArchivosMusica archivosRemotos_Eliminar = null;
@@ -232,6 +242,7 @@ public class GestorCambios {
         }
         return new ArchivosMusica(archivosMusica_subir);
     }
+
     public ArchivosMusica determinarArchivosRemotosSEA_Subir(CambiosLocales cambiosLocales, List<Path> listaPathArchivosMusicaRecibidos) {
         //System.err.println("Subir remotos " + listaPathArchivosMusicaRecibidos.size());
         if (cambiosLocales.getArchivosNuevos().isEmpty() && cambiosLocales.getArchivosSimilares().isEmpty()) {
@@ -253,7 +264,8 @@ public class GestorCambios {
                     .add(new ArchivoMusica(path.toString(), path.getFileName().toString(), Long.toString(new File(path.toString()).length()))));
         }
         return new ArchivosMusica(archivosMusica_subir);
-    } 
+    }
+
     public ArchivosMusica determinarArchivosRemotos_Eliminar(CambiosLocales cambiosLocalesEliminados, List<Path> listaPathArchivosMusicaRecibidos) {;
         List<Path> misArchivos = new ArrayList<>();
         if (cambiosLocalesEliminados.getArchivosEliminados().isEmpty()) {
@@ -308,7 +320,7 @@ public class GestorCambios {
     private List<Path> determinarArchivosIguales(List<Path> estadoArchivosAnterior, List<Path> estadoArchivosActual) {
         List<Path> archivosIguales = new ArrayList<>(estadoArchivosActual);
         archivosIguales.retainAll(estadoArchivosAnterior);
-        archivosIguales.forEach(path -> System.err.println(path.toString()+" iguales"));
+        archivosIguales.forEach(path -> System.err.println(path.toString() + " iguales"));
         if (archivosIguales.isEmpty()) {
             System.err.println("no hay iguales");
         }
@@ -318,7 +330,7 @@ public class GestorCambios {
     private List<Path> determinarArchivosEliminados(List<Path> estadoArchivosAnterior, List<Path> estadoArchivosActual) {
         List<Path> archivosEliminados = new ArrayList<>(estadoArchivosAnterior);
         archivosEliminados.removeAll(estadoArchivosActual);
-        archivosEliminados.forEach(path -> System.out.println(path.toString()+" eliminados"));
+        archivosEliminados.forEach(path -> System.out.println(path.toString() + " eliminados"));
         if (archivosEliminados.isEmpty()) {
             System.err.println("no hay eliminados");
         }
@@ -328,7 +340,7 @@ public class GestorCambios {
     private List<Path> deterinarArchivosNuevos(List<Path> estadoArchivosAnterior, List<Path> estadoArchivosActual) {
         List<Path> archivosNuevos = new ArrayList<>(estadoArchivosActual);
         archivosNuevos.removeAll(estadoArchivosAnterior);
-        archivosNuevos.forEach(path -> System.err.println(path.toString()+ "nuevos"));
+        archivosNuevos.forEach(path -> System.err.println(path.toString() + "nuevos"));
         if (archivosNuevos.isEmpty()) {
             System.err.println("no hay nuevos");
         }
@@ -345,6 +357,19 @@ public class GestorCambios {
             return archivos;
         } else {
             return null;
+        }
+    }
+
+    private boolean existeEstadoAnterior() {
+        File directorio = new File(directorioCambios.toString());
+        if (directorio.exists()) {
+            List<Path> archivos = new ArrayList<>();
+            leerEstadoArchivosAnterior().forEach(path -> {
+                archivos.add(Paths.get(path));
+            });
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -374,7 +399,7 @@ public class GestorCambios {
         }
     }
 
-    public int guardarRegistroActual() {
+    public boolean guardarRegistroActual() {
         FileOutputStream fos = null;
         try {
             List<Path> arbolDirectorios = cliente.getGestorDirectorio()
@@ -389,17 +414,16 @@ public class GestorCambios {
             ObjectOutputStream out = new ObjectOutputStream(fos);
             out.writeObject(pathsArchivos); //se guarda y serializa al estudiante
             fos.close();
-            return 1;
-
+            return true;
         } catch (FileNotFoundException ex) {
             Logger.getLogger(GestorCambios.class
                     .getName()).log(Level.SEVERE, null, ex);
-            return 0;
+            return false;
 
         } catch (IOException ex) {
             Logger.getLogger(GestorCambios.class
                     .getName()).log(Level.SEVERE, null, ex);
-            return 0;
+            return false;
         }
     }
 }

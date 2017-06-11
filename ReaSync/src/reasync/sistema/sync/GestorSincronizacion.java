@@ -2,6 +2,10 @@ package reasync.sistema.sync;
 
 import archivos.ArchivoMusica;
 import archivos.ArchivosMusica;
+import java.io.IOException;
+import java.nio.file.DirectoryNotEmptyException;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -50,7 +54,13 @@ public class GestorSincronizacion {
                     System.err.println("cambios encontrados");
                     cliente.getReaSyncController().mostrarMensajeLog("Cambios Encontrados, Se ejecutaran acciones de sincronización");
                     ejecutarAccionesSincronizacion(cambiosGlobales);
-                    cliente.getGestorCambios().guardarRegistroActual();
+                    if(cliente.getGestorCambios().guardarRegistroActual()){
+                        cliente.getReaSyncController()
+                            .mostrarMensajeLog("SYNC terminada, copia de estado actual guardada");
+                    }else{
+                        cliente.getReaSyncController()
+                            .mostrarMensajeLog("SYNC terminada, problema al guardar el estado actual");
+                    }
                 }
             }
         } else {
@@ -61,8 +71,6 @@ public class GestorSincronizacion {
     public void ejecutarAccionesSincronizacion(CambiosGlobales cambiosGlobales) {
         determinarAccionesRemotas(cambiosGlobales);
         determinarAccionesLocales(cambiosGlobales);
-        //guardar estado local
-
     }
 
     public void determinarAccionesLocales(CambiosGlobales cambiosGlobales) {
@@ -79,18 +87,50 @@ public class GestorSincronizacion {
     }
 
     public void descargarArchivosMusica(List<Path> pathArchivosMusica) {
-        System.err.println("Se descargaran los siguientes archivos");
-        pathArchivosMusica.forEach(path -> System.err.println(path.toString()));
-        cliente.getGestorFTP().conectarClienteFTP();
-        pathArchivosMusica.forEach(archivo -> {
-            cliente.getGestorFTP().descargarArchivo(archivo);
-        });
-        cliente.getGestorFTP().desconectarClienteFTP();
+        //System.err.println("Se descargaran los siguientes archivos");
+        //pathArchivosMusica.forEach(path -> System.err.println(path.toString()));
+        if (cliente.getGestorFTP().conectarClienteFTP() == 1) {
+            pathArchivosMusica.forEach(archivo -> {
+                if (cliente.getGestorFTP().descargarArchivo(archivo) == 1) {
+                    cliente.getReaSyncController()
+                            .mostrarMensajeLog("Archivo "
+                                    + archivo.toString()
+                                    + " Descargado");
+                } else {
+                    cliente.getReaSyncController()
+                            .mostrarMensajeLog("El Archivo "
+                                    + archivo.toString()
+                                    + " No ha podido ser descargado");
+                }
+                cliente.getGestorFTP().desconectarClienteFTP();
+            });
+        } else {
+            cliente.getReaSyncController()
+                    .mostrarMensajeLog("Error al conectarse con el server FTP");
+        }
     }
 
     public void eliminarArchivosMusicaLocales(List<Path> pathArchivosMusica) {
-        System.err.println("Se eliminaran los siguientes archivos");
-        pathArchivosMusica.forEach(path -> System.err.println(path.toString()));
+        //System.err.println("Se eliminaran los siguientes archivos");
+        pathArchivosMusica.forEach(path -> {
+            try {
+                Files.delete(path);
+            } catch (NoSuchFileException x) {
+                cliente.getReaSyncController()
+                            .mostrarMensajeLog("El Archivo a eliminar"
+                                    + path.toString()
+                                    + " No se encuentra");
+            } catch (DirectoryNotEmptyException x) {
+                cliente.getReaSyncController()
+                            .mostrarMensajeLog("Error al tratar el archivo "
+                                    + path.toString());
+            } catch (IOException x) {
+                // File permission problems are caught here.
+                cliente.getReaSyncController()
+                            .mostrarMensajeLog("No hay permisos para eliminar el archivo "
+                                    + path.toString());
+            }
+        });
     }
 
     public void determinarAccionesRemotas(CambiosGlobales cambiosGlobales) {
@@ -128,13 +168,14 @@ public class GestorSincronizacion {
             });
             cliente.getGestorFTP().desconectarClienteFTP();
         } else {
-
+            cliente.getReaSyncController()
+                    .mostrarMensajeLog("Error al conectarse con el server FTP");
         }
 
     }
 
     public void eliminarArchivosMusicaRemotos(List<ArchivoMusica> archivosMusica) {
-        System.err.println("Se eliminaran los siguientes archivos del servidor");
+        //System.err.println("Se eliminaran los siguientes archivos del servidor");
         String comandoPeticion = "eliminarRegistroMusica";
         if (cliente.getGestorFTP().conectarClienteFTP() == 1) {
             archivosMusica.forEach(archivo -> {
@@ -154,8 +195,10 @@ public class GestorSincronizacion {
                                     + archivo.getRutaArchivo() + " del servidor");
                 }
             });
+            cliente.getGestorFTP().desconectarClienteFTP();
         } else {
-
+            cliente.getReaSyncController()
+                    .mostrarMensajeLog("Error al conectarse con el server FTP");
         }
 
     }
