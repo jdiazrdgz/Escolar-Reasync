@@ -9,7 +9,7 @@ import java.util.Iterator;
  */
 public class GestorArchivosCliente {
 
-    private Cliente cliente;
+    private final Cliente cliente;
 
     public GestorArchivosCliente(Cliente cliente) {
         this.cliente = cliente;
@@ -37,7 +37,6 @@ public class GestorArchivosCliente {
             }
         }
         fixedPath = originalPath.subpath(inicio + 1, fin);
-        System.err.println(fixedPath);
         return fixedPath;
     }
 }

@@ -131,7 +131,7 @@ public class GestorCambios {
                                 .obtenerPathArchivosMusica(archivosMusicaRecibidosEspecificados);
                 if (!cambiosLocales.getArchivosSimilares().isEmpty()
                         && cambiosLocales.getArchivosNuevos().isEmpty()
-                        && cambiosLocales.getArchivosNuevos().isEmpty()) {
+                        && cambiosLocales.getArchivosEliminados().isEmpty()) {
                     //No habia estado anterior de archivos
                     //tendra preferencia servidor
                     //entonces
@@ -172,9 +172,6 @@ public class GestorCambios {
             return null;
         }
         List<Path> archivosEliminar = new ArrayList<>();
-        if (!cambiosLocales.getArchivosNuevos().isEmpty()) {
-            archivosEliminar.addAll(cambiosLocales.getArchivosNuevos());
-        }
         if (!cambiosLocales.getArchivosSimilares().isEmpty()) {
             archivosEliminar.addAll(cambiosLocales.getArchivosSimilares());
         }
@@ -224,6 +221,7 @@ public class GestorCambios {
             misArchivos.addAll(cambiosLocales.getArchivosNuevos());
         }
         misArchivos.removeAll(listaPathArchivosMusicaRecibidos);
+        listaPathArchivosMusicaRecibidos.removeAll(misArchivos);
         if (misArchivos.isEmpty()) {
             //tenemos los mismos server y nosotros
             return null;
@@ -266,7 +264,9 @@ public class GestorCambios {
         }
         List<ArchivoMusica> archivosMusica_Eliminar = new ArrayList<>();
         misArchivos.forEach(archivo -> {
+            //System.out.println(archivo.toString() + " a eliminar");
             if (listaPathArchivosMusicaRecibidos.contains(archivo)) {
+                //System.out.println("si esta");
                 archivosMusica_Eliminar.add(new ArchivoMusica(archivo.toString(), archivo.getFileName().toString(), Long.toString(new File(archivo.toString()).length())));
             }
         });
@@ -275,6 +275,7 @@ public class GestorCambios {
             //nada que eliminar en el server
         } else {
             //son los que vamos a subir
+            listaPathArchivosMusicaRecibidos.removeAll(misArchivos);
             return new ArchivosMusica(archivosMusica_Eliminar);
         }
     }
@@ -305,12 +306,11 @@ public class GestorCambios {
     }
 
     private List<Path> determinarArchivosIguales(List<Path> estadoArchivosAnterior, List<Path> estadoArchivosActual) {
-        List<Path> archivosIguales = estadoArchivosAnterior;
-        archivosIguales.retainAll(estadoArchivosActual);
+        List<Path> archivosIguales = new ArrayList<>(estadoArchivosActual);
+        archivosIguales.retainAll(estadoArchivosAnterior);
+        archivosIguales.forEach(path -> System.err.println(path.toString()+" iguales"));
         if (archivosIguales.isEmpty()) {
             System.err.println("no hay iguales");
-        } else {
-            System.err.println("hay iguales");
         }
         return archivosIguales;
     }
@@ -318,6 +318,7 @@ public class GestorCambios {
     private List<Path> determinarArchivosEliminados(List<Path> estadoArchivosAnterior, List<Path> estadoArchivosActual) {
         List<Path> archivosEliminados = new ArrayList<>(estadoArchivosAnterior);
         archivosEliminados.removeAll(estadoArchivosActual);
+        archivosEliminados.forEach(path -> System.out.println(path.toString()+" eliminados"));
         if (archivosEliminados.isEmpty()) {
             System.err.println("no hay eliminados");
         }
@@ -326,8 +327,8 @@ public class GestorCambios {
 
     private List<Path> deterinarArchivosNuevos(List<Path> estadoArchivosAnterior, List<Path> estadoArchivosActual) {
         List<Path> archivosNuevos = new ArrayList<>(estadoArchivosActual);
-        archivosNuevos.forEach(path -> path.toString());
         archivosNuevos.removeAll(estadoArchivosAnterior);
+        archivosNuevos.forEach(path -> System.err.println(path.toString()+ "nuevos"));
         if (archivosNuevos.isEmpty()) {
             System.err.println("no hay nuevos");
         }

@@ -45,6 +45,7 @@ public class GestorSincronizacion {
                         && cambiosGlobales.getArchivosRemotos_Subir() == null) {
                     cliente.getReaSyncController().mostrarMensajeLog("Nada que sincronizar");
                     System.err.println("Nada que sincronizar");
+                    cliente.getGestorCambios().guardarRegistroActual();
                 } else {
                     System.err.println("cambios encontrados");
                     cliente.getReaSyncController().mostrarMensajeLog("Cambios Encontrados, Se ejecutaran acciones de sincronización");
@@ -58,8 +59,8 @@ public class GestorSincronizacion {
     }
 
     public void ejecutarAccionesSincronizacion(CambiosGlobales cambiosGlobales) {
-        determinarAccionesLocales(cambiosGlobales);
         determinarAccionesRemotas(cambiosGlobales);
+        determinarAccionesLocales(cambiosGlobales);
         //guardar estado local
 
     }
@@ -134,7 +135,7 @@ public class GestorSincronizacion {
 
     public void eliminarArchivosMusicaRemotos(List<ArchivoMusica> archivosMusica) {
         System.err.println("Se eliminaran los siguientes archivos del servidor");
-        String comandoPeticion = "eliminarRegistroArchivo";
+        String comandoPeticion = "eliminarRegistroMusica";
         if (cliente.getGestorFTP().conectarClienteFTP() == 1) {
             archivosMusica.forEach(archivo -> {
                 boolean eliminado = cliente.getGestorFTP().eliminarArchivo(Paths.get(archivo.getRutaArchivo()));

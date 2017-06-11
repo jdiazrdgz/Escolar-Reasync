@@ -11,7 +11,6 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import reasyncserver.server.Server;
 import reasyncserver.server.conexiones.clientes.Cliente;
 
 /**
@@ -37,7 +36,21 @@ public class GestorRegistros {
             Logger.getLogger(GestorRegistros.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    public boolean eliminarRegistroArchivoMusica(ArchivoMusica archivoMusica){
+        try {
+            conexion = gestorConexionBD.conectar();
+            String pathEspecialMysql = archivoMusica.getRutaArchivo().replace("\\", "\\\\");
+            statement = conexion
+                    .createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String query = "DELETE from registroarchivosmusica where path = '"+pathEspecialMysql+"';";
+            statement.execute(query);
+            gestorConexionBD.desconectar();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorRegistros.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
     public int guardarRegistroArchivoMusica(ArchivoMusica archivoMusica) {
         try {
             conexion = gestorConexionBD.conectar();
@@ -65,7 +78,8 @@ public class GestorRegistros {
             String pathEspecialMysql = archivoMusica.getRutaArchivo().replace("\\", "\\\\");
             statement = conexion
                     .createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            resultset = statement.executeQuery("select path from registroarchivosmusica where path = '"+pathEspecialMysql+"';");
+            String query = "select path from registroarchivosmusica where path = '"+pathEspecialMysql+"';";
+            resultset = statement.executeQuery(query);
             return resultset.next();
         } catch (SQLException ex) {
             Logger.getLogger(GestorRegistros.class.getName()).log(Level.SEVERE, null, ex);

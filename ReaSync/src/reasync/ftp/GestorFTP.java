@@ -127,11 +127,12 @@ public class GestorFTP {
     public boolean eliminarArchivo(Path pathArchivo) {
         try {
             //Esto hara que la path ya no tenga la ruta relativa del equipo cliente
-            Path pathArchivoRemoto = new GestorArchivosMusica(cliente.getGestorConfiguracion())
-                    .generalizarPathArchivoMusica(pathArchivo);
+            String pathArchivoLocal = pathArchivo.toString();
+            //System.err.println(pathArchivoLocal+ "local");
+            String pathArchivoRemoto = new GestorArchivosMusica(cliente.getGestorConfiguracion())
+                    .generalizarPathArchivoMusica(pathArchivo).toString();
             //Esto nos devuelve la ruta sin el nombre del archivo
-            String pathDirectorio = pathArchivoRemoto.getParent().toString();
-            boolean deleted = ftpClient.deleteFile(pathDirectorio);
+            boolean deleted = ftpClient.deleteFile(pathArchivoRemoto);
             if (deleted) {
                 System.out.println("The file was deleted successfully.");
                 return true;
@@ -167,10 +168,10 @@ public class GestorFTP {
         OutputStream outputStream1 = null;
         try {
             String pathArchivoLocal = pathArchivo.toString();
-            System.err.println(pathArchivoLocal+ "local");
+            //System.err.println(pathArchivoLocal+ "local");
             String pathArchivoRemoto = new GestorArchivosMusica(cliente.getGestorConfiguracion())
                     .generalizarPathArchivoMusica(pathArchivo).toString();
-            System.err.println(pathArchivoLocal + "local");
+            //System.err.println(pathArchivoLocal + "local");
             File archivo = new File(pathArchivoLocal);
             outputStream1 = new BufferedOutputStream(new FileOutputStream(archivo));
             boolean success = ftpClient.retrieveFile(pathArchivoRemoto, outputStream1);

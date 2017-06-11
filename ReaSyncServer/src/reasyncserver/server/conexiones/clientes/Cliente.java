@@ -81,15 +81,24 @@ public class Cliente implements Runnable {
                             break;
                         }
                         case "eliminarRegistroMusica": {
+                            Path pathArchivoMusica = Paths.get(directorio.toString(), peticion.getInfo());
+                            //System.err.println(pathArchivoMusica);
+                            ArchivoMusica archivoMusica
+                                    = new ArchivoMusica(pathArchivoMusica.toString(), pathArchivoMusica.getFileName().toString(), Long.toString(new File(pathArchivoMusica.toString()).length()));
+                            if(gestorRegistros.existeRegistro(archivoMusica)){
+                                System.err.println("existe" + archivoMusica.getRutaArchivo());
+                                gestorRegistros.eliminarRegistroArchivoMusica(archivoMusica);
+                            }
                             break;
                         }
                         case "guardarRegistroArchivo": {
-                            System.err.println("guardar archivo musica");
+                            //System.err.println("guardar archivo musica");
                             Path pathArchivoMusica = Paths.get(directorio.toString(), peticion.getInfo());
                             //System.err.println(pathArchivoMusica);
                             ArchivoMusica archivoMusica
                                     = new ArchivoMusica(pathArchivoMusica.toString(), pathArchivoMusica.getFileName().toString(), Long.toString(new File(pathArchivoMusica.toString()).length()));
                             if(!gestorRegistros.existeRegistro(archivoMusica)){
+                                
                                 gestorRegistros.guardarRegistroArchivoMusica(archivoMusica);
                             }
                             break;
