@@ -27,6 +27,7 @@ public class EsperadorConexiones implements Runnable {
     public EsperadorConexiones(Server server) {
         this.server=server;
         manejadorHilosCliente= Executors.newCachedThreadPool();
+        manejadorHilosCliente.execute(new AnalizadorConexionCliente(this));
     }
 
     @Override
@@ -45,7 +46,7 @@ public class EsperadorConexiones implements Runnable {
                                     Paths.get(server.getGestorConfigurcion()
                                             .getConfiguracion()
                                             .getServerInfo()
-                                            .getRutaDirectorioSync())));
+                                            .getRutaDirectorioSync()),ipCliente));
                 manejadorHilosCliente.execute(clientes.get(idCliente));
             } catch (IOException ex) {
                 Logger.getLogger(EsperadorConexiones.class.getName()).log(Level.SEVERE, null, ex);
@@ -55,4 +56,17 @@ public class EsperadorConexiones implements Runnable {
         }
         server.getReaSyncController().mostrarError("Conexión", "Ha terminado la espera de clientes");
     }
+
+    public ArrayList<Cliente> getClientes() {
+        return clientes;
+    }
+
+    public Server getServer() {
+        return server;
+    }
+
+    void eliminarClienteLista(int id) {
+        clientes.remove(id);
+    }
+    
 }

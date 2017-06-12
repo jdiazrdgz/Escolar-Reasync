@@ -66,10 +66,10 @@ public class GestorCambios {
                     }
                     if (!cambiosLocales.getArchivosSimilares().isEmpty()) {
                         pathArchivosSubir.addAll(cambiosLocales.getArchivosSimilares());
-                        System.err.println("similares tiene");
+                        //System.err.println("similares tiene");
                     }
                     if (cambiosLocales.getArchivosNuevos().isEmpty() && cambiosLocales.getArchivosSimilares().isEmpty()) {
-                        System.err.println("vacios");
+                        //System.err.println("vacios");
                         return null;
                     } else {
                         List<ArchivoMusica> listaArchivosMusica = new ArrayList<>();
@@ -80,7 +80,7 @@ public class GestorCambios {
                         ArchivosMusica archivosRemotos_Eliminar = null;
                         List<Path> archivosLocales_Eliminar = null;
                         List<Path> archivosLocales_Descargar = null;
-                        archivosRemotos_Subir.getArchivosMusica().forEach(archivo -> System.err.println(archivo.getRutaArchivo()));
+                        //archivosRemotos_Subir.getArchivosMusica().forEach(archivo -> System.err.println(archivo.getRutaArchivo()));
                         return new CambiosGlobales(archivosLocales_Eliminar, archivosLocales_Descargar, archivosRemotos_Subir, archivosRemotos_Eliminar);
                     }
                 }
@@ -297,7 +297,7 @@ public class GestorCambios {
         List<Path> estadoArchivosAnterior = obtenerEstadoArchivosAnterior();
         List<Path> estadoArchivosActual = obtenerEstadoArchivosActual();
         if (estadoArchivosAnterior == null) {
-            System.err.println("no hay estado anterior");
+            //System.err.println("no hay estado anterior");
             cliente.getReaSyncController().mostrarMensajeLog("No se encuentra "
                     + "un estado anterior de archivos");
             cliente.getReaSyncController().mostrarMensajeLog("Los archivos que tenga server y "
@@ -320,9 +320,9 @@ public class GestorCambios {
     private List<Path> determinarArchivosIguales(List<Path> estadoArchivosAnterior, List<Path> estadoArchivosActual) {
         List<Path> archivosIguales = new ArrayList<>(estadoArchivosActual);
         archivosIguales.retainAll(estadoArchivosAnterior);
-        archivosIguales.forEach(path -> System.err.println(path.toString() + " iguales"));
+        //archivosIguales.forEach(path -> System.err.println(path.toString() + " iguales"));
         if (archivosIguales.isEmpty()) {
-            System.err.println("no hay iguales");
+            //System.err.println("no hay iguales");
         }
         return archivosIguales;
     }
@@ -332,7 +332,7 @@ public class GestorCambios {
         archivosEliminados.removeAll(estadoArchivosActual);
         archivosEliminados.forEach(path -> System.out.println(path.toString() + " eliminados"));
         if (archivosEliminados.isEmpty()) {
-            System.err.println("no hay eliminados");
+            //System.err.println("no hay eliminados");
         }
         return archivosEliminados;
     }
@@ -342,7 +342,7 @@ public class GestorCambios {
         archivosNuevos.removeAll(estadoArchivosAnterior);
         archivosNuevos.forEach(path -> System.err.println(path.toString() + "nuevos"));
         if (archivosNuevos.isEmpty()) {
-            System.err.println("no hay nuevos");
+            //System.err.println("no hay nuevos");
         }
         return archivosNuevos;
     }

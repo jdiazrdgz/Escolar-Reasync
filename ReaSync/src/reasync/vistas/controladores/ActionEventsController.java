@@ -57,6 +57,7 @@ class ActionEventsController implements ActionListener {
                     reaSyncController.mostrarMensajeLog("Conexion establecida con el servidor de ReaSync");
                     reaSyncController.getFrame().statusConnectionServerLabel
                             .setText("Conectado con el servidor de ReaSync");
+                    reaSyncController.getFrame().conectedHomeLabel.setText("Conectado con el servidor de ReaSync");
                     reaSyncController.getFrame().connectServerButton.setEnabled(false);
                     reaSyncController.getFrame().disconectServerButton.setEnabled(true);
                     reaSyncController.getCliente().iniciarGestorFTP(ipServer, puerto);
@@ -65,6 +66,7 @@ class ActionEventsController implements ActionListener {
                     reaSyncController.mostrarMensajeLog("Error al conectarse con el servidor de ReaSync");
                     reaSyncController.getFrame().statusConnectionServerLabel
                             .setText("Error al conectarse con el servidor de ReaSync");
+                    reaSyncController.getFrame().conectedHomeLabel.setText("Error al conectarse con el servidor de ReaSync");
                     reaSyncController.getFrame().connectServerButton.setEnabled(true);
                     reaSyncController.getFrame().disconectServerButton.setEnabled(false);
                 }
@@ -76,10 +78,16 @@ class ActionEventsController implements ActionListener {
                     reaSyncController.mostrarMensajeLog("Desconectado del servidor de ReaSync");
                     reaSyncController.getFrame().statusConnectionServerLabel
                             .setText("No estas conectado con el servidor de ReaSync");
+                    reaSyncController.getFrame().conectedHomeLabel.setText("No estas conectado con el servidor de ReaSync");
+                    reaSyncController.getFrame().connectServerButton.setEnabled(true);
+                    reaSyncController.getFrame().disconectServerButton.setEnabled(false);
                 } else {
                     reaSyncController.mostrarMensajeLog("Error al desconectarse con el servidor de ReaSync");
                     reaSyncController.getFrame().statusConnectionServerLabel
                             .setText("Error al desconectarse con el servidor de ReaSync");
+                    reaSyncController.getFrame().conectedHomeLabel.setText("Error al desconectarse con el servidor de ReaSync");
+                    reaSyncController.getFrame().connectServerButton.setEnabled(false);
+                    reaSyncController.getFrame().disconectServerButton.setEnabled(true);
                 }
                 break;
             }
@@ -88,6 +96,24 @@ class ActionEventsController implements ActionListener {
                 reaSyncController.getCliente()
                         .getGestorSincronizacion()
                         .iniciarProcesoSincronizacion();
+                break;
+            }
+            case "startAutoSyncButton":{
+                reaSyncController.mostrarMensajeLog("Se inicia la sincronización automatica");
+                reaSyncController.getCliente().iniciarSincronizacionAutomatica();
+                reaSyncController.getFrame().startAutoSyncButton.setEnabled(false);
+                reaSyncController.getFrame().syncNowButton.setEnabled(false);
+                reaSyncController.getFrame().stopAutoSyncButton.setEnabled(true);
+                reaSyncController.getFrame().syncHomeLabel.setText("La sincronización automatica esta activada");
+                break;
+            }
+            case "stopAutoSyncButton":{
+                reaSyncController.mostrarMensajeLog("Se ha detenido la sincronización automatica");
+                reaSyncController.getFrame().syncHomeLabel.setText("La sincronización automatica esta desactivada");
+                reaSyncController.getCliente().detenerSincronizacionAutomatica();
+                reaSyncController.getFrame().startAutoSyncButton.setEnabled(true);
+                reaSyncController.getFrame().syncNowButton.setEnabled(true);
+                reaSyncController.getFrame().stopAutoSyncButton.setEnabled(false);
                 break;
             }
             default: {

@@ -48,7 +48,7 @@ public class EsperadorRespuestas implements Runnable {
                 }
             }
         } catch (IOException | ClassNotFoundException ex) {
-            Logger.getLogger(EsperadorRespuestas.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(EsperadorRespuestas.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

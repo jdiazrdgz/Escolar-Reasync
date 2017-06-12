@@ -43,12 +43,14 @@ public class ReaSyncController {
             case "conectado": {
                 mostrarMensajeLog("Conexion establecida con el servidor de ReaSync");
                 frame.statusConnectionServerLabel.setText("Estas conectado con el servidor de ReaSync");
+                frame.conectedHomeLabel.setText("Conectado con el servidor de ReaSync");
                 frame.connectServerButton.setEnabled(false);
                 frame.disconectServerButton.setEnabled(true);
             }
             case "desconectado": {
                 mostrarMensajeLog("Desconectado del servidor de ReaSync");
                 frame.statusConnectionServerLabel.setText("No estas conectado con el servidor de ReaSync");
+                frame.conectedHomeLabel.setText("No estas conectado con el servidor de ReaSync");
                 frame.connectServerButton.setEnabled(true);
                 frame.disconectServerButton.setEnabled(false);
             }

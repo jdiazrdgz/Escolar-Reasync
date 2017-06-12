@@ -48,9 +48,22 @@ public class ReaSyncController {
         datos.addColumn("Nombre");
         frame.clientsTable.setModel(datos);
     }
+    public void actualizarClienteTabla(ClienteConectado clienteConectado){
+        DefaultTableModel yourModel = (DefaultTableModel)  frame.clientsTable.getModel();
+        yourModel.removeRow(Integer.parseInt(clienteConectado.getId()));
+        yourModel.insertRow(Integer.parseInt(clienteConectado.getId()), new Object[]{clienteConectado.getId(), clienteConectado.getIp(),clienteConectado.getNombre()});
+    }
+    public void eliminarClienteTabla(ClienteConectado clienteConectado){
+        DefaultTableModel yourModel = (DefaultTableModel)  frame.clientsTable.getModel();
+        try{
+            yourModel.removeRow(Integer.parseInt(clienteConectado.getId()));
+        }catch(ArrayIndexOutOfBoundsException e){
+            System.err.println("El cliente ya no existe");
+        }
+    }
     public void mostrarClienteTabla(ClienteConectado clienteConectado){
         DefaultTableModel yourModel = (DefaultTableModel)  frame.clientsTable.getModel();
-        yourModel.addRow(new Object[]{clienteConectado.getId(), clienteConectado.getIp(),clienteConectado.getNombre()});
+        yourModel.insertRow(Integer.parseInt(clienteConectado.getId()), new Object[]{clienteConectado.getId(), clienteConectado.getIp(),clienteConectado.getNombre()});
     }
     public void mostrarMensajeLog(String mensaje) {
         LocalDateTime ahora = LocalDateTime.now();

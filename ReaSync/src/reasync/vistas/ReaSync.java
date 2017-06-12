@@ -34,6 +34,8 @@ public class ReaSync extends javax.swing.JFrame {
         connectServerButton.addActionListener(control.getActionController());
         disconectServerButton.addActionListener(control.getActionController());
         syncNowButton.addActionListener(control.getActionController());
+        startAutoSyncButton.addActionListener(control.getActionController());
+        stopAutoSyncButton.addActionListener(control.getActionController());
     }
 
     private void initMouseListeners(ReaSyncController control) {
@@ -60,6 +62,9 @@ public class ReaSync extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         homeBodyPanel = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        conectedHomeLabel = new javax.swing.JLabel();
+        syncHomeLabel = new javax.swing.JLabel();
         servicesContainerPanel = new javax.swing.JPanel();
         servicesBannerPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -196,15 +201,36 @@ public class ReaSync extends javax.swing.JFrame {
 
         homeBodyPanel.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel10.setText("Bienvenido a ReaSync!");
+
+        conectedHomeLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        conectedHomeLabel.setText("No estas conectado al servidor, Conectate desde la ventana se servicios!");
+
+        syncHomeLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        syncHomeLabel.setText("La sincronización esta desactivada activala!");
+
         javax.swing.GroupLayout homeBodyPanelLayout = new javax.swing.GroupLayout(homeBodyPanel);
         homeBodyPanel.setLayout(homeBodyPanelLayout);
         homeBodyPanelLayout.setHorizontalGroup(
             homeBodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 690, Short.MAX_VALUE)
+            .addGroup(homeBodyPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(homeBodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addComponent(conectedHomeLabel)
+                    .addComponent(syncHomeLabel))
+                .addContainerGap(239, Short.MAX_VALUE))
         );
         homeBodyPanelLayout.setVerticalGroup(
             homeBodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 295, Short.MAX_VALUE)
+            .addGroup(homeBodyPanelLayout.createSequentialGroup()
+                .addComponent(jLabel10)
+                .addGap(18, 18, 18)
+                .addComponent(conectedHomeLabel)
+                .addGap(18, 18, 18)
+                .addComponent(syncHomeLabel)
+                .addGap(0, 208, Short.MAX_VALUE))
         );
 
         homeContainerPanel.add(homeBodyPanel, java.awt.BorderLayout.CENTER);
@@ -464,6 +490,7 @@ public class ReaSync extends javax.swing.JFrame {
         startAutoSyncButton.setBackground(new java.awt.Color(255, 255, 153));
         startAutoSyncButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reasync/vistas/imagenes/play-button.png"))); // NOI18N
         startAutoSyncButton.setToolTipText("Iniciar Sincronización Automatica");
+        startAutoSyncButton.setActionCommand("startAutoSyncButton");
         startAutoSyncButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 startAutoSyncButtonActionPerformed(evt);
@@ -474,6 +501,7 @@ public class ReaSync extends javax.swing.JFrame {
         stopAutoSyncButton.setBackground(new java.awt.Color(255, 255, 153));
         stopAutoSyncButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reasync/vistas/imagenes/stop-button.png"))); // NOI18N
         stopAutoSyncButton.setToolTipText("Detener Sincronización automatica");
+        stopAutoSyncButton.setActionCommand("stopAutoSyncButton");
         stopAutoSyncButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         syncServiceBodyPannel.add(stopAutoSyncButton);
 
@@ -604,6 +632,7 @@ public class ReaSync extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton chooseDirectoryButton;
+    public javax.swing.JLabel conectedHomeLabel;
     public javax.swing.JButton connectServerButton;
     public javax.swing.JTextField deviceNameField;
     public javax.swing.JPanel directoryContainerPanel;
@@ -612,6 +641,7 @@ public class ReaSync extends javax.swing.JFrame {
     public javax.swing.JPanel homeBodyPanel;
     public javax.swing.JPanel homeContainerPanel;
     public javax.swing.JLabel jLabel1;
+    public javax.swing.JLabel jLabel10;
     public javax.swing.JLabel jLabel2;
     public javax.swing.JLabel jLabel3;
     public javax.swing.JLabel jLabel4;
@@ -648,6 +678,7 @@ public class ReaSync extends javax.swing.JFrame {
     public javax.swing.JPanel syncBodyPanel;
     public javax.swing.JPanel syncContainerPanel;
     public javax.swing.JPanel syncContainerPannel;
+    public javax.swing.JLabel syncHomeLabel;
     public javax.swing.JButton syncMenuButton;
     public javax.swing.JButton syncNowButton;
     public javax.swing.JPanel syncServiceBannerPanel;

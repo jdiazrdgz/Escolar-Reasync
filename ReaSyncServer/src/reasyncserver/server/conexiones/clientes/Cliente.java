@@ -33,8 +33,10 @@ public class Cliente implements Runnable {
     private final GestorArchivosCliente gestorArchivosCliente;
     private final Path directorio;
     private String nombreUsuario;
+    private String ip;
+    private boolean alive;
 
-    public Cliente(Socket conexion, int id, Path directorio) {
+    public Cliente(Socket conexion, int id, Path directorio, String ip) {
         this.conexion = conexion;
         this.id = id;
         int error = iniciarCanalesEntradaSalida();
@@ -46,7 +48,9 @@ public class Cliente implements Runnable {
         gestorRespuestas = new GestorRespuestas(this);
         gestorArchivosCliente = new GestorArchivosCliente(this);
         this.directorio = directorio;
-        nombreUsuario = "";
+        nombreUsuario = "identificando";
+        this.ip=ip;
+        alive=true;
     }
 
     @Override
@@ -119,8 +123,9 @@ public class Cliente implements Runnable {
                 }
             }
         } catch (IOException | ClassNotFoundException ex) {
-            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
-
+            //Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+            //El cliente se ha desconectado
+            alive=false;
         }
     }
 
@@ -140,4 +145,24 @@ public class Cliente implements Runnable {
         return directorio;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public Socket getConexion() {
+        return conexion;
+    }
+
+    public boolean isAlive() {
+        return alive;
+    }
+    
 }

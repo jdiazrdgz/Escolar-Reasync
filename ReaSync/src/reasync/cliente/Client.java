@@ -12,6 +12,7 @@ import reasync.sistema.cambios.GestorCambios;
 import reasync.sistema.configuracion.GestorConfiguracion;
 import reasync.sistema.directorios.GestorDirectorio;
 import reasync.sistema.sync.GestorSincronizacion;
+import reasync.sistema.sync.SincronizadorAutomatico;
 import reasync.vistas.controladores.ReaSyncController;
 
 /**
@@ -24,6 +25,7 @@ public class Client {
     private Socket conexion;
     private GestorConexion gestorConexion;
     private ExecutorService ejecutorEsperadorRespuestas;
+    private ExecutorService sincronizadorAutomatico;
     private final GestorDirectorio gestorDirectorio;
     private final GestorConfiguracion gestorConfiguracion;
     private final GestorSincronizacion gestorSincronizacion;
@@ -69,6 +71,15 @@ public class Client {
         ejecutorEsperadorRespuestas.execute(new EsperadorRespuestas(this));
     }
 
+    public void iniciarSincronizacionAutomatica() {
+        sincronizadorAutomatico = Executors.newCachedThreadPool();
+        sincronizadorAutomatico.execute(new SincronizadorAutomatico(this));
+    }
+
+    public void detenerSincronizacionAutomatica() {
+        sincronizadorAutomatico.shutdownNow();
+    }
+
     public GestorConexion getGestorConexion() {
         return gestorConexion;
     }
@@ -92,21 +103,25 @@ public class Client {
     public GestorCambios getGestorCambios() {
         return gestorCambios;
     }
-    public void iniciarGestorFTP(String ipServer, int port){
-        gestorFTP= new GestorFTP(this, ipServer, port);
+
+    public void iniciarGestorFTP(String ipServer, int port) {
+        gestorFTP = new GestorFTP(this, ipServer, port);
     }
-    public void terminarGestorFTP(){
-        gestorFTP=null;
+
+    public void terminarGestorFTP() {
+        gestorFTP = null;
     }
 
     public GestorFTP getGestorFTP() {
         return gestorFTP;
     }
-    public void iniciarGestorPeticiones(){
+
+    public void iniciarGestorPeticiones() {
         gestorPeticiones = new GestorPeticiones(this);
     }
+
     public GestorPeticiones getGestorPeticiones() {
         return gestorPeticiones;
     }
-      
+
 }
