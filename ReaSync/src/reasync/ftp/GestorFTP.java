@@ -86,6 +86,7 @@ public class GestorFTP {
     public int subirArchivo(Path pathArchivo) {
         InputStream inputStream = null;
         try {
+            ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
             File archivo = pathArchivo.toFile();
             //Esto hara que la path ya no tenga la ruta relativa del equipo cliente
             Path pathArchivoRemoto = new GestorArchivosMusica(cliente.getGestorConfiguracion())
@@ -102,9 +103,21 @@ public class GestorFTP {
                 }
             }
             inputStream = new FileInputStream(archivo);
-            boolean done = ftpClient.storeFile(pathArchivoRemoto.getFileName().toString(), inputStream);
+            System.out.println("Start uploading second file");
+            OutputStream outputStream = ftpClient.storeFileStream(pathArchivoRemoto.getFileName().toString());
+            byte[] bytesIn = new byte[4096];
+            int read = 0;
+            while ((read = inputStream.read(bytesIn)) != -1) {
+                outputStream.write(bytesIn, 0, read);
+            }
             inputStream.close();
-            if (done) {
+            outputStream.close();
+            boolean completed = ftpClient.completePendingCommand();
+            if (completed) {
+                System.out.println("The second file is uploaded successfully.");
+            }
+            inputStream.close();
+            if (completed) {
                 return 1;
             } else {
                 return 0;
@@ -115,12 +128,6 @@ public class GestorFTP {
         } catch (IOException ex) {
             Logger.getLogger(GestorFTP.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
-        } finally {
-            try {
-                inputStream.close();
-            } catch (IOException ex) {
-                Logger.getLogger(GestorFTP.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
     }
 
@@ -167,11 +174,17 @@ public class GestorFTP {
     public int descargarArchivo(Path pathArchivo) {
         OutputStream outputStream1 = null;
         try {
+            ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
             String pathArchivoLocal = pathArchivo.toString();
-            //System.err.println(pathArchivoLocal+ "local");
+            System.err.println(pathArchivoLocal + "local");
             String pathArchivoRemoto = new GestorArchivosMusica(cliente.getGestorConfiguracion())
                     .generalizarPathArchivoMusica(pathArchivo).toString();
-            //System.err.println(pathArchivoLocal + "local");
+            System.err.println(pathArchivoRemoto + "remoto");
+            String directorioPath = pathArchivo.getParent().toString();
+            File directorio = new File(directorioPath);
+            if (!directorio.exists()) {
+                directorio.mkdirs();
+            }
             File archivo = new File(pathArchivoLocal);
             outputStream1 = new BufferedOutputStream(new FileOutputStream(archivo));
             boolean success = ftpClient.retrieveFile(pathArchivoRemoto, outputStream1);
@@ -188,12 +201,6 @@ public class GestorFTP {
         } catch (IOException ex) {
             Logger.getLogger(GestorFTP.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
-        } finally {
-            try {
-                outputStream1.close();
-            } catch (IOException ex) {
-                Logger.getLogger(GestorFTP.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
     }
 }

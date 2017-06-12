@@ -16,6 +16,8 @@ public class GestorArchivosCliente {
     }
     
     public Path generalizarPathArchivoMusica(Path archivoMusica, Path dirSyncLocal) {
+        System.err.println(archivoMusica.toString() + "generalizar archivo musica");
+        System.err.println(dirSyncLocal.toString() + "generalizar dir local");
         Path originalPath = null;
         Path fixedPath = null;
         String nombredirSync = dirSyncLocal.getFileName().toString();

@@ -119,7 +119,7 @@ public class GestorCambios {
                 List<Path> archivosLocales_Eliminar = null;
                 List<Path> archivosLocales_Descargar = new ArrayList<>();
                 archivosMusicaRecibidos.getArchivosMusica().forEach(archivo -> {
-                    archivosLocales_Descargar.add(Paths.get(archivo.getRutaArchivo()));
+                    archivosLocales_Descargar.add(new GestorArchivosMusica(cliente.getGestorConfiguracion()).especificarPathArchivoMusica(Paths.get(archivo.getRutaArchivo())));
                 });
                 return new CambiosGlobales(archivosLocales_Eliminar, archivosLocales_Descargar, archivosRemotos_Subir, archivosRemotos_Eliminar);
             } else {

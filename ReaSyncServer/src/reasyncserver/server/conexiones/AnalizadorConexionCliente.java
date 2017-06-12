@@ -39,9 +39,9 @@ public class AnalizadorConexionCliente implements Runnable {
                                     .actualizarClienteTabla(new ClienteConectado(Integer.toString(cliente.getId()), cliente.getIp(), cliente.getNombreUsuario()));
                         } else {
                             System.err.println("no esta conectado");
-                            esperadorConexiones
+                            /*esperadorConexiones
                                     .getServer().getReaSyncController()
-                                    .eliminarClienteTabla(new ClienteConectado(Integer.toString(cliente.getId()), cliente.getIp(), cliente.getNombreUsuario()));
+                                    .eliminarClienteTabla(new ClienteConectado(Integer.toString(cliente.getId()), cliente.getIp(), cliente.getNombreUsuario()));*/
                             //esperadorConexiones.eliminarClienteLista(cliente.getId());
                         }
                     }
