@@ -26,7 +26,7 @@ public class GestorFTP {
     private final String ipserver;
     private final int port = 21;
     private final String user = "reasync";
-    private final String pass = "jenesais";
+    private final String pass = "reasync";
     private FTPClient ftpClient;
 
     public GestorFTP(Client cliente, String ipserver, int port) {

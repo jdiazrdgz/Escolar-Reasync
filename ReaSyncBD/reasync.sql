@@ -23,12 +23,12 @@ DROP TABLE IF EXISTS `registroarchivosmusica`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `registroarchivosmusica` (
-  `idarchivomusica` int(11) NOT NULL,
-  `nombre` varchar(70) NOT NULL,
+  `idarchivomusica` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(300) NOT NULL,
   `peso` varchar(45) NOT NULL,
-  `path` varchar(500) NOT NULL,
+  `path` varchar(800) NOT NULL,
   PRIMARY KEY (`idarchivomusica`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=205 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -49,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-31  9:59:31
+-- Dump completed on 2017-06-12 15:23:05
