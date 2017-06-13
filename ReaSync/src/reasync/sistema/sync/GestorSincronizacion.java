@@ -102,8 +102,8 @@ public class GestorSincronizacion {
                                     + archivo.toString()
                                     + " No ha podido ser descargado");
                 }
-                cliente.getGestorFTP().desconectarClienteFTP();
             });
+            cliente.getGestorFTP().desconectarClienteFTP();
         } else {
             cliente.getReaSyncController()
                     .mostrarMensajeLog("Error al conectarse con el server FTP");

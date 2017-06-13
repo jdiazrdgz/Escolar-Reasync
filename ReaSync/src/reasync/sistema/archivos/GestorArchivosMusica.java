@@ -94,7 +94,7 @@ public class GestorArchivosMusica {
         String nombreDirSync = gestorConfiguracion.getConfiguracion().getNombreDirectorioConfiguracion();
         String dirSync = gestorConfiguracion.getConfiguracion().getDirectorioSincronizacion();
         generalPath = archivoMusica;
-        localPath = Paths.get(dirSync, nombreDirSync, generalPath.toString());
+        localPath = Paths.get(dirSync,generalPath.toString());
         return localPath;
     }
 
