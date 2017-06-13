@@ -3,12 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Documents/GitHub/Escolar-Reasync/ReaSync/src/reasync/vistas/ReaSync.java</file>
-            <file>file:/D:/Documents/GitHub/Escolar-Reasync/ReaSync/src/reasync/sistema/sync/GestorSincronizacion.java</file>
-            <file>file:/D:/Documents/GitHub/Escolar-Reasync/ReaSync/src/reasync/sistema/cambios/GestorCambios.java</file>
-            <file>file:/D:/Documents/GitHub/Escolar-Reasync/ReaSync/src/reasync/sistema/cambios/CambiosGlobales.java</file>
-            <file>file:/D:/Documents/GitHub/Escolar-Reasync/ReaSync/src/reasync/ftp/GestorFTP.java</file>
-            <file>file:/D:/Documents/GitHub/Escolar-Reasync/ReaSync/src/reasync/sistema/archivos/GestorArchivosMusica.java</file>
+            <file>file:/Z:/JDIAZRDGZ/Data/Github/Escolar-Reasync/ReaSync/src/reasync/sistema/sync/GestorSincronizacion.java</file>
+            <file>file:/Z:/JDIAZRDGZ/Data/Github/Escolar-Reasync/ReaSync/src/reasync/ftp/GestorFTP.java</file>
+            <file>file:/Z:/JDIAZRDGZ/Data/Github/Escolar-Reasync/ReaSync/src/reasync/vistas/ReaSync.java</file>
         </group>
     </open-files>
 </project-private>

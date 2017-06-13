@@ -1,7 +1,7 @@
 /ReaSyncServer/build/
-/ReaSyncServer/dist/
+/ReaSyncServer/congif.dat
 /ReaSync/build/
-/ReaSync/dist/
+/ReaSync/cambios.dat
+/ReaSync/config.dat
 /ReaSyncBean/build/
-/ReaSyncBean/dist/
 /ReaSyncBean/nbproject/private/
